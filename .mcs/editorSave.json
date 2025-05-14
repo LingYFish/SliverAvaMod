@@ -1,0 +1,44 @@
+{
+    "Addon": {
+        "EnchantSetting": {
+            "amplifier": 1
+        },
+        "PackResourceSortData": {
+            "2_emmmm_avaritia:infinity_bow": {
+                "createTime": 1747202620.3311574,
+                "modifyTime": 1747202620.3311574
+            },
+            "2_emmmm_avaritia:infinity_chestplate": {
+                "createTime": 1747202620.3347046,
+                "modifyTime": 1747202620.3347046
+            },
+            "2_emmmm_avaritia:infinity_helmet": {
+                "createTime": 1747202620.3388824,
+                "modifyTime": 1747202620.3388824
+            },
+            "2_emmmm_avaritia:infinity_leggings": {
+                "createTime": 1747202620.3413985,
+                "modifyTime": 1747202620.3413985
+            },
+            "2_emmmm_avaritia:infinity_sword": {
+                "createTime": 1747202620.3437731,
+                "modifyTime": 1747202620.3437731
+            },
+            "2_sliver_x:infinity_sword": {
+                "createTime": 1747202084.3120122,
+                "modifyTime": 1747205708.1678138
+            },
+            "8192_sliver_x_sliver_x_ava_category_config": {
+                "createTime": 1747205686.2135959,
+                "modifyTime": 1747205703.97565
+            }
+        },
+        "PlayerEffectSetting": {
+            "amplifier": 1,
+            "duration": 10
+        },
+        "PresetInstanceTreeData": [
+
+        ]
+    }
+}

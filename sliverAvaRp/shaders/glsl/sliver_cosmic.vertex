@@ -1,0 +1,23 @@
+// __multiversion__
+// This signals the loading code to prepend either #version 100 or #version 300 es as apropriate.
+#include "entityVertexUtil.h"
+#line 4
+
+varying vec4 light; // 光照值 vec4(r, g, b, a)
+varying vec3 fPos;
+varying vec3 vertexColor;
+
+void main() {
+	POS4 entitySpacePosition, entitySpaceNormal;
+	calculateOverlayColor(); //原版效果
+	calculateGlint();
+	entityCommonVert();
+	getEntitySpacePositionAndNormal(entitySpacePosition, entitySpaceNormal);
+	light = getLightColor(entitySpacePosition, entitySpaceNormal);
+	uv = TEXCOORD_0;
+	applyUVAnim(uv);
+	POS4 projSpacePos = WORLDVIEWPROJ * entitySpacePosition;
+    fPos = (WORLD * entitySpacePosition).xyz;
+    vertexColor = vec3(0.0);
+	gl_Position = projSpacePos;
+}

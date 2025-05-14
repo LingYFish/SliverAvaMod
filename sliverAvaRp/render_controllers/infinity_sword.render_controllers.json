@@ -1,0 +1,65 @@
+{
+    "render_controllers": {
+        "controller.render.infinity_sword": {
+            "arrays": {
+                "textures": {
+                    "array.sword": [
+                        "texture.default",
+                        "texture.default_1",
+                        "texture.default_2",
+                        "texture.default_3",
+                        "texture.default_4",
+                        "texture.default_5",
+                        "texture.default_6",
+                        "texture.default_7",
+                        "texture.default_8",
+                        "texture.default_9",
+                        "texture.default_10",
+                        "texture.default_11",
+                        "texture.default_12",
+                        "texture.default_13",
+                        "texture.default_14",
+                        "texture.default_15",
+                        "texture.default_16",
+                        "texture.default_17",
+                        "texture.default_18",
+                        "texture.default_19",
+                        "texture.default_20",
+                        "texture.default_21",
+                        "texture.default_22",
+                        "texture.default_23",
+                        "texture.default_24",
+                        "texture.default_25",
+                        "texture.default_26",
+                        "texture.default_27"
+                    ],
+                    "array.cosmic2": [
+                        "texture.cosmic2_frame0",
+                        "texture.cosmic2_frame1",
+                        "texture.cosmic2_frame2",
+                        "texture.cosmic2_frame3"
+                    ],
+                    "array.cosmic": [
+                        "texture.cosmic_frame0",
+                        "texture.cosmic_frame1",
+                        "texture.cosmic_frame2",
+                        "texture.cosmic_frame3"
+                    ]
+                }
+            },
+            "geometry": "Geometry.default",
+            "filter_lighting": true,
+            "materials": [
+                {
+                    "*": "variable.is_first_person ? material.first_person : material.default"
+                }
+            ],
+            "textures": [
+                "array.sword[(query.anim_time * 20)]",
+                "array.cosmic[(query.anim_time * 8)]",
+                "array.cosmic2[(query.anim_time * 8)]"
+            ]
+        }
+    },
+    "format_version": "1.10.0"
+}

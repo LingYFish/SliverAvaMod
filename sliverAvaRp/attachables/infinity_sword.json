@@ -1,0 +1,67 @@
+{
+    "format_version": "1.10.0",
+    "minecraft:attachable": {
+        "description": {
+            "animations": {
+                "wield": "animation.infinity_sword.wield"
+            },
+            "geometry": {
+                "default": "geometry.infinity_sword"
+            },
+            "identifier": "sliver_x:infinity_sword",
+            "materials": {
+                "default": "cosmic",
+                "first_person": "cosmic"
+            },
+            "render_controllers": [
+                "controller.render.infinity_sword"
+            ],
+            "scripts": {
+                "animate": [
+                    "wield"
+                ],
+                "pre_animation": [
+                    "variable.is_first_person = c.is_first_person;"
+                ]
+            },
+            "textures": {
+                "cosmic2_frame0": "textures/cosmic_shader/cosmic7/0",
+                "cosmic2_frame1": "textures/cosmic_shader/cosmic7/1",
+                "cosmic2_frame2": "textures/cosmic_shader/cosmic7/2",
+                "cosmic2_frame3": "textures/cosmic_shader/cosmic7/3",
+                "cosmic_frame0": "textures/cosmic_shader/cosmic0/0",
+                "cosmic_frame1": "textures/cosmic_shader/cosmic0/1",
+                "cosmic_frame2": "textures/cosmic_shader/cosmic0/2",
+                "cosmic_frame3": "textures/cosmic_shader/cosmic0/3",
+                "default": "textures/sliver_ava/tools/infinity_sword/attachable/0",
+                "default_1": "textures/sliver_ava/tools/infinity_sword/attachable/1",
+                "default_10": "textures/sliver_ava/tools/infinity_sword/attachable/10",
+                "default_11": "textures/sliver_ava/tools/infinity_sword/attachable/11",
+                "default_12": "textures/sliver_ava/tools/infinity_sword/attachable/12",
+                "default_13": "textures/sliver_ava/tools/infinity_sword/attachable/13",
+                "default_14": "textures/sliver_ava/tools/infinity_sword/attachable/14",
+                "default_15": "textures/sliver_ava/tools/infinity_sword/attachable/15",
+                "default_16": "textures/sliver_ava/tools/infinity_sword/attachable/16",
+                "default_17": "textures/sliver_ava/tools/infinity_sword/attachable/17",
+                "default_18": "textures/sliver_ava/tools/infinity_sword/attachable/18",
+                "default_19": "textures/sliver_ava/tools/infinity_sword/attachable/19",
+                "default_2": "textures/sliver_ava/tools/infinity_sword/attachable/2",
+                "default_20": "textures/sliver_ava/tools/infinity_sword/attachable/20",
+                "default_21": "textures/sliver_ava/tools/infinity_sword/attachable/21",
+                "default_22": "textures/sliver_ava/tools/infinity_sword/attachable/22",
+                "default_23": "textures/sliver_ava/tools/infinity_sword/attachable/23",
+                "default_24": "textures/sliver_ava/tools/infinity_sword/attachable/24",
+                "default_25": "textures/sliver_ava/tools/infinity_sword/attachable/25",
+                "default_26": "textures/sliver_ava/tools/infinity_sword/attachable/26",
+                "default_27": "textures/sliver_ava/tools/infinity_sword/attachable/27",
+                "default_3": "textures/sliver_ava/tools/infinity_sword/attachable/3",
+                "default_4": "textures/sliver_ava/tools/infinity_sword/attachable/4",
+                "default_5": "textures/sliver_ava/tools/infinity_sword/attachable/5",
+                "default_6": "textures/sliver_ava/tools/infinity_sword/attachable/6",
+                "default_7": "textures/sliver_ava/tools/infinity_sword/attachable/7",
+                "default_8": "textures/sliver_ava/tools/infinity_sword/attachable/8",
+                "default_9": "textures/sliver_ava/tools/infinity_sword/attachable/9"
+            }
+        }
+    }
+}

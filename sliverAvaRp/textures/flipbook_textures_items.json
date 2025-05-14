@@ -1,0 +1,8 @@
+[
+    {
+        "atlas_tile": "sliver_x:infinity_sword",
+        "blend_frames": true,
+        "flipbook_texture": "textures/sliver_ava/tools/infinity_sword/1",
+        "ticks_per_frame": 12
+    }
+]

@@ -1,0 +1,15 @@
+{
+  "materials": {
+    "version": "1.0.0",
+    "cosmic:entity_alphatest": {
+        "vertexShader": "shaders/sliver_cosmic.vertex",
+        "fragmentShader": "shaders/sliver_cosmic.fragment",
+        "+samplerStates": [
+            {
+              "samplerIndex": 0,
+              "textureWrap": "Repeat"
+            }
+        ]
+    }
+  }
+}

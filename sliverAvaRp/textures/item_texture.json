@@ -1,0 +1,9 @@
+{
+    "resource_pack_name": "vanilla",
+    "texture_data": {
+        "sliver_x:infinity_sword": {
+            "textures": "textures/sliver_ava/tools/infinity_sword/1"
+        }
+    },
+    "texture_name": "atlas.items"
+}
