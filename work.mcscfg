@@ -5,7 +5,7 @@
   "Versions": null,
   "JavaType": 8,
   "Name": "无尽贪婪",
-  "UpdateTime": "2025-05-14T17:20:20.2565623+08:00",
+  "UpdateTime": "2025-05-14T20:52:12.299679+08:00",
   "IconName": "",
   "Md5": null,
   "CloudMd5": null,
@@ -52,7 +52,7 @@
   "TestExperimentalModding": false,
   "TestStartWithMap": false,
   "SelectComponents": [
-    "79e30e1018654e3e98c67cd6128dfcc5",
+    "f388b4beb1a2407a8fee502f42cb0b6e",
     "10b7e91a8f314d34bfcf2d178e6b5b7f"
   ],
   "isSlim": false,

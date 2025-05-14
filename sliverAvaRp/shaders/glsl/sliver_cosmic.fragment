@@ -10,92 +10,126 @@ LAYOUT_BINDING(1) uniform sampler2D TEXTURE_1;
 LAYOUT_BINDING(2) uniform sampler2D TEXTURE_2;
 
 // uniform highp float TIME;
-UNIFORM vec2 VIEWPORT_SIZE;
+UNIFORM vec2 viewportSize;
 
-varying vec3 fPos;
-varying vec3 vertexColor;
+varying vec3 fragPos;
+varying vec3 vertColor;
 
+// One-liner rotation matrix
 mat4 rotationMatrix(vec3 axis, float angle) {
-    return mat4(vec4(cos(angle) + axis.x * axis.x * (1.0 - cos(angle)), axis.x * axis.y * (1.0 - cos(angle)) - axis.z * sin(angle), axis.x * axis.z * (1.0 - cos(angle)) + axis.y * sin(angle), 0.0),vec4(axis.y * axis.x * (1.0 - cos(angle)) + axis.z * sin(angle), cos(angle) + axis.y * axis.y * (1.0 - cos(angle)), axis.y * axis.z * (1.0 - cos(angle)) - axis.x * sin(angle), 0.0),vec4(axis.z * axis.x * (1.0 - cos(angle)) - axis.y * sin(angle), axis.z * axis.y * (1.0 - cos(angle)) + axis.x * sin(angle), cos(angle) + axis.z * axis.z * (1.0 - cos(angle)), 0.0),vec4(0.0, 0.0, 0.0, 1.0));
+    return mat4(
+        vec4(cos(angle) + axis.x * axis.x * (1.0 - cos(angle)), axis.x * axis.y * (1.0 - cos(angle)) - axis.z * sin(angle), axis.x * axis.z * (1.0 - cos(angle)) + axis.y * sin(angle), 0.0),
+        vec4(axis.y * axis.x * (1.0 - cos(angle)) + axis.z * sin(angle), cos(angle) + axis.y * axis.y * (1.0 - cos(angle)), axis.y * axis.z * (1.0 - cos(angle)) - axis.x * sin(angle), 0.0),
+        vec4(axis.z * axis.x * (1.0 - cos(angle)) - axis.y * sin(angle), axis.z * axis.y * (1.0 - cos(angle)) + axis.x * sin(angle), cos(angle) + axis.z * axis.z * (1.0 - cos(angle)), 0.0),
+        vec4(0.0, 0.0, 0.0, 1.0)
+    );
 }
+
 void main() {
     vec4 texColor = texture2D(TEXTURE_0, uv);
+    const float externalScale = 2.0;  // External scale factor
+    const float oneOverExternalScale = 2.0 / externalScale;  // Inverse of external scale
+    const float uvtiles = 16.0;  // Number of tiles in UV space
 
-    const float M_PI = 3.1415;
-    const int cosmicCount = 50;  // 星星数量
-    const int cosmicOutOf = 101;
-    const float lightMix = 0.5;
-    const float externalScale = 1.0;
-    const float oneOverExternalScale = 4.0 / externalScale;
-    const float uvtiles = 16.0;
+    vec4 col = vec4(0.01, 0.0, 0.0, 1.0);  // Dark blue background
+    float pulse = mod(TIME * 20.0, 400.0) / 400.0;  // Time-based pulse for background color
+    col.g = sin(pulse*3.1415*2.) * 0.1 + 0.05;  // 背景色g 随时间变化
+    col.b = cos(pulse*3.1415*2.) * 0.05 + 0.15;  // 背景色b 随时间变化
 
-    vec4 col = vec4(0.01, 0.0, 0.0, 1.0);  // 深蓝色背景
-    float pulse = mod(TIME * 20.0, 400.0) / 400.0;
-    col.g = sin(pulse * M_PI * 2.0) * 0.1 + 0.05;
-    col.b = cos(pulse * M_PI * 2.0) * 0.05 + 0.15;
+    vec4 dir = normalize(vec4(-fragPos, 0.0));  // Direction vector from fragment position
+    float pitch = 1.0;  // Pitch rotation
+    float yaw = 1.0;  // Yaw rotation
 
-    vec4 dir = normalize(vec4(-fPos, 0.0));
-    float pitch = 1.0;  // 上下旋转
-    float yaw = 1.0;    // 左右旋转
-
-    // Apply pitch rotation
+    // Apply pitch and yaw rotations
     dir = rotationMatrix(vec3(1.0, 0.0, 0.0), pitch) * dir;
-    // Apply yaw rotation
     dir = rotationMatrix(vec3(0.0, 1.0, 0.0), yaw) * dir;
 
     for (int i = 0; i < 16; i++) {
-        int mult = 16 - i;
-        int j = i + 7;
-        int k = j + 1;
-        float rand1 = float(j * j * 3 + j * 8) * 2.0;
-        float rand2 = float(k * k * 2 + k * 7) * 3.0;
-        float rand3 = rand1 * 0.4 + rand2 * 0.4;
-        vec3 axis = normalize(vec3(sin(rand1), sin(rand2), cos(rand3)));
-        vec4 ray = dir * rotationMatrix(axis, mod(rand3, 2.0 * M_PI));
-        float rawU = 0.5 + (atan(ray.z, ray.x) / (2.0 * M_PI));
-        float rawV = 0.5 + (asin(ray.y) / M_PI);
+        int mult = 16 - i;  // Layer multiplier
+        int j = i + 7;  // Seed for random number generation
+        int k = j + 1;  // Seed for random number generation
+        float rand1 = float(j * j * 3 + j * 8) * 2.0;  // Random number 1
+        float rand2 = float(k * k * 2 + k * 7) * 3.0;  // Random number 2
+        float rand3 = rand1 * 0.4 + rand2 * 0.4;  // Random number 3
 
-        float scale = float(mult) * 0.5 + 2.75;
-        float u = (rawU + TIME * 0.001 * oneOverExternalScale) * scale * externalScale;  // 水平移动
-        float v = (rawV + TIME * 0.001 * oneOverExternalScale) * scale * 0.6 * externalScale;  // 垂直移动
-        int tu = int(mod(floor(u * uvtiles), uvtiles));
-        int tv = int(mod(floor(v * uvtiles), uvtiles));
-        int position = ((77 * tu) + (76 * tv) + (36 * (i + 31)) + 172);
-        int symbol = int(mod(float(position), float(cosmicOutOf)));
-        int rotation = int(mod(pow(float(tu), float(tv)) + float(tu) + 3.0 + float(tv * i), 8.0));
-        if (rotation >= 4) {rotation -= 4;}
-        if (symbol >= 0 && symbol < cosmicCount) {
+        vec3 axis = normalize(vec3(sin(rand1), sin(rand2), cos(rand3)));  // Random axis for rotation
+        vec4 ray = dir * rotationMatrix(axis, mod(rand3, 2.0 * 3.1415));  // Rotated ray
+
+        float rawU = 0.5 + (atan(ray.z, ray.x) / (2.0 * 3.1415));  // Raw U coordinate
+        float rawV = 0.5 + (asin(ray.y) / 3.1415);  // Raw V coordinate
+
+        float scale = float(mult) * 0.5 + 2.75;  // Scale factor for UV coordinates
+        float u = (rawU + TIME * 0.001 * oneOverExternalScale) * scale * externalScale;  // U coordinate with time-based offset
+        float v = (rawV + TIME * 0.001 * oneOverExternalScale) * scale * 0.6 * externalScale;  // V coordinate with time-based offset
+
+        float u2 = (rawU + TIME * -0.001 * oneOverExternalScale) * scale * externalScale;  // U coordinate with time-based offset
+        float v2 = (rawV + TIME * -0.001 * oneOverExternalScale) * scale * 0.6 * externalScale;  // V coordinate with time-based offset
+
+        int tu = int(mod(floor(u * uvtiles), uvtiles));  // Tile index in U direction
+        int tv = int(mod(floor(v * uvtiles), uvtiles));  // Tile index in V direction
+
+        int tu2 = int(mod(floor(u2 * uvtiles), uvtiles));  // Tile index in U direction
+        int tv2 = int(mod(floor(v2 * uvtiles), uvtiles));  // Tile index in V direction
+
+        int position = ((77 * tu) + (76 * tv) + (36 * (i + 31)) + 172);  // Pseudorandom position
+        int symbol = int(mod(float(position), float(100)));  // Symbol index
+        int rotation = int(mod(pow(float(tu), float(tv)) + float(tu) + 3.0 + float(tv * i), 8.0));  // Rotation index
+        if (rotation >= 4) rotation -= 4;  // Normalize rotation index
+
+        if (symbol >= 0 && symbol < 20) {
             if (texColor.a < 1.0 && texColor.a > 0.0) {
-                vec2 tileUV = vec2(mod(u, 1.0), mod(v, 1.0));
-                float ru = clamp(tileUV.x * uvtiles - float(tu), 0.0, 1.0);
-                float rv = clamp(tileUV.y * uvtiles - float(tv), 0.0, 1.0);
-                if (rotation >= 4) {ru = 1.0 - ru;}
+                vec2 tileUV = vec2(mod(u, 1.0), mod(v, 1.0));  // Local UV coordinates within the tile
+                float ru = clamp(tileUV.x * uvtiles - float(tu), 0.0, 1.0);  // Local U coordinate
+                float rv = clamp(tileUV.y * uvtiles - float(tv), 0.0, 1.0);  // Local V coordinate
+
+                if (rotation >= 4) ru = 1.0 - ru;  // Flip U coordinate based on rotation
                 float oru = ru;
                 float orv = rv;
-                if (rotation == 1) {oru = 1.0 - rv;orv = ru;}
-                else if (rotation == 2) {oru = 1.0 - ru;orv = 1.0 - rv;}
-                else if (rotation == 3) {oru = rv;orv = 1.0 - ru;}
-                vec2 iconUV = vec2(oru, orv);
-                vec4 starCol = texture2D(TEXTURE_1, iconUV);
-                vec4 starCol2 = texture2D(TEXTURE_2, iconUV);
-                float alpha = starCol.r * (0.5 + (1.0 / float(mult)) * 1.0) * (1.0 - smoothstep(0.15, 0.48, abs(rawV - 0.5)));
-                float alpha2 = starCol2.r * (0.5 + (1.0 / float(mult)) * 1.0) * (1.0 - smoothstep(0.15, 0.48, abs(rawV - 0.5)));
-                float r = mix(0.7, 0.0, mod(rand1, 1.0));  // Interpolate between 0.7 (light blue) and 0.0 (dark blue)
-                float g = mix(0.8, 0.2, mod(rand2, 1.0));  // Interpolate between 0.8 (light blue) and 0.2 (dark blue)
-                float b = mix(1.0, 0.4, mod(rand1, 1.0));  // Interpolate between 1.0 (light blue) and 0.4 (dark blue)
-                col += vec4(r, g, b, 1.0) * alpha;
-                col += vec4(r, g, b, 1.0) * alpha2;
+                if (rotation == 1) {oru = 1.0 - rv; orv = ru;}  // Rotate coordinates
+                else if (rotation == 2) {oru = 1.0 - ru; orv = 1.0 - rv;}  // Rotate coordinates
+                else if (rotation == 3) {oru = rv; orv = 1.0 - ru;}  // Rotate coordinates
+
+                vec2 tileUV2 = vec2(mod(u2, 1.0), mod(v2, 1.0));  // Local UV coordinates within the tile
+                float ru2 = clamp(tileUV2.x * uvtiles - float(tu2), 0.0, 1.0);  // Local U coordinate
+                float rv2 = clamp(tileUV2.y * uvtiles - float(tv2), 0.0, 1.0);  // Local V coordinate
+
+                if (rotation >= 4) ru2 = 1.0 - ru2;  // Flip U coordinate based on rotation
+                float oru2 = ru2;
+                float orv2 = rv2;
+                if (rotation == 1) {oru2 = 1.0 - rv2; orv2 = ru2;}  // Rotate coordinates
+                else if (rotation == 2) {oru2 = 1.0 - ru2; orv2 = 1.0 - rv2;}  // Rotate coordinates
+                else if (rotation == 3) {oru2 = rv2; orv2 = 1.0 - ru2;}  // Rotate coordinates
+
+                vec2 iconUV = vec2(oru, orv);  // Final UV coordinates for star texture
+                vec2 iconUV2 = vec2(oru2, orv2);  // Final UV coordinates for star texture
+                vec4 starCol = texture2D(TEXTURE_1, iconUV);  // Sample star texture
+                vec4 starCol2 = texture2D(TEXTURE_2, iconUV2);  // Sample secondary star texture
+
+                float alpha = starCol.r * (0.5 + (1.0 / float(mult)) * 1.0) * (1.0 - smoothstep(0.15, 0.48, abs(rawV - 0.5)));  // Alpha value for star
+                float alpha2 = starCol2.r * (0.5 + (1.0 / float(mult)) * 1.0) * (1.0 - smoothstep(0.15, 0.48, abs(rawV - 0.5)));  // Secondary alpha value for star
+
+                //原本的变色不好看 不知道哪里抄来的一个变色
+                //float r = mix(0.7, 0.0, mod(rand1, 1.0));  // Interpolate between light and dark blue for red component
+                //float g = mix(0.8, 0.2, mod(rand2, 1.0));  // Interpolate between light and dark blue for green component
+                //float b = mix(1.0, 0.4, mod(rand1, 1.0));  // Interpolate between light and dark blue for blue component
+                float r = (mod(rand1, 29.0)/29.0) * 0.3 + 0.4;
+                float g = (mod(rand2, 35.0)/35.0) * 0.4 + 0.7;
+                float b = (mod(rand1, 17.0)/17.0) * 0.3 + 0.7;
+
+                col += vec4(r, g, b, 1.0) * alpha;  // Add star color to final color
+                col += vec4(r, g, b, 1.0) * alpha2;  // Add secondary star color to final color
             }
         }
     }
 
-    vec3 shade = vertexColor.rgb * lightMix + vec3(1.0 - lightMix, 1.0 - lightMix, 1.0 - lightMix);
+    vec3 shade = vertColor.rgb * 0.3 + vec3(1.0 - 0.3, 1.0 - 0.3, 1.0 - 0.3);  // Apply lighting
     col.rgb *= shade;
 
     if (texColor.r < 0.4) {
-        gl_FragColor = col;
+        col = mix(texColor, col, 0.9);
+        gl_FragColor = col;  // Use background color if texture alpha is low
     } else {
-        col = mix(col, texColor, min(1.0, (1.0 + uv.x - uv.y) * 0.55));
-        gl_FragColor = col;
+        //col = mix(col, texColor, 0.7);  // Blend with texture color
+        gl_FragColor = texColor;
     }
 }

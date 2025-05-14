@@ -1,0 +1,57 @@
+// __multiversion__
+// This signals the loading code to prepend either #version 100 or #version 300 es as apropriate.
+precision highp float;
+
+#include "fragmentVersionCentroidUV.h"
+#include "uniformWorldConstants.h"
+#include "util.h"
+LAYOUT_BINDING(0)
+uniform sampler2D TEXTURE_0;
+LAYOUT_BINDING(1)
+uniform sampler2D TEXTURE_1;
+LAYOUT_BINDING(2)
+uniform sampler2D TEXTURE_2;
+
+uniform vec4 EXTRA_VECTOR1; // (threshold 门限, strength 泛光强度, sigma 高斯模糊, bloom_size 泛光大小)
+varying vec4 light;
+// 辅助函数：计算高斯权重
+float gaussian(float x, float sigma)
+{
+	return exp(-x * x / (2.0 * sigma * sigma)) / sqrt(2.0 * 3.14159265358979323846 * sigma * sigma);
+}
+float lerp(float min, float max, float a)
+{
+	return (1 - a) * min + a * max;
+}
+
+uniform vec4 EXTRA_VECTOR4;
+// Screen Info vec4(width,height,pixelWidth,pixelHeight) （屏幕大小，像素大小）(xyzw)
+void main()
+{
+	float strength = EXTRA_VECTOR1.g;
+	vec4 bright_color = vec4(0.0);
+
+	vec4 color = texture2D(TEXTURE_0, uv);
+
+	// 高斯模糊
+	float sigma = EXTRA_VECTOR1.b;
+	vec4 bloom_color = vec4(0.0);
+	float total_weight = 0.0;
+	float bloom_size = EXTRA_VECTOR1.a;
+	for (float i = -bloom_size; i <= bloom_size; ++i)
+	{
+		for (float j = -bloom_size; j <= bloom_size; ++j)
+		{
+			vec2 offset = vec2(float(i) * EXTRA_VECTOR4.z, float(j) * EXTRA_VECTOR4.w) * bloom_size;
+			float weight = gaussian(length(vec2(i, j)), sigma);
+			bright_color += texture2D(TEXTURE_0, uv + offset) * weight;
+			total_weight += weight;
+		}
+	}
+
+	bright_color /= total_weight;
+	// 加强泛光
+	bright_color *= strength;
+	// 将泛光光晕和泛光区域叠加,传入下一个pass
+	gl_FragColor = color + bright_color;
+}

@@ -1,0 +1,28 @@
+// __multiversion__
+// This signals the loading code to prepend either #version 100 or #version 300 es as apropriate.
+precision highp float;
+
+#include "fragmentVersionCentroidUV.h"
+#include "uniformWorldConstants.h"
+#include "util.h"
+LAYOUT_BINDING(0) uniform sampler2D TEXTURE_0;
+LAYOUT_BINDING(1) uniform sampler2D TEXTURE_1;
+LAYOUT_BINDING(2) uniform sampler2D TEXTURE_2;
+
+uniform vec4 EXTRA_VECTOR1; // (threshold 门限, strength 泛光强度, sigma 高斯模糊, bloom_size 泛光大小)
+varying vec4 light;
+
+
+
+void main() {
+	float threshold=EXTRA_VECTOR1.r;
+	vec4 color = texture2D(TEXTURE_0, uv);
+	
+	// 提取透明度小于threshold的区域，即将透明度大于threshold的区域变黑
+	if (color.a>=threshold){
+		color*=0.0;
+	}
+	// 提取区域传给下一个pass
+	gl_FragColor = color;
+
+}

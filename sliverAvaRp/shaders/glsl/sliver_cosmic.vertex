@@ -2,11 +2,9 @@
 // This signals the loading code to prepend either #version 100 or #version 300 es as apropriate.
 #include "entityVertexUtil.h"
 #line 4
-
 varying vec4 light; // 光照值 vec4(r, g, b, a)
-varying vec3 fPos;
-varying vec3 vertexColor;
-
+varying vec3 fragPos;
+varying vec3 vertColor;
 void main() {
 	POS4 entitySpacePosition, entitySpaceNormal;
 	calculateOverlayColor(); //原版效果
@@ -17,7 +15,7 @@ void main() {
 	uv = TEXCOORD_0;
 	applyUVAnim(uv);
 	POS4 projSpacePos = WORLDVIEWPROJ * entitySpacePosition;
-    fPos = (WORLD * entitySpacePosition).xyz;
-    vertexColor = vec3(0.0);
+    fragPos = (WORLD * entitySpacePosition).xyz;
+    vertColor = vec3(0.0);
 	gl_Position = projSpacePos;
 }

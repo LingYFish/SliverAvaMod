@@ -1,0 +1,68 @@
+{
+  "bloom_processMat": {
+    "vertexShader": "shaders/fullscreen.vertex",
+    "fragmentShader": "shaders/bloom_process.fragment",
+
+    "vertexFields": [
+      { "field": "Position" },
+      { "field": "UV0" }
+    ],
+
+    "samplerStates": [
+      {
+        "samplerIndex": 0,
+        "textureWrap": "Clamp",
+        "textureFilter": "Bilinear"
+      }
+    ],
+    "states": [
+        "DisableDepthTest"
+    ],  
+
+    "msaaSupport": "Both"
+  },
+  "bloom_startMat": {
+    "vertexShader": "shaders/fullscreen.vertex",
+    "fragmentShader": "shaders/bloom_start.fragment",
+
+    "vertexFields": [
+      { "field": "Position" },
+      { "field": "UV0" }
+    ],
+
+    "samplerStates": [
+      {
+        "samplerIndex": 0,
+        "textureWrap": "Clamp",
+        "textureFilter": "Bilinear"
+      }
+    ],
+    "states": [
+        "DisableDepthTest"
+    ],  
+
+    "msaaSupport": "Both"
+  },
+  "bloom_endMat": {
+    "vertexShader": "shaders/fullscreen.vertex",
+    "fragmentShader": "shaders/bloom_end.fragment",
+
+    "vertexFields": [
+      { "field": "Position" },
+      { "field": "UV0" }
+    ],
+
+    "samplerStates": [
+      {
+        "samplerIndex": 0,
+        "textureWrap": "Clamp",
+        "textureFilter": "Bilinear"
+      }
+    ],
+    "states": [
+        "DisableDepthTest"
+    ],  
+
+    "msaaSupport": "Both"
+  }
+}
