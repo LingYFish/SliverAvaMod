@@ -1,0 +1,1 @@
+{"animation_controllers":{"controller.animation.gaping_void.particle":{"states":{"default":{"transitions":[{"particle":"query.life_time < 6.0"}]},"particle":{"particle_effects":[{"effect":"particle"}],"transitions":[{"default":"(1.0)"}]}},"initial_state":"default"}},"format_version":"1.10.0"}

@@ -1,0 +1,23 @@
+{
+  "render_controllers": {
+    "controller.render.sliver_x_gaping_void": {
+      "geometry": "Geometry.default",
+      "textures": [
+        "Texture.default"
+      ],
+      "ignore_lighting": true,
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "overlay_color": {
+        "a": "1.0",
+        "r": "variable.color",
+        "b": "variable.color",
+        "g": "variable.color"
+      }
+    }
+  },
+  "format_version": "1.8.0"
+}

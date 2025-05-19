@@ -1004,13 +1004,13 @@ class extremeCraftingTable(object):
     @staticmethod
     def canShapedRecipe(recipe, container):
         shape, width, hight = extremeCraftingTable.getShaped(recipe)
-        for x in xrange(9 - (width - 1)):
-            for y in xrange(9 - (hight - 1)):
+        for x in range(9 - (width - 1)):
+            for y in range(9 - (hight - 1)):
                 canRecipe = True
                 pos = (x, y)
                 allPos = set()
-                for i in xrange(width):
-                    for j in xrange(hight):
+                for i in range(width):
+                    for j in range(hight):
                         posX, posY = pos[0] + i, pos[1] + j
                         allPos.add((posX, posY))
                         item = container[extremeCraftingTable.posToSlot.get((posX, posY))]
@@ -1028,9 +1028,9 @@ class extremeCraftingTable(object):
         allItems = container.values()
         ingredients = map(lambda i: ItemStack(**i), recipe["ingredients"])
         ingredients2 = len(ingredients)
-        for i in xrange(len(ingredients)):
+        for i in range(len(ingredients)):
             item = ingredients[i]
-            for i2 in xrange(len(allItems)):
+            for i2 in range(len(allItems)):
                 item2 = allItems[i2]
                 if item == item2 and item2.count >= item.count:
                     ingredients2 -= 1

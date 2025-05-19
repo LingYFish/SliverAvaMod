@@ -10,7 +10,7 @@
                 "default": "cosmic_armor"
             },
             "render_controllers": [
-                "controller.render.infinity_armor"
+                "controller.render.sliver_x_infinity_armor"
             ],
             "scripts": {
                 "parent_setup": "variable.boot_layer_visible = 0.0;"

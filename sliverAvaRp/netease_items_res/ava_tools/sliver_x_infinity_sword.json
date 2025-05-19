@@ -6,7 +6,8 @@
             "netease:frame_anim_in_scene": {
                 "texture_path": "textures/sliver_ava/tools/infinity_sword/1",
                 "ticks_per_frame": 6
-            }
+            },
+            "minecraft:hover_text_color": "red"
         },
         "description": {
             "identifier": "sliver_x:infinity_sword"

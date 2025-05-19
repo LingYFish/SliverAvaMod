@@ -1,0 +1,27 @@
+{
+  "render_controllers": {
+    "controller.render.sliver_x_endest_pearl": {
+      "geometry": "Geometry.default",
+      "textures": [
+        "Texture.default"
+      ],
+      "filter_lighting": true,
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "uv_anim": {
+        "scale": [
+          1.0,
+          "1 / variable.texture_frame"
+        ],
+        "offset": [
+          0.0,
+          "Math.mod(Math.floor(query.life_time * 10.0), variable.texture_frame) / variable.texture_frame"
+        ]
+      }
+    }
+  },
+  "format_version": "1.8.0"
+}

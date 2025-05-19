@@ -12,9 +12,9 @@
                 "wing": "cosmic_wing"
             },
             "render_controllers": [
-                "controller.render.infinity_armor",
+                "controller.render.sliver_x_infinity_armor",
                 {
-                    "controller.render.infinity_armor_wing": "query.mod.show_wing"
+                    "controller.render.sliver_x_infinity_armor_wing": "query.mod.show_wing"
                 }
             ],
             "scripts": {

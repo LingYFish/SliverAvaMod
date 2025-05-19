@@ -11,12 +11,12 @@
                 "default": "cosmic_armor"
             },
             "render_controllers": [
-                "controller.render.infinity_armor",
+                "controller.render.sliver_x_infinity_armor",
                 {
-                    "controller.render.infinity_armor_eyes": "!variable.all_equipped"
+                    "controller.render.sliver_x_infinity_armor_eyes": "!variable.all_equipped"
                 },
                 {
-                    "controller.render.infinity_armor_eyes_2": "variable.all_equipped"
+                    "controller.render.sliver_x_infinity_armor_eyes_2": "variable.all_equipped"
                 }
             ],
             "scripts": {

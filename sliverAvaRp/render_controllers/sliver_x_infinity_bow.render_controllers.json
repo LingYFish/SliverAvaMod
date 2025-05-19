@@ -1,6 +1,6 @@
 {
   "render_controllers": {
-    "controller.render.infinity_bow": {
+    "controller.render.sliver_x_infinity_bow": {
       "arrays": {
         "textures": {
           "array.bow_texture_frames": [

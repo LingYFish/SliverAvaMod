@@ -94,12 +94,9 @@ class Inventory(ScreenNode):
         self.updateInfoAlpha()
         self.updateClickInterval()
         self.updateHoldTime()
-        #self.updateHightSlot()
 
     def updateMode(self):
         inputMode = self.getInputMode()
-        if inputMode == self.inputMode:
-            return
         if self.inputMode == 0: #鼠标
             self.mouse = True
         elif self.inputMode == 1: #触屏
@@ -426,8 +423,7 @@ class Inventory(ScreenNode):
         elif not self.selectedSlot:
             self.holdTime = 0
             self.holdSlot = itemSlot
-        if not self.mouse:
-            self.showItemText(itemSlot)
+        self.showItemText(itemSlot)
 
     def mergeItems(self):
         """
@@ -475,7 +471,8 @@ class Inventory(ScreenNode):
         userData = itemSlot.itemStack.tag
         text = compFactory.CreateItem(self.playerId).GetItemFormattedHoverText(itemName, auxValue, False, userData)
         text = self.replaceSpecialCharacters(text)
-        self.ShowItemText(text)
+        if self.mouse == False:
+            self.ShowItemText(text)
 
     def showItemhoverText(self, itemSlot):
         if itemSlot.itemStack.isEmpty():

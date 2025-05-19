@@ -1,6 +1,7 @@
 from SliverAvaritiaScript.api.client.BaseClientSystem import BaseClientSystem
 from SliverAvaritiaScript.modConfig import *
 from SliverAvaritiaScript.api.lib.unicodeUtils import UnicodeConvert
+from random import uniform
 import mod.client.extraClientApi as clientApi
 import json
 import uuid
@@ -13,9 +14,50 @@ class SliverAvaritiaClientSystem(BaseClientSystem):
 
     def __init__(self, namespace, systemName):
         BaseClientSystem.__init__(self, namespace, systemName)
+        self.default_option = None
         self.addListenEvent(self.UiInitFinished,eventName='UiInitFinished')
         self.addListenEvent(self.OnLocalPlayerStopLoading, eventName="OnLocalPlayerStopLoading")
         self.addListenEvent(self.syncFlyState, modName, "SliverAvaritiaServerSystem", "syncFlyState")
+        self.addListenEvent(self.StartUsingItemClient, eventName="StartUsingItemClientEvent")
+        self.addListenEvent(self.StopUsingItemClientEvent, eventName="StopUsingItemClientEvent")
+        self.addListenEvent(self.OnCarriedNewItemChangedClient, eventName="OnCarriedNewItemChangedClientEvent")
+        self.addListenEvent(self.shootSound, modName, "SliverAvaritiaServerSystem", "shootSound")
+
+    def StartUsingItemClient(self, args):
+        playerId = args['playerId']
+        itemDict = args['itemDict']
+        if itemDict['newItemName'] == ItemType.INFINITY_BOW:
+            if playerId == localId:
+                compFactory.CreatePlayerAnim(playerId).PlayTpAnimation("bow_equipped")
+                self.serverCaller("startUsingBow", {})
+    
+    def StopUsingItemClientEvent(self, args):
+        playerId = args['playerId']
+        itemDict = args['itemDict']
+        if itemDict['newItemName'] == ItemType.INFINITY_BOW:
+            if playerId == localId:
+                compFactory.CreatePlayerAnim(playerId).StopAnimation("bow_equipped")
+                self.serverCaller("stopUsingBow", {})
+    
+    def OnCarriedNewItemChangedClient(self, args):
+        itemDict = args['itemDict']
+        if itemDict and itemDict['newItemName'] == ItemType.INFINITY_BOW:
+            playerViewComp = compFactory.CreatePlayerView(levelId)
+            if playerViewComp.GetToggleOption(minecraftEnum.OptionId.INPUT_MODE) == minecraftEnum.InputMode.Touch:
+                if self.default_option is None:
+                    self.default_option = playerViewComp.GetToggleOption(minecraftEnum.OptionId.SPLIT_CONTROLS)
+                    if self.default_option == 0:
+                        clientApi.SetCrossHair(True)
+        else:
+            if self.default_option == 0:
+                clientApi.SetCrossHair(False)
+            self.default_option = None
+    
+    def shootSound(self, args):
+        audioCustomComp = compFactory.CreateCustomAudio(levelId)
+        posComp = compFactory.CreatePos(args["playerId"])
+        pos = posComp.GetPos()
+        audioCustomComp.PlayCustomMusic('random.bow', pos, 1.0, uniform(0.83, 1.25))
     
     def Destroy(self):
         queryVariableComp = compFactory.CreateQueryVariable(levelId)

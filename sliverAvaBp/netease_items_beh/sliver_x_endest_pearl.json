@@ -7,9 +7,9 @@
             "register_to_create_menu": true
         },
         "components": {
-            "netease:projectile": "emmmm_avaritia:endest_pearl",
+            "netease:projectile": "sliver_x:endest_pearl",
             "minecraft:food": {
-                "using_converts_to": "emmmm_avaritia:endest_pearl",
+                "using_converts_to": "sliver_x:endest_pearl",
                 "nutrition": 0,
                 "saturation_modifier": "supernatural",
                 "can_always_eat": true

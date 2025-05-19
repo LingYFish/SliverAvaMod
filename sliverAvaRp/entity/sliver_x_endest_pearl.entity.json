@@ -1,0 +1,31 @@
+{
+    "format_version": "1.10.0",
+    "minecraft:client_entity": {
+        "description": {
+            "animations": {
+                "flying": "animation.actor.billboard"
+            },
+            "geometry": {
+                "default": "geometry.item_sprite"
+            },
+            "identifier": "sliver_x:endest_pearl",
+            "materials": {
+                "default": "endest_pearl"
+            },
+            "render_controllers": [
+                "controller.render.sliver_x_endest_pearl"
+            ],
+            "scripts": {
+                "animate": [
+                    "flying"
+                ],
+                "pre_animation": [
+                    "variable.texture_frame = 8;"
+                ]
+            },
+            "textures": {
+                "default": "textures/sliver_ava/endest_pearl/layer_0"
+            }
+        }
+    }
+}

@@ -60,6 +60,8 @@ class SystemInit:
 class EntityType:
     GAPING_VOID = "sliver_x:gaping_void"
     HEAVEN_ARROW = "sliver_x:heaven_arrow"
+    ENDEST_PEARL = "sliver_x:endest_pearl"
+    SUB_HEAVEN_ARROW = "sliver_x:sub_heaven_arrow"
 
 class ItemType:
     DIAMOND_SINGULARITY = "sliver_x:diamond_singularity"

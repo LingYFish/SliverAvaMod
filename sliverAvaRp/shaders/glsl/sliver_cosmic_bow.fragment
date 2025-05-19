@@ -12,29 +12,46 @@ LAYOUT_BINDING(2) uniform sampler2D TEXTURE_2;
 // uniform highp float TIME;
 UNIFORM vec2 viewportSize;
 
+// External variables for customization
+UNIFORM float externalScale = 1.0;
+UNIFORM float oneOverExternalScale = 2.0;
+UNIFORM float uvtiles = 32.0;
+UNIFORM int symbolRange = 20; // Range for symbol check
+
 varying vec3 fragPos;
 varying vec3 vertColor;
 
 // One-liner rotation matrix
 mat4 rotationMatrix(vec3 axis, float angle) {
-    return mat4(vec4(cos(angle) + axis.x * axis.x * (1.0 - cos(angle)), axis.x * axis.y * (1.0 - cos(angle)) - axis.z * sin(angle), axis.x * axis.z * (1.0 - cos(angle)) + axis.y * sin(angle), 0.0),vec4(axis.y * axis.x * (1.0 - cos(angle)) + axis.z * sin(angle), cos(angle) + axis.y * axis.y * (1.0 - cos(angle)), axis.y * axis.z * (1.0 - cos(angle)) - axis.x * sin(angle), 0.0),vec4(axis.z * axis.x * (1.0 - cos(angle)) - axis.y * sin(angle), axis.z * axis.y * (1.0 - cos(angle)) + axis.x * sin(angle), cos(angle) + axis.z * axis.z * (1.0 - cos(angle)), 0.0),vec4(0.0, 0.0, 0.0, 1.0));
+    float c = cos(angle);
+    float s = sin(angle);
+    float t = 1.0 - c;
+    float x = axis.x;
+    float y = axis.y;
+    float z = axis.z;
+
+    return mat4(
+        vec4(t * x * x + c, t * x * y - z * s, t * x * z + y * s, 0.0),
+        vec4(t * x * y + z * s, t * y * y + c, t * y * z - x * s, 0.0),
+        vec4(t * x * z - y * s, t * y * z + x * s, t * z * z + c, 0.0),
+        vec4(0.0, 0.0, 0.0, 1.0)
+    );
 }
 
 void main() {
     vec4 texColor = texture2D(TEXTURE_0, uv);
     if (texColor.a > 0.0 && texColor.a < 1.0) {
-        const float externalScale = 1.0;
-        const float oneOverExternalScale = 2.0 / externalScale;
-        const float uvtiles = 32.0;
         vec4 col = vec4(0.01, 0.0, 0.0, 1.0);
         float pulse = mod(TIME * 20.0, 400.0) / 400.0;
-        col.g = sin(pulse*3.1415*2.) * 0.1 + 0.05;
-        col.b = cos(pulse*3.1415*2.) * 0.05 + 0.15;
+        col.g = sin(pulse * 3.1415 * 2.0) * 0.1 + 0.05;
+        col.b = cos(pulse * 3.1415 * 2.0) * 0.05 + 0.15;
+
         vec4 dir = normalize(vec4(-fragPos, 0.0));
         float pitch = 1.0;
         float yaw = 1.0;
         dir = rotationMatrix(vec3(1.0, 0.0, 0.0), pitch) * dir;
         dir = rotationMatrix(vec3(0.0, 1.0, 0.0), yaw) * dir;
+
         for (int i = 0; i < 16; i++) {
             int mult = 16 - i;
             int j = i + 7;
@@ -44,22 +61,27 @@ void main() {
             float rand3 = rand1 * 0.4 + rand2 * 0.4;
             vec3 axis = normalize(vec3(sin(rand1), sin(rand2), cos(rand3)));
             vec4 ray = dir * rotationMatrix(axis, mod(rand3, 2.0 * 3.1415));
+
             float rawU = 0.5 + (atan(ray.z, ray.x) / (2.0 * 3.1415));
             float rawV = 0.5 + (asin(ray.y) / 3.1415);
             float scale = float(mult) * 0.5 + 2.75;
+
             float u = (rawU + TIME * 0.001 * oneOverExternalScale) * scale * externalScale;
             float v = (rawV + TIME * 0.001 * oneOverExternalScale) * scale * 0.6 * externalScale;
             float u2 = (rawU + TIME * -0.001 * oneOverExternalScale) * scale * externalScale;
             float v2 = (rawV + TIME * -0.001 * oneOverExternalScale) * scale * 0.6 * externalScale;
+
             int tu = int(mod(floor(u * uvtiles), uvtiles));
             int tv = int(mod(floor(v * uvtiles), uvtiles));
             int tu2 = int(mod(floor(u2 * uvtiles), uvtiles));
             int tv2 = int(mod(floor(v2 * uvtiles), uvtiles));
+
             int position = ((77 * tu) + (76 * tv) + (36 * (i + 31)) + 172);
             int symbol = int(mod(float(position), float(100)));
             int rotation = int(mod(pow(float(tu), float(tv)) + float(tu) + 3.0 + float(tv * i), 8.0));
             if (rotation >= 4) rotation -= 4;
-            if (symbol >= 0 && symbol < 20) {
+
+            if (symbol >= 0 && symbol < symbolRange) {
                 if (texColor.a < 1.0 && texColor.a > 0.0) {
                     vec2 tileUV = vec2(mod(u, 1.0), mod(v, 1.0));
                     float ru = clamp(tileUV.x * uvtiles - float(tu), 0.0, 1.0);
@@ -67,54 +89,59 @@ void main() {
                     if (rotation >= 4) ru = 1.0 - ru;
                     float oru = ru;
                     float orv = rv;
-                    if (rotation == 1) {oru = 1.0 - rv; orv = ru;}
-                    else if (rotation == 2) {oru = 1.0 - ru; orv = 1.0 - rv;}
-                    else if (rotation == 3) {oru = rv; orv = 1.0 - ru;}
+                    if (rotation == 1) { oru = 1.0 - rv; orv = ru; }
+                    else if (rotation == 2) { oru = 1.0 - ru; orv = 1.0 - rv; }
+                    else if (rotation == 3) { oru = rv; orv = 1.0 - ru; }
+
                     vec2 tileUV2 = vec2(mod(u2, 1.0), mod(v2, 1.0));
                     float ru2 = clamp(tileUV2.x * uvtiles - float(tu2), 0.0, 1.0);
                     float rv2 = clamp(tileUV2.y * uvtiles - float(tv2), 0.0, 1.0);
                     if (rotation >= 4) ru2 = 1.0 - ru2;
                     float oru2 = ru2;
                     float orv2 = rv2;
-                    if (rotation == 1) {oru2 = 1.0 - rv2; orv2 = ru2;}
-                    else if (rotation == 2) {oru2 = 1.0 - ru2; orv2 = 1.0 - rv2;}
-                    else if (rotation == 3) {oru2 = rv2; orv2 = 1.0 - ru2;}
+                    if (rotation == 1) { oru2 = 1.0 - rv2; orv2 = ru2; }
+                    else if (rotation == 2) { oru2 = 1.0 - ru2; orv2 = 1.0 - rv2; }
+                    else if (rotation == 3) { oru2 = rv2; orv2 = 1.0 - ru2; }
+
                     vec2 iconUV = vec2(oru, orv);
                     vec2 iconUV2 = vec2(oru2, orv2);
+
                     vec4 starCol = texture2D(TEXTURE_1, iconUV);
                     vec4 starCol2 = texture2D(TEXTURE_2, iconUV2);
+
                     float alpha = starCol.r * (0.5 + (1.0 / float(mult)) * 1.0) * (1.0 - smoothstep(0.15, 0.48, abs(rawV - 0.5)));
                     float alpha2 = starCol2.r * (0.5 + (1.0 / float(mult)) * 1.0) * (1.0 - smoothstep(0.15, 0.48, abs(rawV - 0.5)));
 
                     vec3 randColor = vec3(
-                        (mod(rand1, 29.0)/29.0) * 0.3 + 0.4,
-                        (mod(rand2, 35.0)/35.0) * 0.4 + 0.6,
-                        (mod(rand1, 17.0)/17.0) * 0.3 + 0.7
+                        (mod(rand1, 29.0) / 29.0) * 0.3 + 0.4,
+                        (mod(rand2, 35.0) / 35.0) * 0.4 + 0.6,
+                        (mod(rand1, 17.0) / 17.0) * 0.3 + 0.7
                     );
 
-                    col += vec4(randColor,1) * alpha;
-                    //col += vec4(randColor,1) * alpha2;
+                    col += vec4(randColor, 1.0) * alpha;
+                    //col += vec4(randColor, 1.0) * alpha2;
                 }
             }
         }
 
         vec3 shade = vertColor.rgb * 0.3 + vec3(1.0 - 0.3, 1.0 - 0.3, 1.0 - 0.3);
         col.rgb *= shade;
+
         if (texColor.a < 0.8 && texColor.a > 0.6) {
             texColor = mix(texColor, col, 0.4);
             gl_FragColor = texColor;
-            }
+        }
         else if (texColor.a <= 0.6 && texColor.a > 0.4) {
             texColor = mix(texColor, col, 0.9);
-                gl_FragColor = texColor;
-            }
+            gl_FragColor = texColor;
+        }
         else if (texColor.a <= 0.4) {
             gl_FragColor = col;
         }
     }
     else {
         #if defined(ALPHA_TEST) && !defined(USE_MULTITEXTURE) && !defined(MULTIPLICATIVE_TINT)
-            if(NEEDS_DISCARD(texColor))
+            if (NEEDS_DISCARD(texColor))
                 discard;
         #endif
         gl_FragColor = texColor;

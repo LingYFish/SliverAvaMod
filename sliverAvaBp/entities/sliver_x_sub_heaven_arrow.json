@@ -1,0 +1,149 @@
+{
+    "minecraft:entity": {
+        "component_groups": {
+            "sliver_x:remove_heaven_arrow": {
+                "minecraft:explode": {
+                    "breaks_blocks": false,
+                    "fuse_lit": true,
+                    "fuse_length": 0.0,
+                    "power": 0.0,
+                    "causes_fire": false
+                }
+            },
+            "sliver_x:sub_arrow": {
+                "minecraft:projectile": {
+                    "uncertainty_base": 1,
+                    "should_bounce": true,
+                    "power": 5.0,
+                    "offset": [
+                        0,
+                        -0.1,
+                        0
+                    ],
+                    "uncertainty_multiplier": 0,
+                    "gravity": 0.05,
+                    "hit_sound": "bow.hit",
+                    "on_hit": {
+                        "stick_in_ground": {
+                            "shake_time": 0.35
+                        },
+                        "impact_damage": {
+                            "knockback": true,
+                            "damage": 60,
+                            "destroy_on_hit": true,
+                            "power_multiplier": 1.0
+                        }
+                    },
+                    "anchor": 1
+                }
+            },
+            "sliver_x:main_arrow": {
+                "minecraft:projectile": {
+                    "uncertainty_base": 1,
+                    "should_bounce": true,
+                    "power": 5.0,
+                    "offset": [
+                        0,
+                        -0.1,
+                        0
+                    ],
+                    "uncertainty_multiplier": 0,
+                    "gravity": 0.05,
+                    "hit_sound": "bow.hit",
+                    "on_hit": {
+                        "stick_in_ground": {
+                            "shake_time": 0.35
+                        },
+                        "impact_damage": {
+                            "knockback": true,
+                            "damage": 60,
+                            "destroy_on_hit": true,
+                            "power_multiplier": 1.0
+                        }
+                    },
+                    "anchor": 1
+                }
+            },
+            "sliver_x:heaven_arrow_remove": {
+                "minecraft:timer": {
+                    "time_down_event": {
+                        "event": "sliver_x:remove_heaven_arrow"
+                    },
+                    "looping": false,
+                    "time": 5
+                }
+            }
+        },
+        "description": {
+            "is_experimental": false,
+            "identifier": "sliver_x:sub_heaven_arrow",
+            "is_spawnable": false,
+            "is_summonable": true
+        },
+        "components": {
+            "netease:custom_entity_type": {
+                "value": "projectile_entity"
+            },
+            "minecraft:pushable": {
+                "is_pushable_by_piston": true,
+                "is_pushable": false
+            },
+            "minecraft:conditional_bandwidth_optimization": {
+                "default_values": {
+                    "max_optimized_distance": 80.0,
+                    "use_motion_prediction_hints": true,
+                    "max_dropped_ticks": 7
+                }
+            },
+            "minecraft:environment_sensor": {
+                "triggers": {
+                    "filters": {
+                        "all_of": [
+                            {
+                                "test": "on_ground",
+                                "value": true,
+                                "subject": "self"
+                            },
+                            {
+                                "test": "has_component",
+                                "operator": "!=",
+                                "value": "minecraft:timer",
+                                "subject": "self"
+                            }
+                        ]
+                    }
+                }
+            },
+            "minecraft:collision_box": {
+                "width": 0.25,
+                "height": 0.25
+            },
+            "minecraft:physics": {}
+        },
+        "events": {
+            "sliver_x:sub_arrow": {
+                "add": {
+                    "component_groups": [
+                        "sliver_x:sub_arrow",
+                        "sliver_x:heaven_arrow_remove"
+                    ]
+                }
+            },
+            "sliver_x:remove_heaven_arrow": {
+                "add": {
+                    "component_groups": [
+                        "sliver_x:remove_heaven_arrow"
+                    ]
+                }
+            },
+            "minecraft:entity_spawned": {
+                "add": {
+                    "component_groups": [
+                        "sliver_x:main_arrow"
+                    ]
+                }
+            }
+        }
+    },
+    "format_version": "1.13.0"
+}

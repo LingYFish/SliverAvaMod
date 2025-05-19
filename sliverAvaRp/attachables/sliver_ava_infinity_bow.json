@@ -18,7 +18,7 @@
                 "first_person": "cosmic_bow"
             },
             "render_controllers": [
-                "controller.render.infinity_bow"
+                "controller.render.sliver_x_infinity_bow"
             ],
             "scripts": {
                 "animate": [

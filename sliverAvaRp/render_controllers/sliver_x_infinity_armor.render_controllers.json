@@ -1,6 +1,6 @@
 {
   "render_controllers": {
-    "controller.render.infinity_armor": {
+    "controller.render.sliver_x_infinity_armor": {
       "arrays": {
         "textures": {
           "array.cosmic": [
@@ -31,7 +31,7 @@
         "array.cosmic2[(query.anim_time * 8)]"
       ]
     },
-    "controller.render.infinity_armor_eyes_2": {
+    "controller.render.sliver_x_infinity_armor_eyes_2": {
       "geometry": "geometry.default",
       "arrays": {
         "textures": {
@@ -62,7 +62,7 @@
         }
       ]
     },
-    "controller.render.infinity_armor_wing": {
+    "controller.render.sliver_x_infinity_armor_wing": {
       "arrays": {
         "textures": {
           "array.wing": [
@@ -105,7 +105,7 @@
         "array.cosmic2[(query.anim_time * 8)]"
       ]
     },
-    "controller.render.infinity_armor_eyes": {
+    "controller.render.sliver_x_infinity_armor_eyes": {
       "arrays": {
         "textures": {
           "array.cosmic": [

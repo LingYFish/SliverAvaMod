@@ -14,7 +14,7 @@
                 "first_person": "cosmic"
             },
             "render_controllers": [
-                "controller.render.infinity_sword"
+                "controller.render.sliver_x_infinity_sword"
             ],
             "scripts": {
                 "animate": [

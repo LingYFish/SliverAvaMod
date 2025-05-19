@@ -1,0 +1,55 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:entity": {
+        "components": {
+            "minecraft:collision_box": {
+                "height": 0,
+                "width": 0
+            },
+            "minecraft:damage_sensor": {
+                "triggers": {
+                    "cause": "all",
+                    "deals_damage": false
+                }
+            },
+            "minecraft:explode": {
+                "breaks_blocks": true,
+                "causes_fire": false,
+                "fuse_length": 9.3,
+                "fuse_lit": true,
+                "power": 6
+            },
+            "minecraft:fire_immune": true,
+            "minecraft:health": {
+                "max": 10,
+                "value": 10
+            },
+            "minecraft:knockback_resistance": {
+                "max": 100,
+                "value": 100
+            },
+            "minecraft:persistent": {
+
+            },
+            "minecraft:physics": {
+                "has_collision": false,
+                "has_gravity": true
+            },
+            "minecraft:pushable": {
+                "is_pushable": false,
+                "is_pushable_by_piston": false
+            },
+            "minecraft:type_family": {
+                "family": [
+                    "void"
+                ]
+            }
+        },
+        "description": {
+            "identifier": "sliver_x:gaping_void",
+            "is_experimental": false,
+            "is_spawnable": false,
+            "is_summonable": true
+        }
+    }
+}

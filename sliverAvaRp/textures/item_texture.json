@@ -128,6 +128,9 @@
         "sliver_x:skullfire_sword": {
             "textures": "textures/sliver_ava/tools/skullfire_sword/layer_0"
         },
+        "sliver_x:matter_cluster.full": {
+            "textures": "textures/sliver_ava/matter_cluster/full"
+        },
         "sliver_x:tin_singularity": {
             "textures": "textures/sliver_ava/singularity/tin_singularity"
         },

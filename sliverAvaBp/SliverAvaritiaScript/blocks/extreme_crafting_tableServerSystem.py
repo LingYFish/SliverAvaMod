@@ -84,8 +84,8 @@ class extreme_crafting_tableServerSystem(InventoryBlockServerSystem):
         if recipe:
             outputItem = recipe["result"]
             self.SetContainerItem(None,dimensionId, pos,'container_slot', "output", outputItem)
-        else:
-            self.SetContainerItem(None,dimensionId, pos,'container_slot', "output", {})
+            return
+        self.SetContainerItem(None,dimensionId, pos,'container_slot', "output", {})
 
     def DropItem(self, playerId, itemDict):
         """模拟玩家丢弃"""
@@ -108,60 +108,115 @@ class extreme_crafting_tableServerSystem(InventoryBlockServerSystem):
             return
         dimensionId = blockInfo["dimensionId"]
         pos = blockInfo["pos"]
-        for i in range(81):
-            key = "crafting_slot%s" % str(i + 1)
-            item = self.GetContainerItem(dimensionId, pos,'container_slot', key)
-            if item:
-                if len([i for i in itemComp.GetPlayerAllItems(minecraftEnum.ItemPosType.INVENTORY) if i != None]) < 36:
-                    itemComp.SpawnItemToPlayerInv(item, playerId)
-                else:
-                    self.DropItem(playerId, item)
-                self.SetContainerItem(None,dimensionId, pos,'container_slot', key, {})
+        self.ClearCraftingGrid(dimensionId, pos, playerId, itemComp)
         recipe = extremeCraftingTable.getExtremeRecipeByName(itemName)
-        if recipe:
-            allItem = extremeCraftingTable.getRecipeAllItems(recipe)
-            Invitem = []
-            for i in range(36):
-                item = itemComp.GetPlayerItem(minecraftEnum.ItemPosType.INVENTORY, i, True)
-                if item:
-                    Invitem.append(ItemStack(**item))
-                else:
-                    Invitem.append(ItemStack())
-            for i in Invitem:
-                for i2 in allItem:
-                    if i2.isEmpty():
-                        continue
-                    if i == i2 and i.count >= i2.count:
-                        i.count -= i2.count
-                        i2.count = 0
-            enough = all([i.isEmpty() for i in allItem])
-            if enough:
-                if recipe["type"] == "shaped":
-                    shape, width, hight = extremeCraftingTable.getShaped(recipe)
-                    for i in range(width):
-                        for j in range(hight):
-                            key = "crafting_slot%s" % str(extremeCraftingTable.posToSlot.get((i, j)) + 1)
-                            self.SetContainerItem(None,dimensionId, pos,'container_slot', key, shape[j][i])
-                if recipe["type"] == "shapeless":
-                    ingredients = copy.deepcopy(recipe["ingredients"])
-                    for i in range(len(ingredients)):
-                        key = "crafting_slot%s" % str(i + 1)
-                        item = ingredients[i]
-                        self.SetContainerItem(None,dimensionId, pos,'container_slot', key, item)
-                for i in range(36):
-                    itemComp.SetPlayerAllItems({(minecraftEnum.ItemPosType.INVENTORY, i): Invitem[i].toItemDict()})
+        if not recipe:
+            return
+        inventoryItems = self.GetInventoryItems(itemComp)
+        requiredItems = extremeCraftingTable.getRecipeAllItems(recipe)
+        checkSuccess, materialSnapshot = self.CheckMaterials(inventoryItems, requiredItems)
+        
+        if checkSuccess:
+            try:
+                self.SetupRecipeGrid(recipe, dimensionId, pos)
+                self.UpdateInventory(itemComp, inventoryItems)
+            except Exception as e:
+                self.RecoverMaterials(inventoryItems, materialSnapshot)
+                self.UpdateInventory(itemComp, inventoryItems)
+                self.ShowSystemError(playerId, str(e))
+        else:
+            missingItems = self.CalculateMissingItems(requiredItems)
+            self.ShowWarning(playerId, missingItems, itemComp)
+
+    def ClearCraftingGrid(self, dimensionId, pos, playerId, itemComp):
+        for i in range(81):
+            slotKey = "crafting_slot%s" % (i + 1)
+            item = self.GetContainerItem(dimensionId, pos, 'container_slot', slotKey)
+            if not item:
+                continue
+            if len([i for i in itemComp.GetPlayerAllItems(minecraftEnum.ItemPosType.INVENTORY) if i]) < 36:
+                itemComp.SpawnItemToPlayerInv(item, playerId)
             else:
-                leftItem = []
-                for i in allItem:
-                    if not i.isEmpty():
-                        for i2 in leftItem:
-                            if i2 == i:
-                                i2.count += i.count
-                                break
-                        else:
-                            leftItem.append(i)
-                text = ["§c目前制作物品材料不够!\n§r§7还缺:\n"]
-                for item in leftItem:
-                    name = itemComp.GetItemBasicInfo(item.identifier, item.data)['itemName']
-                    text.append('§r§7{} §r§7x{}§r\n'.format(name, item.count))
-                self.clientCaller(playerId, "showItemText", {"text": "".join(text)})
+                self.DropItem(playerId, item)
+            self.SetContainerItem(None, dimensionId, pos, 'container_slot', slotKey, {})
+
+    def GetInventoryItems(self, itemComp):
+        return [
+            ItemStack(**item).clone() if item else ItemStack()
+            for item in itemComp.GetPlayerAllItems(minecraftEnum.ItemPosType.INVENTORY)
+        ]
+
+    def CheckMaterials(self, inventoryItems, requiredItems):
+        materialSnapshot = [item.clone() for item in inventoryItems]
+        tempInventory = [item.clone() for item in inventoryItems]
+        try:
+            for required in requiredItems:
+                if required.isEmpty():
+                    continue
+                remaining = required.count
+                for invItem in tempInventory:
+                    if invItem == required and invItem.count > 0:
+                        deduct = min(invItem.count, remaining)
+                        invItem.count -= deduct
+                        remaining -= deduct
+                        if remaining <= 0:
+                            break
+                if remaining > 0:
+                    return False, materialSnapshot
+            for i in range(len(inventoryItems)):
+                inventoryItems[i].count = tempInventory[i].count
+            return True, None
+        except:
+            return False, materialSnapshot
+
+    def RecoverMaterials(self, inventoryItems, snapshot):
+        for i in range(len(inventoryItems)):
+            inventoryItems[i].count = snapshot[i].count
+
+    def SetupRecipeGrid(self, recipe, dimensionId, pos):
+        if recipe["type"] == "shaped":
+            shape, width, height = extremeCraftingTable.getShaped(recipe)
+            for x in range(width):
+                for y in range(height):
+                    slotNum = extremeCraftingTable.posToSlot.get((x, y)) + 1
+                    slotKey = "crafting_slot%s" % slotNum
+                    self.SetContainerItem(None, dimensionId, pos, 'container_slot', slotKey, shape[y][x])
+        else:
+            ingredients = copy.deepcopy(recipe["ingredients"])
+            for idx in range(len(ingredients)):
+                slotKey = "crafting_slot%s" % (idx + 1)
+                self.SetContainerItem(None, dimensionId, pos, 'container_slot', slotKey, ingredients[idx])
+
+    def CalculateMissingItems(self, requiredItems):
+        missing = []
+        for item in requiredItems:
+            if item.isEmpty():
+                continue
+            found = False
+            for m in missing:
+                if m == item:
+                    m.count += item.count
+                    found = True
+                    break
+            if not found:
+                missing.append(item.clone())
+        return missing
+
+    def ShowWarning(self, playerId, missingItems, itemComp):
+        msg = ["§c材料不足！\n§r§7缺少以下物品：\n"]
+        for item in missingItems:
+            info = itemComp.GetItemBasicInfo(item.identifier, item.data)
+            msg.append("§r§7%s §r§7x%d§r\n" % (info['itemName'], item.count))
+        self.clientCaller(playerId, "showItemText", {"text": "".join(msg)})
+
+    def UpdateInventory(self, itemComp, inventoryItems):
+        updateDict = {
+            (minecraftEnum.ItemPosType.INVENTORY, i): item.toItemDict()
+            for i, item in enumerate(inventoryItems)
+        }
+        itemComp.SetPlayerAllItems(updateDict)
+
+    def ShowSystemError(self, playerId, errorMsg):
+        self.clientCaller(playerId, "showItemText", {
+            "text": "§c合成过程发生错误！\n§r§7错误信息：%s\n§r§e材料已自动恢复" % errorMsg
+        })

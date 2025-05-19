@@ -1,0 +1,42 @@
+{
+  "minecraft:client_entity": {
+    "description": {
+      "textures": {
+        "default": "textures/sliver_ava/entity/void"
+      },
+      "geometry": {
+        "default": "geometry.sliver_x_ava_gaping_void"
+      },
+      "particle_effects": {
+        "particle": "sliver_x:gaping_void"
+      },
+      "scripts": {
+        "should_update_bones_and_effects_offscreen": true,
+        "animate": [
+          "particle"
+        ],
+        "scale": "variable.voidscale",
+        "pre_animation": [
+          "variable.maxlifetime = 200.0;",
+          "variable.collapse = 0.95;",
+          "variable.age = math.round(query.life_time * 20.0) + query.delta_time;",
+          "variable.life = variable.age <= variable.maxlifetime ? variable.age / variable.maxlifetime : 1.0;",
+          "variable.voidscale = variable.life < variable.collapse ? 10.0 * (0.05 + math.sqrt(1 - ((1 - (variable.collapse - variable.life) / variable.collapse) - 1) * ((1 - (variable.collapse - variable.life) / variable.collapse) - 1)) * 0.995) : 10.0 * math.sqrt(1 - ((1 - (variable.life - variable.collapse) / (1 - variable.collapse)) - 1) * ((1 - (variable.life - variable.collapse) / (1 - variable.collapse)) - 1));",
+          "variable.f = math.max(0.0, variable.life - variable.collapse / (1 - variable.collapse));",
+          "variable.color = variable.age <= (variable.maxlifetime - (2 / 3) * 20.0) ? math.max(variable.f, 1 - (variable.life * 30.0)) : (variable.age - (variable.maxlifetime - (2 / 3) * 20.0)) * (1 - variable.collapse);"
+        ]
+      },
+      "render_controllers": [
+        "controller.render.sliver_x_gaping_void"
+      ],
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "animations": {
+        "particle": "controller.animation.gaping_void.particle"
+      },
+      "identifier": "sliver_x:gaping_void"
+    }
+  },
+  "format_version": "1.10.0"
+}
