@@ -1,8 +1,138 @@
 {
     "resource_pack_name": "vanilla",
     "texture_data": {
+        "sliver_x:copper_singularity": {
+            "textures": "textures/sliver_ava/singularity/copper_singularity"
+        },
+        "sliver_x:cosmic_meatballs": {
+            "textures": "textures/sliver_ava/cosmic_meatballs"
+        },
+        "sliver_x:crystal_matrix_ingot": {
+            "textures": "textures/sliver_ava/resource/crystal_matrix_ingot"
+        },
+        "sliver_x:diamond_lattice": {
+            "textures": "textures/sliver_ava/resource/diamond_lattice"
+        },
+        "sliver_x:diamond_singularity": {
+            "textures": "textures/sliver_ava/singularity/diamond_singularity"
+        },
+        "sliver_x:emerald_singularity": {
+            "textures": "textures/sliver_ava/singularity/emerald_singularity"
+        },
+        "sliver_x:endest_pearl": {
+            "textures": "textures/sliver_ava/endest_pearl/layer_0"
+        },
+        "sliver_x:fluxed_singularity": {
+            "textures": "textures/sliver_ava/singularity/fluxed_singularity"
+        },
+        "sliver_x:gold_singularity": {
+            "textures": "textures/sliver_ava/singularity/gold_singularity"
+        },
+        "sliver_x:infinity_axe": {
+            "textures": "textures/sliver_ava/tools/infinity_axe/layer_0"
+        },
+        "sliver_x:infinity_boots": {
+            "textures": "textures/sliver_ava/armor/boots"
+        },
+        "sliver_x:infinity_bow_idle": {
+            "textures": "textures/sliver_ava/tools/infinity_bow/idle"
+        },
+        "sliver_x:infinity_bow_pull": {
+            "textures": [
+                "textures/sliver_ava/tools/infinity_bow/pull_0",
+                "textures/sliver_ava/tools/infinity_bow/pull_0",
+                "textures/sliver_ava/tools/infinity_bow/pull_1",
+                "textures/sliver_ava/tools/infinity_bow/pull_2",
+                "textures/sliver_ava/tools/infinity_bow/pull_2",
+                "textures/sliver_ava/tools/infinity_bow/pull_2"
+            ]
+        },
+        "sliver_x:infinity_catalyst": {
+            "textures": "textures/sliver_ava/resource/infinity_catalyst"
+        },
+        "sliver_x:infinity_chestplate": {
+            "textures": "textures/sliver_ava/armor/chestplate"
+        },
+        "sliver_x:infinity_helmet": {
+            "textures": "textures/sliver_ava/armor/helmet"
+        },
+        "sliver_x:infinity_hoe": {
+            "textures": "textures/sliver_ava/tools/infinity_hoe/layer_0"
+        },
+        "sliver_x:infinity_ingot": {
+            "textures": "textures/sliver_ava/resource/infinity_ingot"
+        },
+        "sliver_x:infinity_leggings": {
+            "textures": "textures/sliver_ava/armor/legs"
+        },
+        "sliver_x:infinity_legs": {
+            "textures": "textures/sliver_ava/armor/legs"
+        },
+        "sliver_x:infinity_pickaxe": {
+            "textures": "textures/sliver_ava/tools/infinity_pickaxe/pickaxe"
+        },
+        "sliver_x:infinity_pickaxe.hammer": {
+            "textures": "textures/sliver_ava/tools/infinity_pickaxe/hammer"
+        },
+        "sliver_x:infinity_shovel": {
+            "textures": "textures/sliver_ava/tools/infinity_shovel/shovel"
+        },
+        "sliver_x:infinity_shovel.destroyer": {
+            "textures": "textures/sliver_ava/tools/infinity_shovel/destroyer"
+        },
         "sliver_x:infinity_sword": {
             "textures": "textures/sliver_ava/tools/infinity_sword/1"
+        },
+        "sliver_x:iridium_singularity": {
+            "textures": "textures/sliver_ava/singularity/iridium_singularity"
+        },
+        "sliver_x:iron_singularity": {
+            "textures": "textures/sliver_ava/singularity/iron_singularity"
+        },
+        "sliver_x:lapis_singularity": {
+            "textures": "textures/sliver_ava/singularity/lapis_singularity"
+        },
+        "sliver_x:lead_singularity": {
+            "textures": "textures/sliver_ava/singularity/lead_singularity"
+        },
+        "sliver_x:matter_cluster": {
+            "textures": "textures/sliver_ava/matter_cluster/empty"
+        },
+        "sliver_x:neutron_nugget": {
+            "textures": "textures/sliver_ava/resource/neutron_nugget"
+        },
+        "sliver_x:neutron_pile": {
+            "textures": "textures/sliver_ava/neutron_pile"
+        },
+        "sliver_x:neutronium_ingot": {
+            "textures": "textures/sliver_ava/neutron_ingot"
+        },
+        "sliver_x:nickel_singularity": {
+            "textures": "textures/sliver_ava/singularity/nickel_singularity"
+        },
+        "sliver_x:platinum_singularity": {
+            "textures": "textures/sliver_ava/singularity/platinum_singularity"
+        },
+        "sliver_x:quartz_singularity": {
+            "textures": "textures/sliver_ava/singularity/quartz_singularity"
+        },
+        "sliver_x:record_fragment": {
+            "textures": "textures/sliver_ava/resource/record_fragment"
+        },
+        "sliver_x:redstone_singularity": {
+            "textures": "textures/sliver_ava/singularity/redstone_singularity"
+        },
+        "sliver_x:silver_singularity": {
+            "textures": "textures/sliver_ava/singularity/silver_singularity"
+        },
+        "sliver_x:skullfire_sword": {
+            "textures": "textures/sliver_ava/tools/skullfire_sword/layer_0"
+        },
+        "sliver_x:tin_singularity": {
+            "textures": "textures/sliver_ava/singularity/tin_singularity"
+        },
+        "sliver_x:ultimate_stew": {
+            "textures": "textures/sliver_ava/ultimate_stew/layer_0"
         }
     },
     "texture_name": "atlas.items"

@@ -1,0 +1,17 @@
+{
+    "format_version": "1.10",
+    "minecraft:item": {
+        "components": {
+            "minecraft:icon": "sliver_x:diamond_singularity",
+            "netease:frame_anim_in_scene": {
+                "texture_path": "textures/sliver_ava/singularity/diamond_singularity",
+                "ticks_per_frame": 4
+            }
+        },
+        "description": {
+            "category": "Construction",
+            "identifier": "sliver_x:diamond_singularity",
+            "register_to_create_menu": true
+        }
+    }
+}

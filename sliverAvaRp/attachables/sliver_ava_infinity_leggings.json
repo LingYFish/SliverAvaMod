@@ -1,0 +1,33 @@
+{
+    "format_version": "1.10.0",
+    "minecraft:attachable": {
+        "description": {
+            "geometry": {
+                "default": "geometry.humanoid.armor.leggings"
+            },
+            "identifier": "sliver_x:infinity_leggings",
+            "materials": {
+                "default": "cosmic_armor"
+            },
+            "render_controllers": [
+                "controller.render.infinity_armor"
+            ],
+            "scripts": {
+                "parent_setup": "variable.leg_layer_visible = 0.0;"
+            },
+            "textures": {
+                "cosmic2_frame0": "textures/cosmic_shader/cosmic6/0",
+                "cosmic2_frame1": "textures/cosmic_shader/cosmic6/1",
+                "cosmic2_frame2": "textures/cosmic_shader/cosmic6/2",
+                "cosmic2_frame3": "textures/cosmic_shader/cosmic6/3",
+                "cosmic2_frame4": "textures/cosmic_shader/cosmic6/4",
+                "cosmic2_frame5": "textures/cosmic_shader/cosmic6/5",
+                "cosmic_frame0": "textures/cosmic_shader/cosmic0/0",
+                "cosmic_frame1": "textures/cosmic_shader/cosmic0/1",
+                "cosmic_frame2": "textures/cosmic_shader/cosmic0/2",
+                "cosmic_frame3": "textures/cosmic_shader/cosmic0/3",
+                "default": "textures/sliver_ava/armor/infinity_armor2"
+            }
+        }
+    }
+}

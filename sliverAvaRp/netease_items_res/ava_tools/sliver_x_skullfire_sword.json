@@ -1,0 +1,16 @@
+{
+    "minecraft:item": {
+        "description": {
+            "identifier": "sliver_x:skullfire_sword"
+        },
+        "components": {
+            "netease:frame_anim_in_scene": {
+                "texture_path": "textures/sliver_ava/tools/skullfire_sword/layer_0",
+                "ticks_per_frame": 1
+            },
+            "minecraft:icon": "sliver_x:skullfire_sword",
+            "minecraft:hover_text_color": "light_purple"
+        }
+    },
+    "format_version": "1.10.0"
+}

@@ -1,0 +1,17 @@
+{
+    "minecraft:item": {
+        "description": {
+            "category": "sliver_x_ava",
+            "identifier": "sliver_x:crystal_matrix_ingot",
+            "register_to_create_menu": true
+        },
+        "components": {
+            "netease:customtips": {
+                "value": "§o§8这甚至不是最终形态。§r"
+            },
+            "minecraft:max_stack_size": 64,
+            "minecraft:hand_equipped": false
+        }
+    },
+    "format_version": "1.10"
+}

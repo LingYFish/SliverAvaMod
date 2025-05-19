@@ -1,0 +1,12 @@
+{
+    "minecraft:item": {
+        "description": {
+            "identifier": "sliver_x:neutron_nugget"
+        },
+        "components": {
+            "minecraft:icon": "sliver_x:neutron_nugget",
+            "minecraft:hover_text_color": "yellow"
+        }
+    },
+    "format_version": "1.10"
+}

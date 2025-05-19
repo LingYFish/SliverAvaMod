@@ -2,7 +2,12 @@
     "Arena.Component.Namespace": "sliver_x",
     "FirstTabSetting": 0,
     "ShortItemSettings": [
+        "sliverAvaRp\\ui",
         "sliverAvaRp\\models",
         "sliverAvaRp\\textures"
-    ]
+    ],
+    "Uluru.autoLayerDict": {
+        "AvaritiaUi": false
+    },
+    "Uluru.checkSuspectOldUI": true
 }

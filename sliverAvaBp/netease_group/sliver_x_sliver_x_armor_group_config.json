@@ -1,0 +1,14 @@
+{
+    "groups": [
+        {
+            "group_name": "盔甲",
+            "icon": "sliver_x:infinity_helmet",
+            "list": [
+                "sliver_x:infinity_helmet",
+                "sliver_x:infinity_chestplate",
+                "sliver_x:infinity_leggings",
+                "sliver_x:infinity_boots"
+            ]
+        }
+    ]
+}

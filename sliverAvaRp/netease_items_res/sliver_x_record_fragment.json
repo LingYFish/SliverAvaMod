@@ -1,0 +1,12 @@
+{
+    "minecraft:item": {
+        "description": {
+            "identifier": "sliver_x:record_fragment"
+        },
+        "components": {
+            "minecraft:icon": "sliver_x:record_fragment",
+            "minecraft:hover_text_color": "red"
+        }
+    },
+    "format_version": "1.10"
+}

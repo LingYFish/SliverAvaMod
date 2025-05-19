@@ -4,33 +4,125 @@
             "amplifier": 1
         },
         "PackResourceSortData": {
-            "2_emmmm_avaritia:infinity_bow": {
-                "createTime": 1747202620.3311574,
-                "modifyTime": 1747202620.3311574
+            "16384_sliver_x_singularity_group_config": {
+                "createTime": 1747619864.9854007,
+                "modifyTime": 1747628930.9272547
             },
-            "2_emmmm_avaritia:infinity_chestplate": {
-                "createTime": 1747202620.3347046,
-                "modifyTime": 1747202620.3347046
+            "16384_sliver_x_sliver_x_armor_group_config": {
+                "createTime": 1747628967.7322986,
+                "modifyTime": 1747628999.0168648
             },
-            "2_emmmm_avaritia:infinity_helmet": {
-                "createTime": 1747202620.3388824,
-                "modifyTime": 1747202620.3388824
+            "2_sliver_x:cosmic_meatballs": {
+                "createTime": 1747631319.1261315,
+                "modifyTime": 1747631415.1237998
             },
-            "2_emmmm_avaritia:infinity_leggings": {
-                "createTime": 1747202620.3413985,
-                "modifyTime": 1747202620.3413985
+            "2_sliver_x:crystal_matrix_ingot": {
+                "createTime": 1747631319.1261315,
+                "modifyTime": 1747631319.1261315
             },
-            "2_emmmm_avaritia:infinity_sword": {
-                "createTime": 1747202620.3437731,
-                "modifyTime": 1747202620.3437731
+            "2_sliver_x:diamond_lattice": {
+                "createTime": 1747631319.1261315,
+                "modifyTime": 1747631319.1261315
+            },
+            "2_sliver_x:endest_pearl": {
+                "createTime": 1747631319.1261315,
+                "modifyTime": 1747631319.1261315
+            },
+            "2_sliver_x:infinity_boots": {
+                "createTime": 1747619895.4077618,
+                "modifyTime": 1747627403.2718103
+            },
+            "2_sliver_x:infinity_bow": {
+                "createTime": 1747619864.9854007,
+                "modifyTime": 1747650849.8760004
+            },
+            "2_sliver_x:infinity_catalyst": {
+                "createTime": 1747631319.1261315,
+                "modifyTime": 1747631319.1261315
+            },
+            "2_sliver_x:infinity_chestplate": {
+                "createTime": 1747619864.9854007,
+                "modifyTime": 1747652477.0473616
+            },
+            "2_sliver_x:infinity_helmet": {
+                "createTime": 1747619864.9854007,
+                "modifyTime": 1747631592.8218396
+            },
+            "2_sliver_x:infinity_ingot": {
+                "createTime": 1747631319.1261315,
+                "modifyTime": 1747631319.1261315
+            },
+            "2_sliver_x:infinity_leggings": {
+                "createTime": 1747619864.9854007,
+                "modifyTime": 1747627900.9648895
             },
             "2_sliver_x:infinity_sword": {
-                "createTime": 1747202084.3120122,
-                "modifyTime": 1747217406.2715533
+                "createTime": 1747619864.9854007,
+                "modifyTime": 1747628196.8037894
+            },
+            "2_sliver_x:matter_cluster": {
+                "createTime": 1747631319.1271284,
+                "modifyTime": 1747631319.1271284
+            },
+            "2_sliver_x:matter_cluster.full": {
+                "createTime": 1747631319.1261315,
+                "modifyTime": 1747631319.1261315
+            },
+            "2_sliver_x:neutron_nugget": {
+                "createTime": 1747631319.1261315,
+                "modifyTime": 1747631319.1261315
+            },
+            "2_sliver_x:neutron_pile": {
+                "createTime": 1747619864.9854007,
+                "modifyTime": 1747619864.9854007
+            },
+            "2_sliver_x:neutronium_ingot": {
+                "createTime": 1747631319.1261315,
+                "modifyTime": 1747631374.1772225
+            },
+            "2_sliver_x:record_fragment": {
+                "createTime": 1747631319.1261315,
+                "modifyTime": 1747631319.1261315
+            },
+            "2_sliver_x:ultimate_stew": {
+                "createTime": 1747631319.1261315,
+                "modifyTime": 1747631319.1261315
+            },
+            "4_sliver_x:collect": {
+                "createTime": 1747619864.9854007,
+                "modifyTime": 1747619864.9854007
+            },
+            "4_sliver_x:compress": {
+                "createTime": 1747619864.9854007,
+                "modifyTime": 1747619864.9854007
+            },
+            "4_sliver_x:compressed_crafting_table": {
+                "createTime": 1747631319.1271284,
+                "modifyTime": 1747631319.1271284
+            },
+            "4_sliver_x:crystal_matrix": {
+                "createTime": 1747631319.1271284,
+                "modifyTime": 1747631319.1271284
+            },
+            "4_sliver_x:double_compressed_crafting_table": {
+                "createTime": 1747631319.1271284,
+                "modifyTime": 1747631319.1271284
+            },
+            "4_sliver_x:extreme_crafting_table": {
+                "createTime": 1747631319.1271284,
+                "modifyTime": 1747631319.1271284
+            },
+            "4_sliver_x:infinity_block": {
+                "createTime": 1747631319.1271284,
+                "modifyTime": 1747631319.1271284
+            },
+            "4_sliver_x:neutronium_block": {
+                "createTime": 1747631319.1271284,
+                "modifyTime": 1747631319.1271284
             },
             "8192_sliver_x_sliver_x_ava_category_config": {
-                "createTime": 1747205686.2135959,
-                "modifyTime": 1747205703.97565
+                "createTime": 1747619864.9854007,
+                "modifyTime": 1747631847.5774784
             }
         },
         "PlayerEffectSetting": {
@@ -40,5 +132,42 @@
         "PresetInstanceTreeData": [
 
         ]
+    },
+    "UI": {
+        "customPrefabGroupExpand": [
+            "AvaritiaBaseUi",
+            "AvaritiaUi"
+        ],
+        "expandData": {
+            "prefab": {
+                "AvaritiaUi.compress": [
+                    "/netease_prefab_screen"
+                ],
+                "AvaritiaUi.extreme_crafting_table": [
+                    "/netease_prefab_screen",
+                    "/netease_prefab_screen/extreme_crafting_table",
+                    "/netease_prefab_screen/extreme_crafting_table/screen_background",
+                    "/netease_prefab_screen/extreme_crafting_table/screen_background/bg",
+                    "/netease_prefab_screen/extreme_crafting_table/screen_background/bg/crafting",
+                    "/netease_prefab_screen/extreme_crafting_table/screen_background/bg/recipe"
+                ]
+            },
+            "screen": {
+                "D:\\MCStudioDownload\\work\\lingyfish@163.com\\Cpp\\AddOn\\SliverAvaMod\\sliverAvaRp\\ui\\AvaritiaBaseUi.json": [
+
+                ],
+                "D:\\MCStudioDownload\\work\\lingyfish@163.com\\Cpp\\AddOn\\SliverAvaMod\\sliverAvaRp\\ui\\AvaritiaUi.json": [
+                    "/extreme_crafting_tableUi",
+                    "/extreme_crafting_tableUi/variables_button_mappings_and_controls",
+                    "/extreme_crafting_tableUi/variables_button_mappings_and_controls/safezone_screen_matrix",
+                    "/extreme_crafting_tableUi/variables_button_mappings_and_controls/safezone_screen_matrix/inner_matrix",
+                    "/extreme_crafting_tableUi/variables_button_mappings_and_controls/safezone_screen_matrix/inner_matrix/safezone_screen_panel",
+                    "/extreme_crafting_tableUi/variables_button_mappings_and_controls/safezone_screen_matrix/inner_matrix/safezone_screen_panel/root_screen_panel",
+                    "/extreme_crafting_tableUi/variables_button_mappings_and_controls/safezone_screen_matrix/inner_matrix/safezone_screen_panel/root_screen_panel/screen_background",
+                    "/extreme_crafting_tableUi/variables_button_mappings_and_controls/safezone_screen_matrix/inner_matrix/safezone_screen_panel/root_screen_panel/screen_background/bg",
+                    "/extreme_crafting_tableUi/variables_button_mappings_and_controls/safezone_screen_matrix/inner_matrix/safezone_screen_panel/root_screen_panel/screen_background/bg/crafting"
+                ]
+            }
+        }
     }
 }

@@ -1,0 +1,54 @@
+{
+  "render_controllers": {
+    "controller.render.infinity_bow": {
+      "arrays": {
+        "textures": {
+          "array.bow_texture_frames": [
+            "texture.default",
+            "texture.pull_0",
+            "texture.pull_1",
+            "texture.pull_2",
+            "texture.pull_2",
+            "texture.pull_2"
+          ],
+          "array.cosmic": [
+            "texture.cosmic_frame0",
+            "texture.cosmic_frame1",
+            "texture.cosmic_frame2",
+            "texture.cosmic_frame3"
+          ],
+          "array.cosmic2": [
+            "texture.cosmic2_frame0",
+            "texture.cosmic2_frame1",
+            "texture.cosmic2_frame2",
+            "texture.cosmic2_frame3",
+            "texture.cosmic2_frame4",
+            "texture.cosmic2_frame5"
+          ]
+        },
+        "geometries": {
+          "array.bow_geo_frames": [
+            "geometry.default",
+            "geometry.pull_0",
+            "geometry.pull_1",
+            "geometry.pull_2",
+            "geometry.pull_2",
+            "geometry.pull_2"
+          ]
+        }
+      },
+      "geometry": "array.bow_geo_frames[query.get_animation_frame]",
+      "materials": [
+        {
+          "*": "variable.is_first_person ? material.first_person : material.default"
+        }
+      ],
+      "textures": [
+        "array.bow_texture_frames[query.get_animation_frame]",
+        "array.cosmic[(query.anim_time * 8)]",
+        "array.cosmic2[(query.anim_time * 8)]"
+      ]
+    }
+  },
+  "format_version": "1.10"
+}

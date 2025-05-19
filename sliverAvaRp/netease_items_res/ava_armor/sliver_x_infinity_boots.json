@@ -1,0 +1,12 @@
+{
+    "minecraft:item": {
+        "description": {
+            "identifier": "sliver_x:infinity_boots"
+        },
+        "components": {
+            "minecraft:icon": "sliver_x:infinity_boots",
+            "minecraft:hover_text_color": "red"
+        }
+    },
+    "format_version": "1.10"
+}

@@ -1,0 +1,25 @@
+{
+    "groups": [
+        {
+            "group_name": "奇点",
+            "icon": "sliver_x:copper_singularity",
+            "list": [
+                "sliver_x:copper_singularity",
+                "sliver_x:diamond_singularity",
+                "sliver_x:emerald_singularity",
+                "sliver_x:fluxed_singularity",
+                "sliver_x:gold_singularity",
+                "sliver_x:iridium_singularity",
+                "sliver_x:iron_singularity",
+                "sliver_x:lapis_singularity",
+                "sliver_x:lead_singularity",
+                "sliver_x:nickel_singularity",
+                "sliver_x:platinum_singularity",
+                "sliver_x:quartz_singularity",
+                "sliver_x:redstone_singularity",
+                "sliver_x:silver_singularity",
+                "sliver_x:tin_singularity"
+            ]
+        }
+    ]
+}

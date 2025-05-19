@@ -1,0 +1,12 @@
+{
+    "minecraft:item": {
+        "description": {
+            "identifier": "sliver_x:matter_cluster"
+        },
+        "components": {
+            "minecraft:icon": "sliver_x:matter_cluster",
+            "minecraft:hover_text_color": "red"
+        }
+    },
+    "format_version": "1.10"
+}

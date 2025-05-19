@@ -1,0 +1,16 @@
+{
+    "format_version": "1.10",
+    "minecraft:item": {
+        "components": {
+            "minecraft:icon": "sliver_x:infinity_bow_idle",
+            "netease:frame_animation": {
+                "animate_in_toolbar": true,
+                "frame_count": 5,
+                "texture_name": "sliver_x:infinity_bow_pull"
+            }
+        },
+        "description": {
+            "identifier": "sliver_x:infinity_bow"
+        }
+    }
+}

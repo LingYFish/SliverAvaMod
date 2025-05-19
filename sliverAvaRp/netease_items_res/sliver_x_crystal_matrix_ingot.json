@@ -1,0 +1,12 @@
+{
+    "minecraft:item": {
+        "description": {
+            "identifier": "sliver_x:crystal_matrix_ingot"
+        },
+        "components": {
+            "minecraft:icon": "sliver_x:crystal_matrix_ingot",
+            "minecraft:hover_text_color": "aqua"
+        }
+    },
+    "format_version": "1.10"
+}

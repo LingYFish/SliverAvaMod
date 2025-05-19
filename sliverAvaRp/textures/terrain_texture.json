@@ -1,0 +1,45 @@
+{
+    "resource_pack_name": "vanilla",
+    "texture_data": {
+        "Avaritiacollectfront": {
+            "textures": "textures/sliver_ava/blocks/collect/collector_front"
+        },
+        "Avaritiacollectside": {
+            "textures": "textures/sliver_ava/blocks/collect/collector_side"
+        },
+        "Avaritiacollecttop": {
+            "textures": "textures/sliver_ava/blocks/collect/collector_top"
+        },
+        "Avaritiacompressfront": {
+            "textures": "textures/sliver_ava/blocks/compress/inactive"
+        },
+        "Avaritiacompressside": {
+            "textures": "textures/sliver_ava/blocks/compress/side"
+        },
+        "Avaritiacompresstop": {
+            "textures": "textures/sliver_ava/blocks/compress/top"
+        },
+        "Avaritiadouble_compressed_crafting_table": {
+            "textures": "textures/sliver_ava/blocks/table/double_compressed_crafting_table"
+        },
+        "Avaritiacompressed_crafting_table": {
+            "textures": "textures/sliver_ava/blocks/table/compressed_crafting_table"
+        },
+        "Avaritianeutronium_block": {
+            "textures": "textures/sliver_ava/blocks/other/neutron"
+        },
+        "Avaritiacrystal_matrix": {
+            "textures": "textures/sliver_ava/blocks/other/crystal_matrix"
+        },
+        "Avaritiaextreme_crafting_table_side": {
+            "textures": "textures/sliver_ava/blocks/table/extreme_side"
+        },
+        "Avaritiaextreme_crafting_table_top": {
+            "textures": "textures/sliver_ava/blocks/table/extreme_top"
+        },
+        "Avaritiainfinity_block": {
+            "textures": "textures/sliver_ava/blocks/other/infinity"
+        }
+    },
+    "texture_name": "atlas.terrain"
+}

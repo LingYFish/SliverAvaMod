@@ -1,0 +1,11 @@
+{
+    "format_version": "1.10",
+    "minecraft:item": {
+        "components": {
+            "minecraft:icon": "sliver_x:neutron_pile"
+        },
+        "description": {
+            "identifier": "sliver_x:neutron_pile"
+        }
+    }
+}

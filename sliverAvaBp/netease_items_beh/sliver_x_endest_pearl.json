@@ -1,0 +1,23 @@
+{
+    "minecraft:item": {
+        "description": {
+            "category": "sliver_x_ava",
+            "identifier": "sliver_x:endest_pearl",
+            "custom_item_type": "projectile_item",
+            "register_to_create_menu": true
+        },
+        "components": {
+            "netease:projectile": "emmmm_avaritia:endest_pearl",
+            "minecraft:food": {
+                "using_converts_to": "emmmm_avaritia:endest_pearl",
+                "nutrition": 0,
+                "saturation_modifier": "supernatural",
+                "can_always_eat": true
+            },
+            "minecraft:use_duration": 72000,
+            "minecraft:max_stack_size": 16,
+            "minecraft:hand_equipped": false
+        }
+    },
+    "format_version": "1.10"
+}

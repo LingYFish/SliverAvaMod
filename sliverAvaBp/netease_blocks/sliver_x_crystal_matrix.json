@@ -1,0 +1,27 @@
+{
+    "format_version": "1.10.0",
+    "minecraft:block": {
+        "description": {
+            "category": "sliver_x_ava",
+            "register_to_creative_menu": true,
+            "identifier": "sliver_x:crystal_matrix",
+            "is_experimental": false
+        },
+        "components": {
+            "minecraft:explosion_resistance": {
+                "value": 3600000.0
+            },
+            "netease:tier": {
+                "digger": "pickaxe",
+                "destroy_special": true,
+                "level": 3
+            },
+            "minecraft:destroy_time": {
+                "value": 50.0
+            },
+            "netease:solid": {
+                "value": true
+            }
+        }
+    }
+}

@@ -4,6 +4,66 @@
     "cosmic:entity_alphatest": {
         "vertexShader": "shaders/sliver_cosmic.vertex",
         "fragmentShader": "shaders/sliver_cosmic.fragment",
+        "+states": [
+          "DisableCulling",
+          "Blending"
+        ],
+        "+samplerStates": [
+            {
+              "samplerIndex": 0,
+              "textureWrap": "Repeat"
+            }
+        ]
+    },
+    "cosmic_wing:entity_alphatest": {
+        "vertexShader": "shaders/sliver_cosmic.vertex",
+        "fragmentShader": "shaders/sliver_cosmic_wing.fragment",
+        "+states": [
+          "DisableCulling",
+          "Blending"
+        ],
+        "+samplerStates": [
+            {
+              "samplerIndex": 0,
+              "textureWrap": "Repeat"
+            }
+        ]
+    },
+    "cosmic_bow:entity_alphatest": {
+        "vertexShader": "shaders/sliver_cosmic.vertex",
+        "fragmentShader": "shaders/sliver_cosmic_bow.fragment",
+        "+states": [
+          "DisableCulling",
+          "Blending"
+        ],
+        "+samplerStates": [
+            {
+              "samplerIndex": 0,
+              "textureWrap": "Repeat"
+            }
+        ]
+    },
+    "cosmic_armor:entity_alphatest": {
+        "vertexShader": "shaders/sliver_cosmic.vertex",
+        "fragmentShader": "shaders/sliver_cosmic_armor.fragment",
+        "+states": [
+          "DisableCulling",
+          "Blending"
+        ],
+        "+samplerStates": [
+            {
+              "samplerIndex": 0,
+              "textureWrap": "Repeat"
+            }
+        ]
+    },
+    "cosmic_eyes:entity_alphatest": {
+        "vertexShader": "shaders/sliver_cosmic.vertex",
+        "fragmentShader": "shaders/sliver_cosmic_eyes.fragment",
+        "+states": [
+          "DisableCulling",
+          "Blending"
+        ],
         "+samplerStates": [
             {
               "samplerIndex": 0,

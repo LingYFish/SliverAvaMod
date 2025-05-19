@@ -1,0 +1,39 @@
+{
+    "format_version": "1.10.0",
+    "minecraft:block": {
+        "components": {
+            "minecraft:destroy_time": {
+                "value": 24.0
+            },
+            "minecraft:explosion_resistance": {
+                "value": 1234.0
+            },
+            "netease:block_entity": {
+                "client_tick": true,
+                "movable": false,
+                "tick": true
+            },
+            "netease:custom_tips": {
+                "value": ""
+            },
+            "netease:face_directional": {
+                "type": "direction"
+            },
+            "netease:listen_block_remove": {
+                "value": true
+            },
+            "netease:solid": {
+                "value": true
+            },
+            "netease:tier": {
+                "destroy_special": false,
+                "digger": "pickaxe",
+                "level": 2
+            }
+        },
+        "description": {
+            "category": "sliver_x_ava",
+            "identifier": "sliver_x:collect"
+        }
+    }
+}

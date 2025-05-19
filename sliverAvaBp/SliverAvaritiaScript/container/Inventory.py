@@ -4,6 +4,7 @@ ViewBinder = clientApi.GetViewBinderCls()
 from SliverAvaritiaScript.container.InventoryClientSystem import InventoryBlockClientSystem
 from SliverAvaritiaScript.api.lib.itemStack import ItemStack
 from itemSlot import ItemSlot
+from hoverButton import hoverButton
 from SliverAvaritiaScript import modConfig
 from flyingItem import FlyingItem
 import weakref
@@ -37,6 +38,8 @@ class Inventory(ScreenNode):
         self.clientSystem = param["clientSystem"]  # type:InventoryBlockClientSystem
         self.playerId = param["playerId"]
         self.pos = param.get("pos", None)
+        self.playerViewComp = compFactory.CreatePlayerView(levelId)
+        self.cursorSlot = None
         self.slotHight = None
         self.itemSlots = {}
         self.HightTime = 20.0
@@ -56,7 +59,9 @@ class Inventory(ScreenNode):
         self.splitData = {}
         self.hoverText = ''
         self.takeInfo = {}
+        self.inputMode = None
         self.hoverButton = None
+        self.mouse = False
         self.gridLoaded = False
         self.clientSystem.addListenEventUi(self,self.GameRenderTickEvent,eventName='GameRenderTickEvent')
 
@@ -75,15 +80,32 @@ class Inventory(ScreenNode):
         """
         self.clientSystem.screen = None
 
+    def getInputMode(self):
+        """
+        :rtype: int
+        """
+        return self.playerViewComp.GetToggleOption(minecraftEnum.OptionId.INPUT_MODE)
+
     def Update(self):
         """
         更新物品栏。
         """
+        self.updateMode()
         self.updateInfoAlpha()
         self.updateClickInterval()
         self.updateHoldTime()
         #self.updateHightSlot()
-        x,y = compFactory.CreateActorMotion(self.playerId).GetMousePosition()
+
+    def updateMode(self):
+        inputMode = self.getInputMode()
+        if inputMode == self.inputMode:
+            return
+        if self.inputMode == 0: #鼠标
+            self.mouse = True
+        elif self.inputMode == 1: #触屏
+            self.mouse = False
+        self.inputMode = inputMode
+        return
 
     def updateHightSlot(self):
         _ = "此功能已经废弃 问就是石山"
@@ -148,8 +170,6 @@ class Inventory(ScreenNode):
             return
         gen = str(uuid.uuid4())
         newFlyItemName = "fly_item_renderer_%s" % gen
-        fromPos = fromSlot.itemRenderer.GetGlobalPosition()
-        toPos = toSlot.itemRenderer.GetGlobalPosition()
         fromSize = fromSlot.itemRenderer.GetSize()
         toSize = toSlot.itemRenderer.GetSize()
         offset = ((fromSize[0] - toSize[0]) * -0.5, (fromSize[1] - toSize[1]) * -0.5)
@@ -391,9 +411,8 @@ class Inventory(ScreenNode):
         显示物品信息文本。
         :param text: 文本
         """
-        if self.hoverText == '':
-            self.infoText = text
-            self.infoAlpha = 2.0
+        self.infoText = text
+        self.infoAlpha = 2.0
 
     def OnItemCellTouchDown(self, buttonPath):
         """
@@ -407,7 +426,8 @@ class Inventory(ScreenNode):
         elif not self.selectedSlot:
             self.holdTime = 0
             self.holdSlot = itemSlot
-        self.showItemText(itemSlot)
+        if not self.mouse:
+            self.showItemText(itemSlot)
 
     def mergeItems(self):
         """
@@ -455,7 +475,6 @@ class Inventory(ScreenNode):
         userData = itemSlot.itemStack.tag
         text = compFactory.CreateItem(self.playerId).GetItemFormattedHoverText(itemName, auxValue, False, userData)
         text = self.replaceSpecialCharacters(text)
-        text = self.addEMCInfo(text, itemName, auxValue, userData, itemSlot)
         self.ShowItemText(text)
 
     def showItemhoverText(self, itemSlot):
@@ -466,7 +485,6 @@ class Inventory(ScreenNode):
         userData = itemSlot.itemStack.tag
         text = compFactory.CreateItem(self.playerId).GetItemFormattedHoverText(itemName, auxValue, False, userData)
         text = self.replaceSpecialCharacters(text)
-        text = self.addEMCInfo(text, itemName, auxValue, userData, itemSlot)
         self.hoverText = text
 
     def replaceSpecialCharacters(self, text):
@@ -477,16 +495,6 @@ class Inventory(ScreenNode):
         """
         text = text.replace(':hollow_star:', '')
         text = text.replace(':solid_star:', '')
-        return text
-
-    def addEMCInfo(self, text, itemName, auxValue, userData, itemSlot):
-        """
-        添加EMC信息。
-        :param text: 文本
-        :param itemName: 物品名称
-        :param auxValue: 附加值
-        :param userData: 物品数据
-        """
         return text
 
     def splitItems(self):

@@ -1,0 +1,15 @@
+{
+    "format_version": "1.10",
+    "minecraft:item": {
+        "components": {
+            "minecraft:icon": "sliver_x:infinity_sword",
+            "netease:frame_anim_in_scene": {
+                "texture_path": "textures/sliver_ava/tools/infinity_sword/1",
+                "ticks_per_frame": 6
+            }
+        },
+        "description": {
+            "identifier": "sliver_x:infinity_sword"
+        }
+    }
+}

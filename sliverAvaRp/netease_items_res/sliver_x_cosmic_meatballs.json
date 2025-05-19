@@ -1,0 +1,15 @@
+{
+    "format_version": "1.10",
+    "minecraft:item": {
+        "components": {
+            "minecraft:icon": "sliver_x:cosmic_meatballs",
+            "netease:frame_anim_in_scene": {
+                "texture_path": "textures/sliver_ava/cosmic_meatballs",
+                "ticks_per_frame": 2
+            }
+        },
+        "description": {
+            "identifier": "sliver_x:cosmic_meatballs"
+        }
+    }
+}

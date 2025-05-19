@@ -1,0 +1,16 @@
+{
+    "minecraft:item": {
+        "description": {
+            "identifier": "sliver_x:infinity_chestplate"
+        },
+        "components": {
+            "netease:frame_anim_in_scene": {
+                "texture_path": "textures/sliver_ava/armor/chestplate",
+                "ticks_per_frame": 2
+            },
+            "minecraft:icon": "sliver_x:infinity_chestplate",
+            "minecraft:hover_text_color": "red"
+        }
+    },
+    "format_version": "1.10"
+}

@@ -1,0 +1,16 @@
+{
+    "minecraft:item": {
+        "description": {
+            "identifier": "sliver_x:infinity_hoe"
+        },
+        "components": {
+            "netease:frame_anim_in_scene": {
+                "texture_path": "textures/sliver_ava/tools/infinity_hoe/layer_0",
+                "ticks_per_frame": 1
+            },
+            "minecraft:icon": "sliver_x:infinity_hoe",
+            "minecraft:hover_text_color": "red"
+        }
+    },
+    "format_version": "1.10.0"
+}

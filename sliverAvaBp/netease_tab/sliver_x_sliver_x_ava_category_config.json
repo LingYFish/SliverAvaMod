@@ -1,8 +1,8 @@
 {
     "category": [
         {
-            "icon": "textures/cosmic_shader/cosmic0/0",
-            "labelText": "无尽贪婪",
+            "icon": "textures/sliver_ava/resource/crystal_matrix_ingot",
+            "labelText": "无尽贪婪 - SliverX",
             "name": "sliver_x_ava"
         }
     ]

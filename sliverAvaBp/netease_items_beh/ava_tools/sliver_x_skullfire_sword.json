@@ -1,0 +1,23 @@
+{
+    "minecraft:item": {
+        "description": {
+            "category": "sliver_x_ava",
+            "identifier": "sliver_x:skullfire_sword",
+            "custom_item_type": "weapon"
+        },
+        "components": {
+            "netease:weapon": {
+                "enchantment": 10,
+                "speed": 8,
+                "attack_damage": 7,
+                "type": "sword",
+                "level": 3
+            },
+            "netease:customtips": {
+                "value": "§8§o斩骷髅首级,后烧至焦黑。§r"
+            },
+            "minecraft:max_damage": 1561
+        }
+    },
+    "format_version": "1.10.0"
+}

@@ -1,0 +1,16 @@
+{
+    "minecraft:item": {
+        "description": {
+            "identifier": "sliver_x:infinity_catalyst"
+        },
+        "components": {
+            "netease:frame_anim_in_scene": {
+                "texture_path": "textures/sliver_ava/resource/infinity_catalyst",
+                "ticks_per_frame": 2
+            },
+            "minecraft:icon": "sliver_x:infinity_catalyst",
+            "minecraft:hover_text_color": "light_purple"
+        }
+    },
+    "format_version": "1.10"
+}

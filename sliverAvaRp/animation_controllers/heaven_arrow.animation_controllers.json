@@ -1,0 +1,1 @@
+{"animation_controllers":{"controller.animation.heaven_arrow.particle":{"states":{"default":{"transitions":[{"bow_crit":"!query.is_on_ground"}]},"bow_crit":{"particle_effects":[{"effect":"bow_crit"}],"transitions":[{"default":"(1.0)"}]}},"initial_state":"default"}},"format_version":"1.10.0"}

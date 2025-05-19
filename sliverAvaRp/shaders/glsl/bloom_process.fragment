@@ -52,6 +52,7 @@ void main()
 	bright_color /= total_weight;
 	// 加强泛光
 	bright_color *= strength;
+	color = mix(color,bright_color,0.7);
 	// 将泛光光晕和泛光区域叠加,传入下一个pass
-	gl_FragColor = color + bright_color;
+	gl_FragColor = color;
 }

@@ -1,0 +1,48 @@
+{
+    "format_version": "1.10.0",
+    "minecraft:attachable": {
+        "description": {
+            "geometry": {
+                "default": "geometry.humanoid.armor.chestplate",
+                "wing": "geometry.infinity_armor_wing"
+            },
+            "identifier": "sliver_x:infinity_chestplate",
+            "materials": {
+                "default": "cosmic_armor",
+                "wing": "cosmic_wing"
+            },
+            "render_controllers": [
+                "controller.render.infinity_armor",
+                {
+                    "controller.render.infinity_armor_wing": "query.mod.show_wing"
+                }
+            ],
+            "scripts": {
+                "parent_setup": "variable.chest_layer_visible = 0.0;"
+            },
+            "textures": {
+                "cosmic2_frame0": "textures/cosmic_shader/cosmic6/0",
+                "cosmic2_frame1": "textures/cosmic_shader/cosmic6/1",
+                "cosmic2_frame2": "textures/cosmic_shader/cosmic6/2",
+                "cosmic2_frame3": "textures/cosmic_shader/cosmic6/3",
+                "cosmic2_frame4": "textures/cosmic_shader/cosmic6/4",
+                "cosmic2_frame5": "textures/cosmic_shader/cosmic6/5",
+                "cosmic_frame0": "textures/cosmic_shader/cosmic0/0",
+                "cosmic_frame1": "textures/cosmic_shader/cosmic0/1",
+                "cosmic_frame2": "textures/cosmic_shader/cosmic0/2",
+                "cosmic_frame3": "textures/cosmic_shader/cosmic0/3",
+                "default": "textures/sliver_ava/armor/infinity_armor1",
+                "wing": "textures/sliver_ava/armor/wing/0",
+                "wing_1": "textures/sliver_ava/armor/wing/1",
+                "wing_2": "textures/sliver_ava/armor/wing/2",
+                "wing_3": "textures/sliver_ava/armor/wing/3",
+                "wing_4": "textures/sliver_ava/armor/wing/4",
+                "wing_5": "textures/sliver_ava/armor/wing/5",
+                "wing_6": "textures/sliver_ava/armor/wing/6",
+                "wing_7": "textures/sliver_ava/armor/wing/7",
+                "wing_8": "textures/sliver_ava/armor/wing/8",
+                "wing_9": "textures/sliver_ava/armor/wing/9"
+            }
+        }
+    }
+}

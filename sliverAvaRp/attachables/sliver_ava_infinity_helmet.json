@@ -1,0 +1,48 @@
+{
+    "format_version": "1.10.0",
+    "minecraft:attachable": {
+        "description": {
+            "geometry": {
+                "default": "geometry.humanoid.armor.helmet"
+            },
+            "identifier": "sliver_x:infinity_helmet",
+            "materials": {
+                "eyes": "cosmic_eyes",
+                "default": "cosmic_armor"
+            },
+            "render_controllers": [
+                "controller.render.infinity_armor",
+                {
+                    "controller.render.infinity_armor_eyes": "!variable.all_equipped"
+                },
+                {
+                    "controller.render.infinity_armor_eyes_2": "variable.all_equipped"
+                }
+            ],
+            "scripts": {
+                "parent_setup": "variable.helmet_layer_visible = 0.0;",
+                "pre_animation": [
+                    "variable.is_helmet_equipped = query.is_item_name_any('slot.armor.head', 'sliver_X:infinity_helmet');",
+                    "variable.is_chestplate_equipped = query.is_item_name_any('slot.armor.chest', 'sliver_X:infinity_chestplate');",
+                    "variable.is_leggings_equipped = query.is_item_name_any('slot.armor.legs', 'sliver_X:infinity_leggings');",
+                    "variable.is_boots_equipped = query.is_item_name_any('slot.armor.feet', 'sliver_X:infinity_boots');",
+                    "variable.all_equipped = (variable.is_helmet_equipped && variable.is_chestplate_equipped && variable.is_leggings_equipped && variable.is_boots_equipped);"
+                ]
+            },
+            "textures": {
+                "cosmic2_frame0": "textures/cosmic_shader/cosmic6/0",
+                "cosmic2_frame1": "textures/cosmic_shader/cosmic6/1",
+                "cosmic2_frame2": "textures/cosmic_shader/cosmic6/2",
+                "cosmic2_frame3": "textures/cosmic_shader/cosmic6/3",
+                "cosmic2_frame4": "textures/cosmic_shader/cosmic6/4",
+                "cosmic2_frame5": "textures/cosmic_shader/cosmic6/5",
+                "cosmic_frame0": "textures/cosmic_shader/cosmic0/0",
+                "cosmic_frame1": "textures/cosmic_shader/cosmic0/1",
+                "cosmic_frame2": "textures/cosmic_shader/cosmic0/2",
+                "cosmic_frame3": "textures/cosmic_shader/cosmic0/3",
+                "default": "textures/sliver_ava/armor/infinity_armor1",
+                "eyes": "textures/sliver_ava/armor/infinity_armor_eyes"
+            }
+        }
+    }
+}

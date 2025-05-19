@@ -3,5 +3,58 @@
         1,
         1,
         0
-    ]
+    ],
+    "sliver_x:collect": {
+        "sound": "glass",
+        "textures": {
+            "down": "Avaritiacollectside",
+            "east": "Avaritiacollectside",
+            "north": "Avaritiacollectfront",
+            "south": "Avaritiacollectside",
+            "up": "Avaritiacollecttop",
+            "west": "Avaritiacollectside"
+        }
+    },
+    "sliver_x:compress": {
+        "sound": "glass",
+        "textures": {
+            "down": "Avaritiacompressside",
+            "east": "Avaritiacompressside",
+            "north": "Avaritiacompressfront",
+            "south": "Avaritiacompressside",
+            "up": "Avaritiacompresstop",
+            "west": "Avaritiacompressside"
+        }
+    },
+    "sliver_x:infinity_block": {
+        "textures": "Avaritiainfinity_block",
+        "sound": "metal"
+    },
+    "sliver_x:neutronium_block": {
+        "textures": "Avaritianeutronium_block",
+        "sound": "metal"
+    },
+    "sliver_x:compressed_crafting_table": {
+        "textures": "Avaritiacompressed_crafting_table",
+        "sound": "wood"
+    },
+    "sliver_x:extreme_crafting_table": {
+        "textures": {
+        "north": "Avaritiaextreme_crafting_table_side",
+        "west": "Avaritiaextreme_crafting_table_side",
+        "up": "Avaritiaextreme_crafting_table_top",
+        "down": "Avaritiaextreme_crafting_table_top",
+        "east": "Avaritiaextreme_crafting_table_side",
+        "south": "Avaritiaextreme_crafting_table_side"
+        },
+        "sound": "glass"
+    },
+    "sliver_x:crystal_matrix": {
+        "textures": "Avaritiacrystal_matrix",
+        "sound": "glass"
+    },
+    "sliver_x:double_compressed_crafting_table": {
+        "textures": "Avaritiadouble_compressed_crafting_table",
+        "sound": "wood"
+    }
 }

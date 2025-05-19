@@ -1,0 +1,23 @@
+{
+    "minecraft:item": {
+        "description": {
+            "category": "sliver_x_ava",
+            "identifier": "sliver_x:infinity_pickaxe",
+            "custom_item_type": "weapon"
+        },
+        "components": {
+            "netease:weapon": {
+                "enchantment": 200,
+                "speed": 9999,
+                "attack_damage": 8,
+                "type": "pickaxe",
+                "level": 32
+            },
+            "netease:fire_resistant": {
+                "value": true
+            },
+            "minecraft:max_damage": 0
+        }
+    },
+    "format_version": "1.10.0"
+}

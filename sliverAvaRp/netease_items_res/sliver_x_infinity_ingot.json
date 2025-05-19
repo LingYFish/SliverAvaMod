@@ -1,0 +1,16 @@
+{
+    "minecraft:item": {
+        "description": {
+            "identifier": "sliver_x:infinity_ingot"
+        },
+        "components": {
+            "netease:frame_anim_in_scene": {
+                "texture_path": "textures/sliver_ava/resource/infinity_ingot",
+                "ticks_per_frame": 5
+            },
+            "minecraft:icon": "sliver_x:infinity_ingot",
+            "minecraft:hover_text_color": "red"
+        }
+    },
+    "format_version": "1.10"
+}

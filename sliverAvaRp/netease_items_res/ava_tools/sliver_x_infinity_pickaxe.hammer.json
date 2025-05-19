@@ -1,0 +1,16 @@
+{
+    "minecraft:item": {
+        "description": {
+            "identifier": "sliver_x:infinity_pickaxe.hammer"
+        },
+        "components": {
+            "netease:frame_anim_in_scene": {
+                "texture_path": "textures/sliver_ava/tools/infinity_pickaxe/hammer",
+                "ticks_per_frame": 1
+            },
+            "minecraft:icon": "sliver_x:infinity_pickaxe.hammer",
+            "minecraft:hover_text_color": "red"
+        }
+    },
+    "format_version": "1.10.0"
+}

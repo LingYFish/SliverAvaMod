@@ -1,0 +1,141 @@
+{
+  "render_controllers": {
+    "controller.render.infinity_armor": {
+      "arrays": {
+        "textures": {
+          "array.cosmic": [
+            "texture.cosmic_frame0",
+            "texture.cosmic_frame1",
+            "texture.cosmic_frame2",
+            "texture.cosmic_frame3"
+          ],
+          "array.cosmic2": [
+            "texture.cosmic2_frame0",
+            "texture.cosmic2_frame1",
+            "texture.cosmic2_frame2",
+            "texture.cosmic2_frame3",
+            "texture.cosmic2_frame4",
+            "texture.cosmic2_frame5"
+          ]
+        }
+      },
+      "geometry": "geometry.default",
+      "materials": [
+        {
+          "*": "material.default"
+        }
+      ],
+      "textures": [
+        "texture.default",
+        "array.cosmic[(query.anim_time * 8)]",
+        "array.cosmic2[(query.anim_time * 8)]"
+      ]
+    },
+    "controller.render.infinity_armor_eyes_2": {
+      "geometry": "geometry.default",
+      "arrays": {
+        "textures": {
+          "array.cosmic": [
+            "texture.cosmic_frame0",
+            "texture.cosmic_frame1",
+            "texture.cosmic_frame2",
+            "texture.cosmic_frame3"
+          ],
+          "array.cosmic2": [
+            "texture.cosmic2_frame0",
+            "texture.cosmic2_frame1",
+            "texture.cosmic2_frame2",
+            "texture.cosmic2_frame3",
+            "texture.cosmic2_frame4",
+            "texture.cosmic2_frame5"
+          ]
+        }
+      },
+      "textures": [
+        "texture.eyes",
+        "array.cosmic[(query.anim_time * 8)]",
+        "array.cosmic2[(query.anim_time * 8)]"
+      ],
+      "materials": [
+        {
+          "*": "material.eyes"
+        }
+      ]
+    },
+    "controller.render.infinity_armor_wing": {
+      "arrays": {
+        "textures": {
+          "array.wing": [
+            "texture.wing",
+            "texture.wing_1",
+            "texture.wing_2",
+            "texture.wing_3",
+            "texture.wing_4",
+            "texture.wing_5",
+            "texture.wing_6",
+            "texture.wing_7",
+            "texture.wing_8",
+            "texture.wing_9"
+          ],
+          "array.cosmic": [
+            "texture.cosmic_frame0",
+            "texture.cosmic_frame1",
+            "texture.cosmic_frame2",
+            "texture.cosmic_frame3"
+          ],
+          "array.cosmic2": [
+            "texture.cosmic2_frame0",
+            "texture.cosmic2_frame1",
+            "texture.cosmic2_frame2",
+            "texture.cosmic2_frame3",
+            "texture.cosmic2_frame4",
+            "texture.cosmic2_frame5"
+          ]
+        }
+      },
+      "geometry": "geometry.wing",
+      "materials": [
+        {
+          "*": "material.wing"
+        }
+      ],
+      "textures": [
+        "array.wing[(query.anim_time * 20)]",
+        "array.cosmic[(query.anim_time * 8)]",
+        "array.cosmic2[(query.anim_time * 8)]"
+      ]
+    },
+    "controller.render.infinity_armor_eyes": {
+      "arrays": {
+        "textures": {
+          "array.cosmic": [
+            "texture.cosmic_frame0",
+            "texture.cosmic_frame1",
+            "texture.cosmic_frame2",
+            "texture.cosmic_frame3"
+          ],
+          "array.cosmic2": [
+            "texture.cosmic2_frame0",
+            "texture.cosmic2_frame1",
+            "texture.cosmic2_frame2",
+            "texture.cosmic2_frame3",
+            "texture.cosmic2_frame4",
+            "texture.cosmic2_frame5"
+          ]
+        }
+      },
+      "geometry": "geometry.default",
+      "materials": [
+        {
+          "*": "material.default"
+        }
+      ],
+      "textures": [
+        "texture.eyes",
+        "array.cosmic[(query.anim_time * 8)]",
+        "array.cosmic2[(query.anim_time * 8)]"
+      ]
+    }
+  },
+  "format_version": "1.8.0"
+}

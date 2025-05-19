@@ -12,6 +12,12 @@ LAYOUT_BINDING(2) uniform sampler2D TEXTURE_2;
 uniform vec4 EXTRA_VECTOR1; // (threshold 门限, strength 泛光强度, sigma 高斯模糊, bloom_size 泛光大小)
 varying vec4 light;
 
+bool areColorsEqual(vec4 color1, vec4 color2, float threshold) {
+    // 计算两个颜色向量的逐分量绝对差值
+    vec4 diff = abs(color1 - color2);
+    // 检查每个分量的差值是否小于阈值
+    return all(lessThan(diff, vec4(threshold)));
+}
 
 
 void main() {
@@ -19,7 +25,9 @@ void main() {
 	vec4 color = texture2D(TEXTURE_0, uv);
 	
 	// 提取透明度小于threshold的区域，即将透明度大于threshold的区域变黑
-	if (color.a>=threshold){
+	vec4 threshold_color = vec4(0.078, 0.325, 0.310, 1.000);
+	bool is_color = areColorsEqual(color,threshold_color,0.001);
+	if (!is_color){
 		color*=0.0;
 	}
 	// 提取区域传给下一个pass

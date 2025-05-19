@@ -1,0 +1,29 @@
+{
+    "format_version": "1.10.0",
+    "minecraft:block": {
+        "description": {
+            "category": "sliver_x_ava",
+            "register_to_creative_menu": true,
+            "identifier": "sliver_x:double_compressed_crafting_table",
+            "is_experimental": false
+        },
+        "components": {
+            "netease:tier": {
+                "digger": "hatchet",
+                "destroy_special": false
+            },
+            "minecraft:destroy_time": {
+                "value": 8.0
+            },
+            "netease:block_crafting_table": {
+                "custom_description": "container.crafting",
+                "crafting_tags": [
+                    "crafting_table"
+                ]
+            },
+            "netease:solid": {
+                "value": true
+            }
+        }
+    }
+}

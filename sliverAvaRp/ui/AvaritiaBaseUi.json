@@ -1,0 +1,1517 @@
+{
+    "black_background@common.screen_background": {
+        "alpha": 0.45,
+        "controls": [
+            {
+                "drop_button": {
+                    "type": "button",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 1,
+                    "button_mappings": [
+                        {
+                            "to_button_id": "#DropButtonClick",
+                            "from_button_id": "button.menu_select",
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "to_button_id": "#DropButtonClick",
+                            "from_button_id": "button.menu_ok",
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "to_button_id": "#otherHovered",
+                            "mapping_type": "pressed"
+                        }
+                    ]
+                }
+            }
+        ],
+        "layer": 1
+    },
+    "child_panel": {
+        "type": "panel",
+        "size": [
+            0,
+            0
+        ],
+        "layer": 1
+    },
+    "close_button@AvaritiaBaseUi.image_button": {
+        "$default_texture": "textures/ui/close_button_default",
+        "$hover_texture": "textures/ui/close_button_hover",
+        "$left_click_name": "#CloseButtonClick",
+        "$pressed_texture": "textures/ui/close_button_pressed"
+    },
+    "cursor_renderer": {
+        "type": "button",
+        "$cell_size|default": [
+            18,
+            18
+        ],
+        "$item_size|default": [
+            16,
+            16
+        ],
+        "anchor_from": "center",
+        "anchor_to": "center",
+        "size": "$cell_size",
+        "follows_cursor": true,
+        "layer": -10,
+        "always_handle_pointer": true,
+        "controls": [
+            {
+                "cell_image": {
+                    "type": "image",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 1
+                }
+            },
+            {
+                "selected_cell_image": {
+                    "type": "image",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 2,
+                    "visible": false
+                }
+            },
+            {
+                "lock_cell_image": {
+                    "type": "image",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 3,
+                    "visible": false
+                }
+            },
+            {
+                "select_image": {
+                    "type": "image",
+                    "size": [
+                        "100%+5px",
+                        "100%+5px"
+                    ],
+                    "layer": 4,
+                    "visible": false
+                }
+            },
+            {
+                "hight_light_image": {
+                    "type": "panel",
+                    "size": [
+                        18,
+                        18
+                    ],
+                    "layer": 5,
+                    "visible": false,
+                    "controls": [
+                        {
+                            "image": {
+                                "type": "image",
+                                "size": [
+                                    "100%+-2px",
+                                    "100%+-2px"
+                                ],
+                                "layer": 1,
+                                "nineslice_size": [
+                                    0,
+                                    0,
+                                    0,
+                                    0
+                                ]
+                            }
+                        },
+                        {
+                            "image(0)": {
+                                "type": "image",
+                                "size": [
+                                    "100%+0px",
+                                    "100%+0px"
+                                ],
+                                "layer": 1
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "lock_type_panel@AvaritiaBaseUi.lock_type_panel": {
+                    "layer": 7,
+                    "size": "$item_size",
+                    "visible": false
+                }
+            },
+            {
+                "item_renderer_panel": {
+                    "type": "panel",
+                    "size": "$item_size",
+                    "layer": 89898,
+                    "controls": [
+                        {
+                            "item_renderer": {
+                                "type": "custom",
+                                "renderer": "inventory_item_renderer",
+                                "size": "$item_size",
+                                "layer": 1
+                            }
+                        },
+                        {
+                            "durability_bar@AvaritiaBaseUi.durability_bar": {
+                                "layer": 2,
+                                "offset": [
+                                    0,
+                                    5
+                                ],
+                                "size": [
+                                    12,
+                                    1
+                                ],
+                                "visible": false
+                            }
+                        },
+                        {
+                            "count_label": {
+                                "type": "label",
+                                "anchor_from": "bottom_right",
+                                "anchor_to": "bottom_right",
+                                "offset": [
+                                    0,
+                                    1
+                                ],
+                                "layer": 9,
+                                "color": "$item_stack_count_color",
+                                "shadow": true
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "progress_bar": {
+                    "type": "panel",
+                    "anchor_from": "top_middle",
+                    "anchor_to": "top_middle",
+                    "offset": [
+                        0,
+                        -4
+                    ],
+                    "size": [
+                        15,
+                        3
+                    ],
+                    "layer": 21,
+                    "visible": false,
+                    "controls": [
+                        {
+                            "empty_progress_bar@AvaritiaBaseUi.empty_progress_bar": {
+                                "layer": 1
+                            }
+                        },
+                        {
+                            "filled_progress_bar@AvaritiaBaseUi.filled_progress_bar": {
+                                "clip_direction": "left",
+                                "clip_pixelperfect": false,
+                                "layer": 2
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "durability_bar": {
+        "type": "image",
+        "offset": [
+            0.5,
+            8
+        ],
+        "size": [
+            14,
+            2
+        ],
+        "layer": 4,
+        "clip_direction": "left",
+        "clip_ratio": 0,
+        "fill": true,
+        "texture": "textures/ui/durability_stack",
+        "controls": [
+            {
+                "progress_bar": {
+                    "type": "panel",
+                    "$clip_direction": "left",
+                    "$clip_ratio": 0,
+                    "$is_new_nine_slice": false,
+                    "$nine_slice_buttom": 0,
+                    "$nine_slice_left": 0,
+                    "$nine_slice_right": 0,
+                    "$nine_slice_top": 0,
+                    "$nineslice_size": [
+                        0,
+                        0,
+                        0,
+                        0
+                    ],
+                    "$progress_bar_empty_texture": "",
+                    "$progress_bar_filled_texture": "textures/ui/durability_value",
+                    "offset": [
+                        0,
+                        -1
+                    ],
+                    "size": [
+                        "100%+0px",
+                        "100%+0px"
+                    ],
+                    "layer": 8,
+                    "controls": [
+                        {
+                            "empty_progress_bar@netease_editor_template_namespace.empty_progress_bar": {
+                                "is_new_nine_slice": true,
+                                "keep_ratio": false,
+                                "nine_slice_buttom": 0,
+                                "nine_slice_left": 0,
+                                "nine_slice_right": 0,
+                                "nine_slice_top": 0,
+                                "nineslice_size": [
+                                    0,
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "offset": [
+                                    -1,
+                                    0.5
+                                ],
+                                "size": [
+                                    "100%+0px",
+                                    "100%+1px"
+                                ],
+                                "texture": "textures/ui/durability_stack"
+                            }
+                        },
+                        {
+                            "filled_progress_bar@netease_editor_template_namespace.filled_progress_bar": {
+                                "color": [
+                                    1,
+                                    1,
+                                    1
+                                ],
+                                "is_new_nine_slice": true,
+                                "keep_ratio": false,
+                                "nine_slice_buttom": 0,
+                                "nine_slice_left": 0,
+                                "nine_slice_right": 0,
+                                "nine_slice_top": 0,
+                                "nineslice_size": [
+                                    0,
+                                    0,
+                                    0,
+                                    0
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "empty_progress_bar": {
+        "type": "image",
+        "size": [
+            "100%",
+            "100%"
+        ],
+        "layer": 1,
+        "color": [
+            0.3,
+            0.3,
+            0.3
+        ],
+        "texture": "textures/ui/White"
+    },
+    "filled_progress_bar": {
+        "type": "image",
+        "anchor_from": "left_middle",
+        "anchor_to": "left_middle",
+        "size": [
+            "100%",
+            "100%"
+        ],
+        "layer": 1,
+        "color": [
+            0,
+            1,
+            0
+        ],
+        "texture": "textures/ui/White"
+    },
+    "fly_item_renderer": {
+        "type": "custom",
+        "renderer": "inventory_item_renderer",
+        "size": [
+            16,
+            16
+        ],
+        "layer": 1,
+        "visible": false,
+        "controls": [
+            {
+                "count_label": {
+                    "type": "label",
+                    "anchor_from": "bottom_right",
+                    "anchor_to": "bottom_right",
+                    "offset": [
+                        0,
+                        1
+                    ],
+                    "layer": 9,
+                    "visible": false,
+                    "color": "$item_stack_count_color",
+                    "shadow": true
+                }
+            }
+        ]
+    },
+    "getest": {
+        "type": "input_panel",
+        "size": [
+            100,
+            100
+        ],
+        "layer": 1,
+        "button_mappings": [
+            {
+                "to_button_id": "#netease_to_button_id",
+                "from_button_id": "button.menu_select",
+                "mapping_type": "pressed"
+            }
+        ],
+        "modal": true
+    },
+    "hotbar_grid": {
+        "type": "grid",
+        "size": [
+            "default",
+            "default"
+        ],
+        "layer": 1,
+        "grid_dimensions": [
+            9,
+            1
+        ],
+        "grid_item_template": "AvaritiaBaseUi.item_cell",
+        "grid_rescaling_type": "none"
+    },
+    "hotbar_grid_small": {
+        "type": "grid",
+        "size": [
+            "default",
+            "default"
+        ],
+        "layer": 1,
+        "grid_dimensions": [
+            9,
+            1
+        ],
+        "grid_item_template": "AvaritiaBaseUi.item_cell_small",
+        "grid_rescaling_type": "none"
+    },
+    "image_button@common.button": {
+        "$default_texture|default": "textures/ui/pocket_button_default",
+        "$hover_name|default": "#button.hovered",
+        "$hover_texture|default": "textures/ui/pocket_button_hover",
+        "$left_click_name|default": "#button.left_click",
+        "$pressed_texture|default": "textures/ui/pocket_button_pressed",
+        "$right_click_name|default": "#button.right_click",
+        "button_mappings": [
+            {
+                "from_button_id": "button.menu_select",
+                "mapping_type": "pressed",
+                "to_button_id": "$left_click_name"
+            },
+            {
+                "from_button_id": "button.menu_ok",
+                "mapping_type": "focused",
+                "to_button_id": "$left_click_name"
+            },
+            {
+                "from_button_id": "button.menu_secondary_select",
+                "mapping_type": "pressed",
+                "to_button_id": "$right_click_name"
+            },
+            {
+                "from_button_id": "button.controller_select",
+                "mapping_type": "pressed",
+                "to_button_id": "$right_click_name"
+            },
+            {
+                "mapping_type": "pressed",
+                "to_button_id": "$hover_name"
+            }
+        ],
+        "controls": [
+            {
+                "default": {
+                    "type": "image",
+                    "layer": 1,
+                    "texture": "$default_texture"
+                }
+            },
+            {
+                "hover": {
+                    "type": "image",
+                    "layer": 2,
+                    "texture": "$hover_texture"
+                }
+            },
+            {
+                "pressed": {
+                    "type": "image",
+                    "layer": 3,
+                    "texture": "$pressed_texture"
+                }
+            }
+        ],
+        "size": [
+            15,
+            15
+        ]
+    },
+    "image_button_hover@common.button": {
+        "$default_texture|default": "textures/ui/pocket_button_default",
+        "$hover_name|default": "#button.hovered",
+        "$hover_texture|default": "textures/ui/pocket_button_hover",
+        "$left_click_name|default": "#button.left_click",
+        "$pressed_texture|default": "textures/ui/pocket_button_pressed",
+        "$right_click_name|default": "#button.right_click",
+        "button_mappings": [
+            {
+                "from_button_id": "button.menu_select",
+                "mapping_type": "pressed",
+                "to_button_id": "$left_click_name"
+            },
+            {
+                "from_button_id": "button.menu_ok",
+                "mapping_type": "focused",
+                "to_button_id": "$left_click_name"
+            },
+            {
+                "from_button_id": "button.menu_secondary_select",
+                "mapping_type": "pressed",
+                "to_button_id": "$right_click_name"
+            },
+            {
+                "from_button_id": "button.controller_select",
+                "mapping_type": "pressed",
+                "to_button_id": "$right_click_name"
+            },
+            {
+                "mapping_type": "pressed",
+                "to_button_id": "$hover_name"
+            }
+        ],
+        "controls": [
+            {
+                "default": {
+                    "type": "image",
+                    "layer": 1,
+                    "texture": "$default_texture"
+                }
+            },
+            {
+                "hover": {
+                    "type": "image",
+                    "layer": 2,
+                    "texture": "$hover_texture"
+                }
+            },
+            {
+                "pressed": {
+                    "type": "image",
+                    "layer": 3,
+                    "texture": "$pressed_texture"
+                }
+            },
+            {
+                "newHover": {
+                    "type": "custom",
+                    "renderer": "hover_text_renderer",
+                    "$hover_text_binding_name|default": "#HoveredText",
+                    "$hover_text_max_width|default": 0,
+                    "layer": 9999,
+                    "allow_clipping": false,
+                    "visible": false,
+                    "hover_text_max_width": "$hover_text_max_width",
+                    "bindings": [
+                        {
+                            "binding_name_override": "#hover_text",
+                            "binding_condition": "always",
+                            "binding_name": "#HoveredText"
+                        }
+                    ]
+                }
+            },
+            {
+                "item_renderer": {
+                    "type": "custom",
+                    "renderer": "inventory_item_renderer",
+                    "size": [
+                        18.0,
+                        18.0
+                    ],
+                    "layer": 4,
+                    "visible": false,
+                    "property_bag": {
+                        "#item_id_aux": 131072
+                    }
+                }
+            }
+        ],
+        "size": [
+            18,
+            18
+        ]
+    },
+    "inventory_grid": {
+        "type": "grid",
+        "size": [
+            "default",
+            "default"
+        ],
+        "layer": 1,
+        "grid_dimensions": [
+            9,
+            3
+        ],
+        "grid_item_template": "AvaritiaBaseUi.item_cell",
+        "grid_rescaling_type": "none"
+    },
+    "inventory_grid_small": {
+        "type": "grid",
+        "size": [
+            "default",
+            "default"
+        ],
+        "layer": 1,
+        "grid_dimensions": [
+            9,
+            3
+        ],
+        "grid_item_template": "AvaritiaBaseUi.item_cell_small",
+        "grid_rescaling_type": "none"
+    },
+    "inventory_panel": {
+        "type": "panel",
+        "size": [
+            "100%cm",
+            "100%c+3px"
+        ],
+        "layer": 1,
+        "controls": [
+            {
+                "inventory_title": {
+                    "type": "label",
+                    "anchor_from": "top_left",
+                    "anchor_to": "top_left",
+                    "offset": [
+                        0,
+                        -8
+                    ],
+                    "layer": 1,
+                    "color": "$title_text_color",
+                    "text": "物品栏"
+                }
+            },
+            {
+                "inventory_grid@AvaritiaBaseUi.inventory_grid": {
+                    "anchor_from": "bottom_middle",
+                    "anchor_to": "bottom_middle",
+                    "layer": 2,
+                    "offset": [
+                        0,
+                        -27
+                    ]
+                }
+            },
+            {
+                "hotbar_grid@AvaritiaBaseUi.hotbar_grid": {
+                    "anchor_from": "bottom_middle",
+                    "anchor_to": "bottom_middle",
+                    "layer": 3,
+                    "offset": [
+                        0,
+                        -5
+                    ]
+                }
+            }
+        ]
+    },
+    "inventory_small": {
+        "type": "panel",
+        "size": [
+            "100%cm",
+            "100%c+3px"
+        ],
+        "layer": 1,
+        "controls": [
+            {
+                "inventory_grid@AvaritiaBaseUi.inventory_grid_small": {
+                    "offset": [
+                        0,
+                        -10
+                    ]
+                }
+            },
+            {
+                "hotbar_grid@AvaritiaBaseUi.hotbar_grid_small": {
+                    "offset": [
+                        0,
+                        20
+                    ]
+                }
+            }
+        ]
+    },
+    "item_cell": {
+        "type": "panel",
+        "$cell_size|default": [
+            18,
+            18
+        ],
+        "$item_size|default": [
+            16,
+            16
+        ],
+        "size": "$cell_size",
+        "layer": 1,
+        "controls": [
+            {
+                "cell_image": {
+                    "type": "image",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 1,
+                    "texture": "textures/ui/cell_image"
+                }
+            },
+            {
+                "selected_cell_image": {
+                    "type": "image",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 2,
+                    "visible": false,
+                    "texture": "textures/ui/recipe_book_touch_cell_selected"
+                }
+            },
+            {
+                "lock_cell_image": {
+                    "type": "image",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 3,
+                    "visible": false,
+                    "texture": "textures/ui/cell_image_lock"
+                }
+            },
+            {
+                "select_image": {
+                    "type": "image",
+                    "size": [
+                        "100%+5px",
+                        "100%+5px"
+                    ],
+                    "layer": 4,
+                    "visible": false,
+                    "texture": "textures/ui/pocket_ui_highlight_selected_slot"
+                }
+            },
+            {
+                "hight_light_image": {
+                    "type": "panel",
+                    "size": [
+                        18,
+                        18
+                    ],
+                    "layer": 5,
+                    "visible": false,
+                    "controls": [
+                        {
+                            "image": {
+                                "type": "image",
+                                "size": [
+                                    "100%+-2px",
+                                    "100%+-2px"
+                                ],
+                                "layer": 1,
+                                "nineslice_size": [
+                                    0,
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "texture": "textures/ui/highlight_slot"
+                            }
+                        },
+                        {
+                            "image(0)": {
+                                "type": "image",
+                                "size": [
+                                    "100%+0px",
+                                    "100%+0px"
+                                ],
+                                "layer": 1,
+                                "texture": "textures/ui/focus_border_white"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "item_button": {
+                    "type": "button",
+                    "layer": 6,
+                    "button_mappings": [
+                        {
+                            "to_button_id": "#ItemCellClick",
+                            "from_button_id": "button.menu_select",
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "to_button_id": "#ItemCellClick",
+                            "from_button_id": "button.menu_ok",
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "to_button_id": "#ItemRightClick",
+                            "from_button_id": "button.menu_secondary_select",
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "to_button_id": "#ItemRightClick",
+                            "from_button_id": "button.controller_select",
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "to_button_id": "#ItemCellHovered",
+                            "mapping_type": "pressed"
+                        }
+                    ],
+                    "controls": [
+                        {
+                            "newHover": {
+                                "type": "custom",
+                                "renderer": "hover_text_renderer",
+                                "$hover_text_binding_name|default": "#HoveredText",
+                                "$hover_text_max_width|default": 0,
+                                "layer": 9999,
+                                "allow_clipping": false,
+                                "visible": false,
+                                "hover_text_max_width": "$hover_text_max_width",
+                                "bindings": [
+                                    {
+                                        "binding_name_override": "#hover_text",
+                                        "binding_condition": "always",
+                                        "binding_name": "#HoveredText"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "lock_type_panel@AvaritiaBaseUi.lock_type_panel": {
+                    "layer": 7,
+                    "size": "$item_size",
+                    "visible": false
+                }
+            },
+            {
+                "item_renderer_panel": {
+                    "type": "panel",
+                    "size": "$item_size",
+                    "layer": 11,
+                    "controls": [
+                        {
+                            "item_renderer": {
+                                "type": "custom",
+                                "renderer": "inventory_item_renderer",
+                                "size": "$item_size",
+                                "layer": 1
+                            }
+                        },
+                        {
+                            "durability_bar@AvaritiaBaseUi.durability_bar": {
+                                "layer": 2,
+                                "offset": [
+                                    0,
+                                    5
+                                ],
+                                "size": [
+                                    12,
+                                    1
+                                ],
+                                "visible": false
+                            }
+                        },
+                        {
+                            "count_label": {
+                                "type": "label",
+                                "anchor_from": "bottom_right",
+                                "anchor_to": "bottom_right",
+                                "offset": [
+                                    0,
+                                    1
+                                ],
+                                "layer": 9,
+                                "color": "$item_stack_count_color",
+                                "shadow": true
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "progress_bar": {
+                    "type": "panel",
+                    "anchor_from": "top_middle",
+                    "anchor_to": "top_middle",
+                    "offset": [
+                        0,
+                        -4
+                    ],
+                    "size": [
+                        15,
+                        3
+                    ],
+                    "layer": 21,
+                    "visible": false,
+                    "controls": [
+                        {
+                            "empty_progress_bar@AvaritiaBaseUi.empty_progress_bar": {
+                                "layer": 1
+                            }
+                        },
+                        {
+                            "filled_progress_bar@AvaritiaBaseUi.filled_progress_bar": {
+                                "clip_direction": "left",
+                                "clip_pixelperfect": false,
+                                "layer": 2
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "item_cell_small": {
+        "type": "panel",
+        "$cell_size|default": [
+            14,
+            14
+        ],
+        "$item_size|default": [
+            16,
+            16
+        ],
+        "size": "$cell_size",
+        "layer": 1,
+        "controls": [
+            {
+                "cell_image": {
+                    "type": "image",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 1,
+                    "texture": "textures/ui/cell_image"
+                }
+            },
+            {
+                "selected_cell_image": {
+                    "type": "image",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 2,
+                    "visible": false,
+                    "texture": "textures/ui/recipe_book_touch_cell_selected"
+                }
+            },
+            {
+                "lock_cell_image": {
+                    "type": "image",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 3,
+                    "visible": false,
+                    "texture": "textures/ui/cell_image_lock"
+                }
+            },
+            {
+                "select_image": {
+                    "type": "image",
+                    "size": [
+                        "100%+5px",
+                        "100%+5px"
+                    ],
+                    "layer": 4,
+                    "visible": false,
+                    "texture": "textures/ui/pocket_ui_highlight_selected_slot"
+                }
+            },
+            {
+                "hight_light_image": {
+                    "type": "image",
+                    "size": [
+                        "100%+0px",
+                        "100%+0px"
+                    ],
+                    "layer": 5,
+                    "visible": false,
+                    "clip_direction": "left",
+                    "clip_ratio": 0,
+                    "texture": "textures/ui/button_borderless_lightpressed"
+                }
+            },
+            {
+                "item_button": {
+                    "type": "button",
+                    "layer": 6,
+                    "button_mappings": [
+                        {
+                            "to_button_id": "#ItemCellClick",
+                            "from_button_id": "button.menu_select",
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "to_button_id": "#ItemCellClick",
+                            "from_button_id": "button.menu_ok",
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "to_button_id": "#ItemRightClick",
+                            "from_button_id": "button.menu_secondary_select",
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "to_button_id": "#ItemRightClick",
+                            "from_button_id": "button.controller_select",
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "to_button_id": "#ItemCellHovered",
+                            "mapping_type": "pressed"
+                        }
+                    ]
+                }
+            },
+            {
+                "lock_type_panel@AvaritiaBaseUi.lock_type_panel": {
+                    "layer": 7,
+                    "size": "$item_size",
+                    "visible": false
+                }
+            },
+            {
+                "item_renderer_panel": {
+                    "type": "panel",
+                    "size": "$item_size",
+                    "layer": 11,
+                    "controls": [
+                        {
+                            "item_renderer": {
+                                "type": "custom",
+                                "renderer": "inventory_item_renderer",
+                                "size": [
+                                    12,
+                                    12
+                                ],
+                                "layer": 1
+                            }
+                        },
+                        {
+                            "durability_bar@AvaritiaBaseUi.durability_bar": {
+                                "layer": 2,
+                                "offset": [
+                                    0,
+                                    4
+                                ],
+                                "size": [
+                                    8,
+                                    1
+                                ],
+                                "visible": false
+                            }
+                        },
+                        {
+                            "count_label": {
+                                "type": "label",
+                                "anchor_from": "bottom_right",
+                                "anchor_to": "bottom_right",
+                                "offset": [
+                                    -1,
+                                    -1
+                                ],
+                                "layer": 9,
+                                "color": "$item_stack_count_color",
+                                "font_scale_factor": 1.4,
+                                "font_size": "small",
+                                "shadow": true
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "progress_bar": {
+                    "type": "panel",
+                    "anchor_from": "top_middle",
+                    "anchor_to": "top_middle",
+                    "offset": [
+                        0,
+                        -4
+                    ],
+                    "size": [
+                        15,
+                        3
+                    ],
+                    "layer": 21,
+                    "visible": false,
+                    "controls": [
+                        {
+                            "empty_progress_bar@AvaritiaBaseUi.empty_progress_bar": {
+                                "layer": 1
+                            }
+                        },
+                        {
+                            "filled_progress_bar@AvaritiaBaseUi.filled_progress_bar": {
+                                "clip_direction": "left",
+                                "clip_pixelperfect": false,
+                                "layer": 2
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "item_info": {
+        "type": "image",
+        "anchor_from": "bottom_middle",
+        "offset": [
+            0,
+            -32
+        ],
+        "size": [
+            "100%c+8px",
+            "100%c+8px"
+        ],
+        "layer": 1,
+        "propagate_alpha": true,
+        "texture": "textures/ui/purpleBorder",
+        "bindings": [
+            {
+                "binding_name_override": "#alpha",
+                "binding_condition": "always",
+                "binding_name": "#ItemInfoAlpha"
+            }
+        ],
+        "controls": [
+            {
+                "info_text": {
+                    "type": "label",
+                    "layer": 1,
+                    "color": "$item_hover_text_color",
+                    "text": "#ItemInfo",
+                    "bindings": [
+                        {
+                            "binding_condition": "always",
+                            "binding_name": "#ItemInfo"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "itemcell2": {
+        "type": "panel",
+        "$cell_size|default": [
+            22,
+            22
+        ],
+        "$item_size|default": [
+            16,
+            16
+        ],
+        "size": "$cell_size",
+        "layer": 1,
+        "controls": [
+            {
+                "cell_image": {
+                    "type": "image",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 1,
+                    "texture": "textures/ui/cell_image"
+                }
+            },
+            {
+                "selected_cell_image": {
+                    "type": "image",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 2,
+                    "visible": false,
+                    "texture": "textures/ui/recipe_book_touch_cell_selected"
+                }
+            },
+            {
+                "lock_cell_image": {
+                    "type": "image",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 3,
+                    "visible": false,
+                    "texture": "textures/ui/cell_image_lock"
+                }
+            },
+            {
+                "select_image": {
+                    "type": "image",
+                    "size": [
+                        "100%+5px",
+                        "100%+5px"
+                    ],
+                    "layer": 4,
+                    "visible": false,
+                    "texture": "textures/ui/pocket_ui_highlight_selected_slot"
+                }
+            },
+            {
+                "hight_light_image": {
+                    "type": "panel",
+                    "size": [
+                        22,
+                        22
+                    ],
+                    "layer": 5,
+                    "visible": false,
+                    "controls": [
+                        {
+                            "image": {
+                                "type": "image",
+                                "size": [
+                                    "100%+-2px",
+                                    "100%+-2px"
+                                ],
+                                "layer": 1,
+                                "nineslice_size": [
+                                    0,
+                                    0,
+                                    0,
+                                    0
+                                ],
+                                "texture": "textures/ui/highlight_slot"
+                            }
+                        },
+                        {
+                            "image(0)": {
+                                "type": "image",
+                                "size": [
+                                    "100%+0px",
+                                    "100%+0px"
+                                ],
+                                "layer": 1,
+                                "texture": "textures/ui/focus_border_white"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "item_button": {
+                    "type": "button",
+                    "layer": 6,
+                    "button_mappings": [
+                        {
+                            "to_button_id": "#ItemCellClick",
+                            "from_button_id": "button.menu_select",
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "to_button_id": "#ItemCellClick",
+                            "from_button_id": "button.menu_ok",
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "to_button_id": "#ItemRightClick",
+                            "from_button_id": "button.menu_secondary_select",
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "to_button_id": "#ItemRightClick",
+                            "from_button_id": "button.controller_select",
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "to_button_id": "#ItemCellHovered",
+                            "mapping_type": "pressed"
+                        }
+                    ],
+                    "controls": [
+                        {
+                            "newHover": {
+                                "type": "custom",
+                                "renderer": "hover_text_renderer",
+                                "$hover_text_binding_name|default": "#HoveredText",
+                                "$hover_text_max_width|default": 0,
+                                "layer": 9999,
+                                "allow_clipping": false,
+                                "visible": false,
+                                "hover_text_max_width": "$hover_text_max_width",
+                                "bindings": [
+                                    {
+                                        "binding_name_override": "#hover_text",
+                                        "binding_condition": "always",
+                                        "binding_name": "#HoveredText"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "lock_type_panel@AvaritiaBaseUi.lock_type_panel": {
+                    "layer": 7,
+                    "size": "$item_size",
+                    "visible": false
+                }
+            },
+            {
+                "item_renderer_panel": {
+                    "type": "panel",
+                    "size": "$item_size",
+                    "layer": 11,
+                    "controls": [
+                        {
+                            "item_renderer": {
+                                "type": "custom",
+                                "renderer": "inventory_item_renderer",
+                                "size": "$item_size",
+                                "layer": 1
+                            }
+                        },
+                        {
+                            "durability_bar@AvaritiaBaseUi.durability_bar": {
+                                "layer": 2,
+                                "offset": [
+                                    0,
+                                    5
+                                ],
+                                "size": [
+                                    12,
+                                    1
+                                ],
+                                "visible": false
+                            }
+                        },
+                        {
+                            "count_label": {
+                                "type": "label",
+                                "anchor_from": "bottom_right",
+                                "anchor_to": "bottom_right",
+                                "offset": [
+                                    0,
+                                    1
+                                ],
+                                "layer": 9,
+                                "color": "$item_stack_count_color",
+                                "shadow": true
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "progress_bar": {
+                    "type": "panel",
+                    "anchor_from": "top_middle",
+                    "anchor_to": "top_middle",
+                    "offset": [
+                        0,
+                        -4
+                    ],
+                    "size": [
+                        15,
+                        3
+                    ],
+                    "layer": 21,
+                    "visible": false,
+                    "controls": [
+                        {
+                            "empty_progress_bar@AvaritiaBaseUi.empty_progress_bar": {
+                                "layer": 1
+                            }
+                        },
+                        {
+                            "filled_progress_bar@AvaritiaBaseUi.filled_progress_bar": {
+                                "clip_direction": "left",
+                                "clip_pixelperfect": false,
+                                "layer": 2
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "lock_type_panel": {
+        "type": "panel",
+        "layer": 1,
+        "controls": [
+            {
+                "lock_in_inventory_image": {
+                    "type": "image",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 1,
+                    "texture": "textures/ui/item_lock_yellow"
+                }
+            },
+            {
+                "lock_in_slot_image": {
+                    "type": "image",
+                    "size": [
+                        "100%",
+                        "100%"
+                    ],
+                    "layer": 2,
+                    "texture": "textures/ui/item_lock_red"
+                }
+            }
+        ]
+    },
+    "namespace": "AvaritiaBaseUi",
+    "screen@common.base_screen": {
+        "type": "screen",
+        "$screen_animations|default": [
+            "@common.container_screen_exit_animation_push",
+            "@common.container_screen_exit_animation_pop",
+            "@common.container_screen_entrance_animation_push",
+            "@common.container_screen_entrance_animation_pop",
+            "@common.screen_exit_animation_push_fade",
+            "@common.screen_exit_animation_pop_fade",
+            "@common.screen_entrance_animation_push_fade",
+            "@common.screen_entrance_animation_pop_fade"
+        ],
+        "$screen_bg_content|default": "AvaritiaBaseUi.black_background",
+        "$screen_content|default": "AvaritiaBaseUi.screen_panel",
+        "cache_screen": false
+    },
+    "screen_panel": {
+        "type": "panel",
+        "$child_offset|default": [
+            0,
+            0
+        ],
+        "$child_panel|default": "AvaritiaBaseUi.child_panel",
+        "$inventory_offset|default": [
+            0,
+            8
+        ],
+        "layer": 1,
+        "controls": [
+            {
+                "screen_background": {
+                    "type": "input_panel",
+                    "size": [
+                        "100%c",
+                        "100%c"
+                    ],
+                    "layer": 1,
+                    "button_mappings": [
+                        {
+                            "from_button_id": "button.menu_select",
+                            "mapping_type": "pressed"
+                        },
+                        {
+                            "from_button_id": "button.menu_ok",
+                            "mapping_type": "pressed"
+                        }
+                    ],
+                    "controls": [
+                        {
+                            "bg": {
+                                "type": "image",
+                                "size": [
+                                    "100%cm+14px",
+                                    "100%c+3px"
+                                ],
+                                "layer": 1,
+                                "texture": "textures/ui/dialog_background_opaque",
+                                "controls": [
+                                    {
+                                        "close_button@AvaritiaBaseUi.close_button": {
+                                            "anchor_from": "top_right",
+                                            "anchor_to": "top_right",
+                                            "offset": [
+                                                -4,
+                                                4
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "inventory_panel@AvaritiaBaseUi.inventory_panel": {
+                                            "layer": 8,
+                                            "offset": "$inventory_offset"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "item_info@AvaritiaBaseUi.item_info": {
+                    "layer": 18
+                }
+            },
+            {
+                "fly_item_renderer@AvaritiaBaseUi.fly_item_renderer": {
+                    "layer": 20
+                }
+            }
+        ]
+    }
+}

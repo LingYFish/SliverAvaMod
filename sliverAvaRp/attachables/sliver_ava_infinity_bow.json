@@ -1,0 +1,52 @@
+{
+    "format_version": "1.10",
+    "minecraft:attachable": {
+        "description": {
+            "animations": {
+                "charging": "animation.infinity_bow.charging",
+                "wield": "animation.infinity_bow.wield"
+            },
+            "geometry": {
+                "default": "geometry.infinity_bow.idle",
+                "pull_0": "geometry.infinity_bow.pull_0",
+                "pull_1": "geometry.infinity_bow.pull_1",
+                "pull_2": "geometry.infinity_bow.pull_2"
+            },
+            "identifier": "sliver_x:infinity_bow",
+            "materials": {
+                "default": "cosmic_bow",
+                "first_person": "cosmic_bow"
+            },
+            "render_controllers": [
+                "controller.render.infinity_bow"
+            ],
+            "scripts": {
+                "animate": [
+                    "wield",
+                    {
+                        "charging": "query.main_hand_item_use_duration > 0.0f && c.is_first_person"
+                    }
+                ],
+                "pre_animation": [
+                    "variable.is_first_person = c.is_first_person;"
+                ]
+            },
+            "textures": {
+                "cosmic2_frame0": "textures/cosmic_shader/cosmic6/0",
+                "cosmic2_frame1": "textures/cosmic_shader/cosmic6/1",
+                "cosmic2_frame2": "textures/cosmic_shader/cosmic6/2",
+                "cosmic2_frame3": "textures/cosmic_shader/cosmic6/3",
+                "cosmic2_frame4": "textures/cosmic_shader/cosmic6/4",
+                "cosmic2_frame5": "textures/cosmic_shader/cosmic6/5",
+                "cosmic_frame0": "textures/cosmic_shader/cosmic0/0",
+                "cosmic_frame1": "textures/cosmic_shader/cosmic0/1",
+                "cosmic_frame2": "textures/cosmic_shader/cosmic0/2",
+                "cosmic_frame3": "textures/cosmic_shader/cosmic0/3",
+                "default": "textures/sliver_ava/tools/infinity_bow/idle",
+                "pull_0": "textures/sliver_ava/tools/infinity_bow/pull_0",
+                "pull_1": "textures/sliver_ava/tools/infinity_bow/pull_1",
+                "pull_2": "textures/sliver_ava/tools/infinity_bow/pull_2"
+            }
+        }
+    }
+}

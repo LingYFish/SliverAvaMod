@@ -1,0 +1,16 @@
+{
+    "format_version": "1.10",
+    "minecraft:item": {
+        "components": {
+            "minecraft:hover_text_color": "aqua",
+            "minecraft:icon": "sliver_x:neutronium_ingot",
+            "netease:frame_anim_in_scene": {
+                "texture_path": "textures/sliver_ava/resource/neutronium_ingot",
+                "ticks_per_frame": 2
+            }
+        },
+        "description": {
+            "identifier": "sliver_x:neutronium_ingot"
+        }
+    }
+}

@@ -1,0 +1,624 @@
+{
+    "collect": {
+        "type": "panel",
+        "offset": [
+            -1,
+            0
+        ],
+        "layer": 1,
+        "controls": [
+            {
+                "screen_background": {
+                    "type": "panel",
+                    "size": [
+                        "100%c+0px",
+                        "100%c+0px"
+                    ],
+                    "layer": 1,
+                    "controls": [
+                        {
+                            "bg": {
+                                "type": "image",
+                                "size": [
+                                    175,
+                                    165.0
+                                ],
+                                "layer": 1,
+                                "texture": "textures/ui/dialog_background_opaque",
+                                "controls": [
+                                    {
+                                        "close_button@AvaritiaBaseUi.close_button": {
+                                            "anchor_from": "top_right",
+                                            "offset": [
+                                                -10,
+                                                10
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "inventory_title": {
+                                            "type": "label",
+                                            "anchor_from": "top_middle",
+                                            "anchor_to": "top_middle",
+                                            "offset": [
+                                                0.0,
+                                                5
+                                            ],
+                                            "layer": 8,
+                                            "color": "$title_text_color",
+                                            "text": "中子态素收集器"
+                                        }
+                                    },
+                                    {
+                                        "inventory_panel@AvaritiaBaseUi.inventory_panel": {
+                                            "layer": 9,
+                                            "offset": [
+                                                0,
+                                                40
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "item_cell@AvaritiaBaseUi.itemcell2": {
+                                            "offset": [
+                                                0,
+                                                -40
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "label": {
+                                            "type": "label",
+                                            "offset": [
+                                                0.0,
+                                                -20.0
+                                            ],
+                                            "layer": 9,
+                                            "color": [
+                                                0.2980392156862745,
+                                                0.2980392156862745,
+                                                0.2980392156862745
+                                            ],
+                                            "font_type": "unicode",
+                                            "text": "#Progress",
+                                            "text_alignment": "center",
+                                            "bindings": [
+                                                {
+                                                    "binding_condition": "always",
+                                                    "binding_name": "#Progress"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "item_info@AvaritiaBaseUi.item_info": {
+                    "layer": 138
+                }
+            },
+            {
+                "fly_item_renderer@AvaritiaBaseUi.fly_item_renderer": {
+                    "layer": 140
+                }
+            }
+        ]
+    },
+    "collectUi@common.base_screen": {
+        "type": "screen",
+        "$additional_screen_content|default": "",
+        "$screen_animations|default": [
+            "@common.container_screen_exit_animation_push",
+            "@common.container_screen_exit_animation_pop",
+            "@common.container_screen_entrance_animation_push",
+            "@common.container_screen_entrance_animation_pop",
+            "@common.screen_exit_animation_push_fade",
+            "@common.screen_exit_animation_pop_fade",
+            "@common.screen_entrance_animation_push_fade",
+            "@common.screen_entrance_animation_pop_fade"
+        ],
+        "$screen_bg_content|default": "AvaritiaBaseUi.black_background",
+        "$screen_content|default": "AvaritiaUi.collect",
+        "cache_screen": false
+    },
+    "compress": {
+        "type": "panel",
+        "offset": [
+            -1,
+            0
+        ],
+        "layer": 1,
+        "controls": [
+            {
+                "screen_background": {
+                    "type": "panel",
+                    "size": [
+                        "100%c+0px",
+                        "100%c+0px"
+                    ],
+                    "layer": 1,
+                    "controls": [
+                        {
+                            "bg": {
+                                "type": "image",
+                                "size": [
+                                    175.0,
+                                    170.0
+                                ],
+                                "layer": 1,
+                                "texture": "textures/ui/dialog_background_opaque",
+                                "controls": [
+                                    {
+                                        "close_button@AvaritiaBaseUi.close_button": {
+                                            "anchor_from": "top_right",
+                                            "offset": [
+                                                -10,
+                                                10
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "inventory_title": {
+                                            "type": "label",
+                                            "anchor_from": "top_middle",
+                                            "anchor_to": "top_middle",
+                                            "offset": [
+                                                0.0,
+                                                5
+                                            ],
+                                            "layer": 8,
+                                            "color": "$title_text_color",
+                                            "text": "中子态素压缩机"
+                                        }
+                                    },
+                                    {
+                                        "inventory_panel@AvaritiaBaseUi.inventory_panel": {
+                                            "layer": 9,
+                                            "offset": [
+                                                0,
+                                                40
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "output@AvaritiaBaseUi.itemcell2": {
+                                            "offset": [
+                                                40,
+                                                -45
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "input@AvaritiaBaseUi.item_cell": {
+                                            "layer": 9,
+                                            "offset": [
+                                                -40,
+                                                -45
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "label": {
+                                            "type": "label",
+                                            "offset": [
+                                                0.0,
+                                                -25.0
+                                            ],
+                                            "layer": 9,
+                                            "color": [
+                                                0.2980392156862745,
+                                                0.2980392156862745,
+                                                0.2980392156862745
+                                            ],
+                                            "font_type": "unicode",
+                                            "text": "#Progress",
+                                            "text_alignment": "center",
+                                            "bindings": [
+                                                {
+                                                    "binding_condition": "always",
+                                                    "binding_name": "#Progress"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "output_item": {
+                                            "type": "panel",
+                                            "offset": [
+                                                70.0,
+                                                -45.0
+                                            ],
+                                            "size": [
+                                                30.0,
+                                                30.0
+                                            ],
+                                            "controls": [
+                                                {
+                                                    "_": {
+                                                        "type": "label",
+                                                        "anchor_from": "top_middle",
+                                                        "anchor_to": "top_middle",
+                                                        "offset": [
+                                                            0.0,
+                                                            -5.0
+                                                        ],
+                                                        "layer": 8,
+                                                        "color": "$title_text_color",
+                                                        "text": "Output"
+                                                    }
+                                                },
+                                                {
+                                                    "image_button_hover@AvaritiaBaseUi.image_button_hover": {
+                                                        "$default_texture": "",
+                                                        "$hover_name": "#Output",
+                                                        "$hover_texture": "",
+                                                        "$pressed_texture": ""
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "input_item": {
+                                            "type": "panel",
+                                            "offset": [
+                                                -70.0,
+                                                -45.0
+                                            ],
+                                            "size": [
+                                                30.0,
+                                                30.0
+                                            ],
+                                            "controls": [
+                                                {
+                                                    "_": {
+                                                        "type": "label",
+                                                        "anchor_from": "top_middle",
+                                                        "anchor_to": "top_middle",
+                                                        "offset": [
+                                                            0.0,
+                                                            -5.0
+                                                        ],
+                                                        "layer": 8,
+                                                        "color": "$title_text_color",
+                                                        "text": "Input"
+                                                    }
+                                                },
+                                                {
+                                                    "image_button_hover@AvaritiaBaseUi.image_button_hover": {
+                                                        "$default_texture": "",
+                                                        "$hover_name": "#Input",
+                                                        "$hover_texture": "",
+                                                        "$pressed_texture": ""
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "progress_bar": {
+                                            "type": "panel",
+                                            "$clip_direction": "down",
+                                            "$clip_ratio": 0.0,
+                                            "$is_new_nine_slice": false,
+                                            "$nine_slice_buttom": 0,
+                                            "$nine_slice_left": 0,
+                                            "$nine_slice_right": 0,
+                                            "$nine_slice_top": 0,
+                                            "$nineslice_size": [
+                                                0,
+                                                0,
+                                                0,
+                                                0
+                                            ],
+                                            "$progress_bar_empty_texture": "textures/ui/Avaritia/singularity_empty",
+                                            "$progress_bar_filled_texture": "textures/ui/Avaritia/singularity_full",
+                                            "offset": [
+                                                15.0,
+                                                -45.0
+                                            ],
+                                            "size": [
+                                                20.0,
+                                                20.0
+                                            ],
+                                            "layer": 8,
+                                            "clips_children": true,
+                                            "controls": [
+                                                {
+                                                    "empty_progress_bar@netease_editor_template_namespace.empty_progress_bar": {}
+                                                },
+                                                {
+                                                    "filled_progress_bar@netease_editor_template_namespace.filled_progress_bar": {}
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "progress_bar2": {
+                                            "type": "panel",
+                                            "$clip_direction": "left",
+                                            "$clip_ratio": 0.0,
+                                            "$is_new_nine_slice": false,
+                                            "$nine_slice_buttom": 0,
+                                            "$nine_slice_left": 0,
+                                            "$nine_slice_right": 0,
+                                            "$nine_slice_top": 0,
+                                            "$nineslice_size": [
+                                                0,
+                                                0,
+                                                0,
+                                                0
+                                            ],
+                                            "$progress_bar_empty_texture": "textures/ui/arrow_large",
+                                            "$progress_bar_filled_texture": "textures/ui/arrow_active",
+                                            "offset": [
+                                                -12.5,
+                                                -45.0
+                                            ],
+                                            "size": [
+                                                30.0,
+                                                15.0
+                                            ],
+                                            "layer": 8,
+                                            "controls": [
+                                                {
+                                                    "empty_progress_bar@netease_editor_template_namespace.empty_progress_bar": {}
+                                                },
+                                                {
+                                                    "filled_progress_bar@netease_editor_template_namespace.filled_progress_bar": {}
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "item_info@AvaritiaBaseUi.item_info": {
+                    "layer": 138
+                }
+            },
+            {
+                "fly_item_renderer@AvaritiaBaseUi.fly_item_renderer": {
+                    "layer": 140
+                }
+            }
+        ]
+    },
+    "compressUi@common.base_screen": {
+        "type": "screen",
+        "$additional_screen_content|default": "",
+        "$screen_animations|default": [
+            "@common.container_screen_exit_animation_push",
+            "@common.container_screen_exit_animation_pop",
+            "@common.container_screen_entrance_animation_push",
+            "@common.container_screen_entrance_animation_pop",
+            "@common.screen_exit_animation_push_fade",
+            "@common.screen_exit_animation_pop_fade",
+            "@common.screen_entrance_animation_push_fade",
+            "@common.screen_entrance_animation_pop_fade"
+        ],
+        "$screen_bg_content|default": "AvaritiaBaseUi.black_background",
+        "$screen_content|default": "AvaritiaUi.compress",
+        "cache_screen": false
+    },
+    "extreme_crafting_table": {
+        "type": "panel",
+        "offset": [
+            -1,
+            0
+        ],
+        "layer": 1,
+        "controls": [
+            {
+                "screen_background": {
+                    "type": "panel",
+                    "size": [
+                        "100%c+0px",
+                        "100%c+0px"
+                    ],
+                    "layer": 1,
+                    "controls": [
+                        {
+                            "bg": {
+                                "type": "image",
+                                "size": [
+                                    345.0,
+                                    200.0
+                                ],
+                                "layer": 1,
+                                "texture": "textures/ui/dialog_background_opaque",
+                                "controls": [
+                                    {
+                                        "close_button@AvaritiaBaseUi.close_button": {
+                                            "anchor_from": "top_right",
+                                            "offset": [
+                                                -10,
+                                                10
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "inventory_title": {
+                                            "type": "label",
+                                            "anchor_from": "top_middle",
+                                            "anchor_to": "top_middle",
+                                            "offset": [
+                                                0.0,
+                                                5
+                                            ],
+                                            "layer": 8,
+                                            "color": "$title_text_color",
+                                            "text": "终极工作台"
+                                        }
+                                    },
+                                    {
+                                        "inventory_panel@AvaritiaBaseUi.inventory_panel": {
+                                            "layer": 9,
+                                            "offset": [
+                                                85,
+                                                53.5
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "crafting": {
+                                            "type": "panel",
+                                            "offset": [
+                                                -85.0,
+                                                10.0
+                                            ],
+                                            "size": [
+                                                "100%cm+0px",
+                                                "100%c+0px"
+                                            ],
+                                            "layer": 1,
+                                            "controls": [
+                                                {
+                                                    "grid": {
+                                                        "type": "grid",
+                                                        "size": [
+                                                            "100%c+0px",
+                                                            "100%c+0px"
+                                                        ],
+                                                        "layer": 1,
+                                                        "collection_name": "test_grid",
+                                                        "grid_dimensions": [
+                                                            9,
+                                                            9
+                                                        ],
+                                                        "grid_item_template": "AvaritiaBaseUi.item_cell"
+                                                    }
+                                                },
+                                                {
+                                                    "inventory_title": {
+                                                        "type": "label",
+                                                        "anchor_from": "top_left",
+                                                        "anchor_to": "top_left",
+                                                        "offset": [
+                                                            0.0,
+                                                            -8.0
+                                                        ],
+                                                        "layer": 8,
+                                                        "color": "$title_text_color",
+                                                        "text": "合成"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "recipe": {
+                                            "type": "panel",
+                                            "offset": [
+                                                120.0,
+                                                -35.0
+                                            ],
+                                            "size": [
+                                                "100%cm+0px",
+                                                "100%c+0px"
+                                            ],
+                                            "layer": 1,
+                                            "controls": [
+                                                {
+                                                    "grid": {
+                                                        "type": "grid",
+                                                        "anchor_from": "left_middle",
+                                                        "anchor_to": "left_middle",
+                                                        "size": [
+                                                            "100%c+0px",
+                                                            "100%c+0px"
+                                                        ],
+                                                        "layer": 1,
+                                                        "collection_name": "test_grid",
+                                                        "grid_dimensions": [
+                                                            5,
+                                                            5
+                                                        ],
+                                                        "grid_item_template": "AvaritiaBaseUi.item_cell"
+                                                    }
+                                                },
+                                                {
+                                                    "inventory_title": {
+                                                        "type": "label",
+                                                        "anchor_from": "top_left",
+                                                        "anchor_to": "top_left",
+                                                        "offset": [
+                                                            0.0,
+                                                            -8.0
+                                                        ],
+                                                        "layer": 8,
+                                                        "color": "$title_text_color",
+                                                        "text": "配方"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "output@AvaritiaBaseUi.itemcell2": {
+                                            "offset": [
+                                                60,
+                                                -25
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "image": {
+                                            "type": "image",
+                                            "offset": [
+                                                25.0,
+                                                -25.0
+                                            ],
+                                            "size": [
+                                                30.0,
+                                                15.0
+                                            ],
+                                            "layer": 1,
+                                            "texture": "textures/ui/arrow_inactive"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "item_info@AvaritiaBaseUi.item_info": {
+                    "layer": 138
+                }
+            },
+            {
+                "fly_item_renderer@AvaritiaBaseUi.fly_item_renderer": {
+                    "layer": 140
+                }
+            }
+        ]
+    },
+    "extreme_crafting_tableUi@common.base_screen": {
+        "type": "screen",
+        "$additional_screen_content|default": "",
+        "$screen_animations|default": [
+            "@common.container_screen_exit_animation_push",
+            "@common.container_screen_exit_animation_pop",
+            "@common.container_screen_entrance_animation_push",
+            "@common.container_screen_entrance_animation_pop",
+            "@common.screen_exit_animation_push_fade",
+            "@common.screen_exit_animation_pop_fade",
+            "@common.screen_entrance_animation_push_fade",
+            "@common.screen_entrance_animation_pop_fade"
+        ],
+        "$screen_bg_content|default": "AvaritiaBaseUi.black_background",
+        "$screen_content|default": "AvaritiaUi.extreme_crafting_table",
+        "cache_screen": false
+    },
+    "namespace": "AvaritiaUi"
+}

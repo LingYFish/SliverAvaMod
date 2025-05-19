@@ -1,0 +1,12 @@
+{
+    "minecraft:item": {
+        "description": {
+            "identifier": "sliver_x:diamond_lattice"
+        },
+        "components": {
+            "minecraft:icon": "sliver_x:diamond_lattice",
+            "minecraft:hover_text_color": "yellow"
+        }
+    },
+    "format_version": "1.10"
+}
