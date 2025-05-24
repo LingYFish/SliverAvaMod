@@ -1,5 +1,7 @@
 // __multiversion__
 // This signals the loading code to prepend either #version 100 or #version 300 es as appropriate.
+precision highp float;
+
 #include "entityFragmentUtil.h"
 #include "uniformPerFrameConstants.h"
 #include "uniformShaderConstants.h"
@@ -10,13 +12,6 @@ LAYOUT_BINDING(1) uniform sampler2D TEXTURE_1;
 LAYOUT_BINDING(2) uniform sampler2D TEXTURE_2;
 
 // uniform highp float TIME;
-UNIFORM vec2 viewportSize;
-
-// External variables for customization
-UNIFORM float externalScale = 1.0;
-UNIFORM float oneOverExternalScale = 2.0;
-UNIFORM float uvtiles = 32.0;
-UNIFORM int symbolRange = 20; // Range for symbol check
 
 varying vec3 fragPos;
 varying vec3 vertColor;
@@ -40,6 +35,10 @@ mat4 rotationMatrix(vec3 axis, float angle) {
 
 void main() {
     vec4 texColor = texture2D(TEXTURE_0, uv);
+    float externalScale = 1.0;
+    float oneOverExternalScale = 3.0;
+    float uvtiles = 32.0;
+    int symbolRange = 60;
     if (texColor.a > 0.0 && texColor.a < 1.0) {
         vec4 col = vec4(0.01, 0.0, 0.0, 1.0);
         float pulse = mod(TIME * 20.0, 400.0) / 400.0;

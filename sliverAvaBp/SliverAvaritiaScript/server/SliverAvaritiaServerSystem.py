@@ -85,6 +85,7 @@ class SliverAvaritiaServerSystem(BaseServerSystem):
         self.search = []
         self.addListenEvent(self.OnScriptTickServer, eventName="OnScriptTickServer")
         self.addListenEvent(self.LIFO, eventName="OnScriptTickServer")
+        self.addListenEvent(self.LIFO2, eventName="OnScriptTickServer")
         self.addListenEvent(self.OnNewArmorExchangeServerEvent, eventName="OnNewArmorExchangeServerEvent")
         self.addListenEvent(self.DamageEvent, eventName="DamageEvent")
         self.addListenEvent(self.HealthChangeBeforeServerEvent, eventName="HealthChangeBeforeServerEvent")
@@ -110,12 +111,14 @@ class SliverAvaritiaServerSystem(BaseServerSystem):
         if ItemCreate and ItemCreate['newItemName'] == ItemType.INFINITY_AXE and compFactory.CreatePlayer(player_id).isSneaking():
             if any([s in args['fullName'] for s in ['log']]):
                 self.destroyBlockQueue.insert(0, pos)
-            if compFactory.CreateBlockInfo(levelId).GetBlockNew((pos[0],pos[1]-1,pos[2]), pos[-1])['name'] in ["minecraft:grass","minecraft:drit"]:
-                self.replaceBlockQueue[player_id] = [{
-                    "replace" : ["minecraft:grass","minecraft:drit"],
+            print (compFactory.CreateBlockInfo(levelId).GetBlockNew((pos[0],pos[1]-1,pos[2]), pos[3])['name'])
+            if compFactory.CreateBlockInfo(levelId).GetBlockNew((pos[0],pos[1]-1,pos[2]), pos[3])['name'] in ["minecraft:grass","minecraft:dirt"]:
+                self.replaceBlockQueue[player_id] = {
+                    "replace" : ["minecraft:grass","minecraft:dirt"],
                     "count" : 0,
-                    "pos" : [pos]
-                }]
+                    "pos" : [pos],
+                    "y" : pos[1]
+                }
 
     def LIFO(self):
         if not self.destroyBlockQueue: return
@@ -128,21 +131,36 @@ class SliverAvaritiaServerSystem(BaseServerSystem):
             nextPos = tuple((p + offset[i] for i, p in enumerate(pos)))
             nextBlock = compFactory.CreateBlockInfo(levelId).GetBlockNew(nextPos[:3], nextPos[-1])
             if any([s in nextBlock['name'] for s in ['log']]):
-                self.destroyBlockQueue.insert(0, nextPos) 
+                self.destroyBlockQueue.insert(0, nextPos)
+    
+    def LIFO2(self):
+        if not self.replaceBlockQueue: return
         for playerId,data in self.replaceBlockQueue.items():
+            if not data['pos']:
+                del self.replaceBlockQueue[playerId]
+                return
             data['count'] += 1
+            pos = data['pos'].pop()
             if data['count'] >= 100:
                 del self.replaceBlockQueue[playerId]
                 return
-            for offset in [(0, 0, 1, 0),(0, 0, -1, 0),(0, 1, 0, 0),(0, -1, 0, 0),(1, 0, 0, 0),(-1, 0, 0, 0),]:
+            for offset in [(0, 0, 1, pos[-1]),(0, 0, -1, pos[-1]),(0, 1, 0, pos[-1]),(0, -1, 0, pos[-1]),(1, 0, 0, pos[-1]),(-1, 0, 0, pos[-1]),]:
                 nextPos = tuple((p + offset[i] for i, p in enumerate(pos)))
                 nextBlock = compFactory.CreateBlockInfo(levelId).GetBlockNew(nextPos[:3], nextPos[-1])
-                if any([s in nextBlock['name'] for s in [data['replace'][0]]]):
-                    data['pos'].insert(0, nextPos) 
+                if nextBlock['name'] == data['replace'][0]:
+                    data['pos'].insert(0, nextPos)
+                elif nextBlock['name'] == data['replace'][1]:
+                    for offset in [(0, 0, 1, pos[-1]),(0, 0, -1, pos[-1]),(0, 1, 0, pos[-1]),(0, -1, 0, pos[-1]),(1, 0, 0, pos[-1]),(-1, 0, 0, pos[-1]),]:
+                        nnextPos = tuple((p + offset[i] for i, p in enumerate(nextPos)))
+                        nnextBlock = compFactory.CreateBlockInfo(levelId).GetBlockNew(nnextPos[:3], nnextPos[-1])
+                        if nnextPos in data['pos'] or nnextPos[1] > data['y'] or nnextPos[1] < data['y']:
+                            continue
+                        if nnextBlock['name'] == data['replace'][0]:
+                            data['pos'].insert(0, nnextPos)
             compFactory.CreateBlockInfo(levelId).SetBlockNew(pos[:3], {
                 'name': data['replace'][1],
                 'aux': 0
-            }, 1, pos[-1], True)
+            }, 0, pos[-1], True)
 
     def DestroyBlockEventPickaxe(self,args):
         pos = (args['x'],args['y'],args['z'])
@@ -238,17 +256,21 @@ class SliverAvaritiaServerSystem(BaseServerSystem):
             enchantData = itemDict['enchantData']
             modEnchantData = itemDict['modEnchantData']
             if newItemName == ItemType.INFINITY_PICKAXE and compFactory.CreatePlayer(player_id).isSneaking():
-                itemDict = {'itemName': ItemType.INFINITY_PICKAXE_HAMMER,'count': 1,'modEnchantData' : modEnchantData,'enchantData': enchantData,'auxValue': 0,}
-                compFactory.CreateItem(player_id).SpawnItemToPlayerCarried(itemDict, player_id)
+                data = ItemStack(**itemDict)
+                data.identifier = ItemType.INFINITY_PICKAXE_HAMMER
+                compFactory.CreateItem(player_id).SpawnItemToPlayerCarried(data.toItemDict(), player_id)
             elif newItemName == ItemType.INFINITY_PICKAXE_HAMMER and compFactory.CreatePlayer(player_id).isSneaking():
-                itemDict = {'itemName': ItemType.INFINITY_PICKAXE,'count': 1,'modEnchantData' : modEnchantData,'enchantData': enchantData,'auxValue': 0,}
-                compFactory.CreateItem(player_id).SpawnItemToPlayerCarried(itemDict, player_id)
+                data = ItemStack(**itemDict)
+                data.identifier = ItemType.INFINITY_PICKAXE
+                compFactory.CreateItem(player_id).SpawnItemToPlayerCarried(data.toItemDict(), player_id)
             elif newItemName == ItemType.INFINITY_SHOVEL and compFactory.CreatePlayer(player_id).isSneaking():
-                itemDict = {'itemName': ItemType.INFINITY_SHOVEL_DESTROYER,'count': 1,'modEnchantData' : modEnchantData,'enchantData': enchantData,'auxValue': 0,}
-                compFactory.CreateItem(player_id).SpawnItemToPlayerCarried(itemDict, player_id)
+                data = ItemStack(**itemDict)
+                data.identifier = ItemType.INFINITY_SHOVEL_DESTROYER
+                compFactory.CreateItem(player_id).SpawnItemToPlayerCarried(data.toItemDict(), player_id)
             elif newItemName == ItemType.INFINITY_SHOVEL_DESTROYER and compFactory.CreatePlayer(player_id).isSneaking():
-                itemDict = {'itemName': ItemType.INFINITY_SHOVEL,'count': 1,'modEnchantData' : modEnchantData,'enchantData': enchantData,'auxValue': 0,}
-                compFactory.CreateItem(player_id).SpawnItemToPlayerCarried(itemDict, player_id)
+                data = ItemStack(**itemDict)
+                data.identifier = ItemType.INFINITY_SHOVEL
+                compFactory.CreateItem(player_id).SpawnItemToPlayerCarried(data.toItemDict(), player_id)
             elif newItemName == ItemType.MATTER_CLUSTER_FULL:
                 for item,count in json.loads(extraId).items():
                     item_dict = {'itemName': item,'count': count,}
@@ -349,7 +371,8 @@ class SliverAvaritiaServerSystem(BaseServerSystem):
             world = compFactory.CreateDimension(projectile).GetEntityDimensionId()
             pos = compFactory.CreatePos(projectile).GetPos()
             self.CreateEngineEntityByTypeStr(EntityType.GAPING_VOID, pos, (0, 0), world, True)
-        if identifier == EntityType.HEAVEN_ARROW:
+            self.DestroyEntity(projectile)
+        elif identifier == EntityType.HEAVEN_ARROW:
             self.spaw_barrage(args['srcId'],projectile)
             if args['hitTargetType'] == 'ENTITY':
                 compFactory.CreateGame(levelId).KillEntity(args['targetId'])

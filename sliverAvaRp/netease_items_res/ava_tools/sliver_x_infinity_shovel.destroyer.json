@@ -4,7 +4,7 @@
             "identifier": "sliver_x:infinity_shovel.destroyer"
         },
         "components": {
-            "minecraft:icon": "textures/sliver_ava/tools/infinity_shovel/destroyer",
+            "minecraft:icon": "sliver_x:infinity_shovel.destroyer",
             "minecraft:hover_text_color": "red"
         }
     },

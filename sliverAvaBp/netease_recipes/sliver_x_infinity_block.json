@@ -1,0 +1,24 @@
+{
+    "minecraft:recipe_shaped": {
+        "result": {
+            "item": "sliver_x:infinity_block"
+        },
+        "pattern": [
+            "III",
+            "III",
+            "III"
+        ],
+        "description": {
+            "identifier": "sliver_x:infinity_block"
+        },
+        "key": {
+            "I": {
+                "item": "sliver_x:infinity_ingot"
+            }
+        },
+        "tags": [
+            "crafting_table"
+        ]
+    },
+    "format_version": "1.12"
+}

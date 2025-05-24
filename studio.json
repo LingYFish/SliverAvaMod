@@ -3,7 +3,7 @@
   "CreateVersion": "3.3.0.977276",
   "EditVersion": "3.3.0.977276",
   "OldEditCount": 0,
-  "NewEditCount": 17,
+  "NewEditCount": 21,
   "OldComponents": [],
   "Account": "lingyfish@163.com",
   "UserName": "曳枫飞叶",
@@ -35,7 +35,7 @@
   "EditMaterialPaths": [],
   "EditLogFilePath": "D:\\MCStudioDownload\\work\\editor\\edit.log",
   "ServerName": "EXPR",
-  "StudioPort": 10697,
+  "StudioPort": 9689,
   "DCWebUrl": "https://x19apigatewayexpr.nie.netease.com",
   "ShowGuide": false,
   "AssertCacheDir": "D:\\MCStudioDownload\\EngineAssert",
@@ -44,6 +44,6 @@
   "StudioTempPath": "D:\\MCStudioDownload\\temp\\editorTemp",
   "EditorResourcePackPath": "D:\\Apps\\Mcs\\MCStudio\\data\\inner_res",
   "EditDate": 1747351590,
-  "EditDuration": 168474,
-  "TestDuration": 17275
+  "EditDuration": 203371,
+  "TestDuration": 23160
 }

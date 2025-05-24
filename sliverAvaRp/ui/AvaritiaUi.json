@@ -518,12 +518,12 @@
                                         "recipe": {
                                             "type": "panel",
                                             "offset": [
-                                                120.0,
+                                                100.0,
                                                 -35.0
                                             ],
                                             "size": [
                                                 "100%cm+0px",
-                                                "100%c+0px"
+                                                "100%cm+0px"
                                             ],
                                             "layer": 1,
                                             "controls": [
@@ -552,11 +552,39 @@
                                                         "anchor_to": "top_left",
                                                         "offset": [
                                                             0.0,
-                                                            -8.0
+                                                            -12.0
                                                         ],
                                                         "layer": 8,
                                                         "color": "$title_text_color",
                                                         "text": "配方"
+                                                    }
+                                                },
+                                                {
+                                                    "previous@AvaritiaBaseUi.image_button_hover": {
+                                                        "$default_texture": "textures/ui/chevron_grey_left",
+                                                        "$hover_texture": "textures/ui/chevron_grey_left",
+                                                        "$left_click_name": "#previousClick",
+                                                        "$pressed_texture": "textures/ui/chevron_grey_left",
+                                                        "anchor_from": "bottom_left",
+                                                        "anchor_to": "bottom_left",
+                                                        "offset": [
+                                                            -20,
+                                                            0
+                                                        ]
+                                                    }
+                                                },
+                                                {
+                                                    "next@AvaritiaBaseUi.image_button_hover": {
+                                                        "$default_texture": "textures/ui/chevron_grey_right",
+                                                        "$hover_texture": "textures/ui/chevron_grey_right",
+                                                        "$left_click_name": "#nextClick",
+                                                        "$pressed_texture": "textures/ui/chevron_grey_right",
+                                                        "anchor_from": "bottom_right",
+                                                        "anchor_to": "bottom_right",
+                                                        "offset": [
+                                                            20,
+                                                            0
+                                                        ]
                                                     }
                                                 }
                                             ]
@@ -565,24 +593,9 @@
                                     {
                                         "output@AvaritiaBaseUi.itemcell2": {
                                             "offset": [
-                                                60,
+                                                15,
                                                 -25
                                             ]
-                                        }
-                                    },
-                                    {
-                                        "image": {
-                                            "type": "image",
-                                            "offset": [
-                                                25.0,
-                                                -25.0
-                                            ],
-                                            "size": [
-                                                30.0,
-                                                15.0
-                                            ],
-                                            "layer": 1,
-                                            "texture": "textures/ui/arrow_inactive"
                                         }
                                     }
                                 ]

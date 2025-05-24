@@ -6,7 +6,7 @@
         "PackResourceSortData": {
             "16384_sliver_x_singularity_group_config": {
                 "createTime": 1747619864.9854007,
-                "modifyTime": 1747628930.9272547
+                "modifyTime": 1747908230.53457
             },
             "16384_sliver_x_sliver_x_armor_group_config": {
                 "createTime": 1747628967.7322986,
@@ -136,9 +136,137 @@
                 "createTime": 1747631319.1271284,
                 "modifyTime": 1747631319.1271284
             },
+            "524288_book": {
+                "createTime": 1747908666.8266008,
+                "modifyTime": 1747908666.834586
+            },
             "8192_sliver_x_sliver_x_ava_category_config": {
                 "createTime": 1747619864.9854007,
                 "modifyTime": 1747631847.5774784
+            },
+            "8_emmmm_avaritia:compressed_crafting_table_2": {
+                "createTime": 1747713260.8447213,
+                "modifyTime": 1747713260.8447213
+            },
+            "8_emmmm_avaritia:crystal_matrix": {
+                "createTime": 1747713260.8486981,
+                "modifyTime": 1747713260.8486981
+            },
+            "8_emmmm_avaritia:crystal_matrix_ingot": {
+                "createTime": 1747713260.8520977,
+                "modifyTime": 1747713260.8520977
+            },
+            "8_emmmm_avaritia:crystal_matrix_ingot_2": {
+                "createTime": 1747713260.8549016,
+                "modifyTime": 1747713260.8549016
+            },
+            "8_emmmm_avaritia:diamond_lattice": {
+                "createTime": 1747713260.8571885,
+                "modifyTime": 1747713260.8571885
+            },
+            "8_emmmm_avaritia:double_compressed_crafting_table": {
+                "createTime": 1747713260.8594089,
+                "modifyTime": 1747713260.8594089
+            },
+            "8_emmmm_avaritia:extreme_crafting_table": {
+                "createTime": 1747713260.8628092,
+                "modifyTime": 1747713260.8628092
+            },
+            "8_emmmm_avaritia:infinity_block": {
+                "createTime": 1747713260.86432,
+                "modifyTime": 1747713260.86432
+            },
+            "8_emmmm_avaritia:infinity_ingot": {
+                "createTime": 1747713260.8669665,
+                "modifyTime": 1747713260.8669665
+            },
+            "8_emmmm_avaritia:neutron_nugget": {
+                "createTime": 1747713260.8757138,
+                "modifyTime": 1747713260.8757138
+            },
+            "8_emmmm_avaritia:neutron_nugget_2": {
+                "createTime": 1747713260.8779168,
+                "modifyTime": 1747713260.8779168
+            },
+            "8_emmmm_avaritia:neutron_pile": {
+                "createTime": 1747713260.8800914,
+                "modifyTime": 1747713260.8800914
+            },
+            "8_emmmm_avaritia:neutronium_block": {
+                "createTime": 1747713260.8692122,
+                "modifyTime": 1747713260.8692122
+            },
+            "8_emmmm_avaritia:neutronium_ingot": {
+                "createTime": 1747713260.8712885,
+                "modifyTime": 1747713260.8712885
+            },
+            "8_emmmm_avaritia:neutronium_ingot_2": {
+                "createTime": 1747713260.8733022,
+                "modifyTime": 1747713260.8733022
+            },
+            "8_sliver_x:compressed_crafting_table": {
+                "createTime": 1747713348.624416,
+                "modifyTime": 1747713411.4397094
+            },
+            "8_sliver_x:compressed_crafting_table_2": {
+                "createTime": 1747713348.6290302,
+                "modifyTime": 1747713411.4428902
+            },
+            "8_sliver_x:crystal_matrix": {
+                "createTime": 1747713348.6341176,
+                "modifyTime": 1747713411.4446714
+            },
+            "8_sliver_x:crystal_matrix_ingot": {
+                "createTime": 1747713348.6401446,
+                "modifyTime": 1747713411.4476867
+            },
+            "8_sliver_x:crystal_matrix_ingot_2": {
+                "createTime": 1747713348.6426187,
+                "modifyTime": 1747713411.449991
+            },
+            "8_sliver_x:diamond_lattice": {
+                "createTime": 1747713348.6463168,
+                "modifyTime": 1747713411.4546502
+            },
+            "8_sliver_x:double_compressed_crafting_table": {
+                "createTime": 1747713348.6525066,
+                "modifyTime": 1747713411.4580746
+            },
+            "8_sliver_x:extreme_crafting_table": {
+                "createTime": 1747713348.6593268,
+                "modifyTime": 1747713411.4608603
+            },
+            "8_sliver_x:infinity_block": {
+                "createTime": 1747713348.661848,
+                "modifyTime": 1747713411.4621081
+            },
+            "8_sliver_x:infinity_ingot": {
+                "createTime": 1747713348.6649852,
+                "modifyTime": 1747713411.4691849
+            },
+            "8_sliver_x:neutron_nugget": {
+                "createTime": 1747713348.6826925,
+                "modifyTime": 1747713411.4827971
+            },
+            "8_sliver_x:neutron_nugget_2": {
+                "createTime": 1747713348.6872187,
+                "modifyTime": 1747713411.4878597
+            },
+            "8_sliver_x:neutron_pile": {
+                "createTime": 1747713348.6931505,
+                "modifyTime": 1747713411.4956818
+            },
+            "8_sliver_x:neutronium_block": {
+                "createTime": 1747713348.670575,
+                "modifyTime": 1747713411.471491
+            },
+            "8_sliver_x:neutronium_ingot": {
+                "createTime": 1747713348.6752791,
+                "modifyTime": 1747713411.4767518
+            },
+            "8_sliver_x:neutronium_ingot_2": {
+                "createTime": 1747713348.6784348,
+                "modifyTime": 1747713411.4787683
             }
         },
         "PlayerEffectSetting": {
@@ -156,6 +284,9 @@
         ],
         "expandData": {
             "prefab": {
+                "AvaritiaUi.collect": [
+                    "/netease_prefab_screen"
+                ],
                 "AvaritiaUi.compress": [
                     "/netease_prefab_screen"
                 ],
@@ -164,7 +295,6 @@
                     "/netease_prefab_screen/extreme_crafting_table",
                     "/netease_prefab_screen/extreme_crafting_table/screen_background",
                     "/netease_prefab_screen/extreme_crafting_table/screen_background/bg",
-                    "/netease_prefab_screen/extreme_crafting_table/screen_background/bg/crafting",
                     "/netease_prefab_screen/extreme_crafting_table/screen_background/bg/recipe"
                 ]
             },

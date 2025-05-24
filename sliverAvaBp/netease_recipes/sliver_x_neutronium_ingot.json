@@ -1,0 +1,24 @@
+{
+    "minecraft:recipe_shaped": {
+        "result": {
+            "item": "sliver_x:neutronium_ingot"
+        },
+        "pattern": [
+            "NNN",
+            "NNN",
+            "NNN"
+        ],
+        "description": {
+            "identifier": "sliver_x:neutronium_ingot"
+        },
+        "key": {
+            "N": {
+                "item": "sliver_x:neutron_nugget"
+            }
+        },
+        "tags": [
+            "crafting_table"
+        ]
+    },
+    "format_version": "1.12"
+}

@@ -1,0 +1,24 @@
+{
+    "minecraft:recipe_shaped": {
+        "result": {
+            "item": "sliver_x:neutron_nugget"
+        },
+        "pattern": [
+            "PPP",
+            "PPP",
+            "PPP"
+        ],
+        "description": {
+            "identifier": "sliver_x:neutron_nugget"
+        },
+        "key": {
+            "P": {
+                "item": "sliver_x:neutron_pile"
+            }
+        },
+        "tags": [
+            "crafting_table"
+        ]
+    },
+    "format_version": "1.12"
+}

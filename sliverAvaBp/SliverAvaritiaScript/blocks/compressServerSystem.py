@@ -30,6 +30,9 @@ class compressServerSystem(InventoryBlockServerSystem):
     def listenEvent(self):
         InventoryBlockServerSystem.listenEvent(self)
 
+    def addCompressRepic(self,itemName,data):
+        self.compressRepic[itemName] = data
+
     def _OnBlockTickServer(self,args):
         if args["blockName"] != self.OPEN_BLOCK_NAME:
             return

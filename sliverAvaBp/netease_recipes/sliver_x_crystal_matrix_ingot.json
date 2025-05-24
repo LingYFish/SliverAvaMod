@@ -1,0 +1,26 @@
+{
+    "minecraft:recipe_shaped": {
+        "result": {
+            "item": "sliver_x:crystal_matrix_ingot"
+        },
+        "pattern": [
+            "DND",
+            "DND"
+        ],
+        "description": {
+            "identifier": "sliver_x:crystal_matrix_ingot"
+        },
+        "key": {
+            "D": {
+                "item": "sliver_x:diamond_lattice"
+            },
+            "N": {
+                "item": "minecraft:nether_star"
+            }
+        },
+        "tags": [
+            "crafting_table"
+        ]
+    },
+    "format_version": "1.12"
+}

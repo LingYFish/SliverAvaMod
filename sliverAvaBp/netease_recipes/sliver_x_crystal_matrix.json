@@ -1,0 +1,24 @@
+{
+    "minecraft:recipe_shaped": {
+        "result": {
+            "item": "sliver_x:crystal_matrix"
+        },
+        "pattern": [
+            "MMM",
+            "MMM",
+            "MMM"
+        ],
+        "description": {
+            "identifier": "sliver_x:crystal_matrix"
+        },
+        "key": {
+            "M": {
+                "item": "sliver_x:crystal_matrix_ingot"
+            }
+        },
+        "tags": [
+            "crafting_table"
+        ]
+    },
+    "format_version": "1.12"
+}

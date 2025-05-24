@@ -5,7 +5,7 @@
             "minecraft:hover_text_color": "aqua",
             "minecraft:icon": "sliver_x:neutronium_ingot",
             "netease:frame_anim_in_scene": {
-                "texture_path": "textures/sliver_ava/resource/neutronium_ingot",
+                "texture_path": "textures/sliver_ava/neutronium_ingot",
                 "ticks_per_frame": 2
             }
         },

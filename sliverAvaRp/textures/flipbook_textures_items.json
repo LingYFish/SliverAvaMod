@@ -104,7 +104,7 @@
     {
         "atlas_tile": "sliver_x:neutronium_ingot",
         "blend_frames": true,
-        "flipbook_texture": "textures/sliver_ava/neutron_ingot",
+        "flipbook_texture": "textures/sliver_ava/neutronium_ingot",
         "ticks_per_frame": 2
     },
     {

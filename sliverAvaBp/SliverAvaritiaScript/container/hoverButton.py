@@ -15,8 +15,8 @@ class hoverButton(object):
         self.itemButton = self.screenNode.GetBaseUIControl(path).asButton()
         self.itemStack = ItemStack()
         self.itemButton.AddHoverEventParams()
-        self.text = None
-        self.itemDict = None
+        self.text = ""
+        self.itemDict = {}
         self.setFunc = setFunc
         self.itemButton.SetButtonHoverInCallback(self.onButtonHoveInCallback)
         self.itemButton.SetButtonHoverOutCallback(self.OnButtonHoverOutCallback)
@@ -33,7 +33,7 @@ class hoverButton(object):
     
     def showText(self):
         text = ''
-        if self.text:
+        if self.text != "":
             text = self.setFunc(self.replaceSpecialCharacters(text),None,None)
         if self.itemDict:
             text = compFactory.CreateItem(levelId).GetItemFormattedHoverText(str(self.itemDict['itemName']), 15, False)

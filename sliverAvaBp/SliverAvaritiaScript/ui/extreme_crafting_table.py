@@ -1,7 +1,6 @@
 import mod.client.extraClientApi as clientApi
 from SliverAvaritiaScript.container.Inventory import Inventory
 from SliverAvaritiaScript.container.itemSlot import ItemSlot
-from SliverAvaritiaScript.recipe.recipeHelper import extremeCraftingTable
 from SliverAvaritiaScript.api.lib.itemStack import ItemStack
 from SliverAvaritiaScript import modConfig
 import json
@@ -10,6 +9,31 @@ ViewBinder = clientApi.GetViewBinderCls()
 compFactory = clientApi.GetEngineCompFactory()
 levelId = clientApi.GetLevelId()
 minecraftEnum = clientApi.GetMinecraftEnum()
+
+class Pagination:
+    def __init__(self, items):
+        """
+        初始化分页器
+        :param items: 列表，包含所有元素
+        """
+        self.items = items
+        self.page_size = 25
+
+    def CanPrevious(self,current_page):
+        """
+        判断是否可以向上翻页
+        :return: bool
+        """
+        return current_page > 1
+
+    def CanNext(self,current_page):
+        """
+        判断是否可以向下翻页
+        :return: bool
+        """
+        total_pages = (len(self.items) + self.page_size - 1) // self.page_size
+        return current_page < total_pages
+
 
 class extreme_crafting_table(Inventory):
     PATH_TO_CONTAINER = {}
@@ -20,30 +44,28 @@ class extreme_crafting_table(Inventory):
     def __init__(self, namespace, name, param = None):
         Inventory.__init__(self, namespace, name, param)
         self.data = {}
+        self.index = 1
+        self.recipeItems = param['recipeItems']
+        self.pagination = Pagination(self.recipeItems)
 
     def LoadContainer(self):
         path = self.bg + '/output'
         self.PATH_TO_CONTAINER[path] = "output"
         self.containerSlots[path] = ItemSlot(self, path, path)
 
-        for i in xrange(25):
+        for i in range(25*self.index):
             slot = i + 1
+            if i*self.index > len(self.recipeItems) - 1:
+                path = self.bg + '/recipe/grid/item_cell{}'.format(slot)
+                self.PATH_TO_CONTAINER[path] = 'recipe_slot{}'.format(slot)
+                self.containerSlots[path] = ItemSlot(self, path, path)
+                continue
             path = self.bg + '/recipe/grid/item_cell{}'.format(slot)
             self.PATH_TO_CONTAINER[path] = 'recipe_slot{}'.format(slot)
             self.containerSlots[path] = ItemSlot(self, path, path)
-            try:
-                self.containerSlots[path].setSlotItem(extremeCraftingTable.recipeItems[i])
-            except:
-                pass
+            self.containerSlots[path].setSlotItem(self.recipeItems[i*self.index])
 
-        for i in xrange(len(extremeCraftingTable.recipeItems)):
-            slot = i + 1
-            path = self.bg + '/recipe/grid/item_cell{}'.format(slot)
-            self.PATH_TO_CONTAINER[path] = 'recipe_slot{}'.format(slot)
-            self.containerSlots[path] = ItemSlot(self, path, path)
-            self.containerSlots[path].setSlotItem(extremeCraftingTable.recipeItems[i])
-
-        for i in xrange(81):
+        for i in range(81):
             slot = i + 1
             path = self.bg + '/crafting/grid/item_cell{}'.format(slot)
             self.PATH_TO_CONTAINER[path] = 'crafting_slot{}'.format(slot)
@@ -62,10 +84,32 @@ class extreme_crafting_table(Inventory):
         exData = blockEntityData["exData"]
         if exData != self.data:
             self.reloadContainer(exData)
-        for i in xrange(len(extremeCraftingTable.recipeItems)):
+        for i in range(25*self.index):
             slot = i + 1
+            if i*self.index > len(self.recipeItems) - 1:
+                break
             path = self.bg + '/recipe/grid/item_cell{}'.format(slot)
-            self.containerSlots[path].setSlotItem(extremeCraftingTable.recipeItems[i])
+            self.PATH_TO_CONTAINER[path] = 'recipe_slot{}'.format(slot)
+            self.containerSlots[path] = ItemSlot(self, path, path)
+            self.containerSlots[path].setSlotItem(self.recipeItems[i*self.index])
+
+    @ViewBinder.binding(ViewBinder.BF_ButtonClick, "#previousClick")
+    def previousClick(self, args):
+        touchState = args["TouchEvent"]
+        if touchState == minecraftEnum.TouchEvent.TouchDown:
+            if self.pagination.CanPrevious(self.index):
+                self.index -= 1
+            else:
+                self.ShowItemText("没有上一页了!!!")
+
+    @ViewBinder.binding(ViewBinder.BF_ButtonClick, "#nextClick")
+    def nextClick(self, args):
+        touchState = args["TouchEvent"]
+        if touchState == minecraftEnum.TouchEvent.TouchDown:
+            if self.pagination.CanNext(self.index):
+                self.index += 1
+            else:
+                self.ShowItemText("没有下一页了!!!")
 
     def reloadContainer(self, data):
         self.data = data

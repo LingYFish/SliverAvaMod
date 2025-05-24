@@ -1,0 +1,24 @@
+{
+    "minecraft:recipe_shaped": {
+        "result": {
+            "item": "sliver_x:diamond_lattice"
+        },
+        "pattern": [
+            "D D",
+            " D ",
+            "D D"
+        ],
+        "description": {
+            "identifier": "sliver_x:diamond_lattice"
+        },
+        "key": {
+            "D": {
+                "item": "minecraft:diamond"
+            }
+        },
+        "tags": [
+            "crafting_table"
+        ]
+    },
+    "format_version": "1.12"
+}

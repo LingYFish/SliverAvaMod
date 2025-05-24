@@ -27,16 +27,6 @@
                 "gravity": 0.025,
                 "inertia": 1,
                 "liquid_inertia": 1,
-                "on_hit": {
-                    "remove_on_hit": {
-
-                    },
-                    "spawn_chance": {
-                        "first_spawn_count": 1,
-                        "first_spawn_percent_chance": 100.0,
-                        "spawn_definition": "sliver_x:gaping_void"
-                    }
-                },
                 "power": 1.5
             },
             "minecraft:pushable": {

@@ -1,1 +1,0 @@
-{"format_version":"1.16.0","minecraft:geometry":[{"bones":[{"texture_meshes":[{"position":[2.0,1.0,-2.0],"rotation":[0.0,-135.0,90.0],"local_pivot":[6.0,0.0,6.0],"texture":"default"}],"name":"rightitem"}],"description":{"identifier":"geometry.infinity_sword","texture_width":16.0,"texture_height":16.0}}]}

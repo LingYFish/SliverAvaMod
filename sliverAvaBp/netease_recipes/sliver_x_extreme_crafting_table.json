@@ -1,0 +1,27 @@
+{
+    "minecraft:recipe_shaped": {
+        "result": {
+            "item": "sliver_x:extreme_crafting_table"
+        },
+        "pattern": [
+            "CCC",
+            "CDC",
+            "CCC"
+        ],
+        "description": {
+            "identifier": "sliver_x:extreme_crafting_table"
+        },
+        "key": {
+            "C": {
+                "item": "sliver_x:crystal_matrix_ingot"
+            },
+            "D": {
+                "item": "sliver_x:double_compressed_crafting_table"
+            }
+        },
+        "tags": [
+            "crafting_table"
+        ]
+    },
+    "format_version": "1.12"
+}

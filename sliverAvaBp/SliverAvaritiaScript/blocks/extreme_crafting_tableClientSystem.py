@@ -19,3 +19,7 @@ class extreme_crafting_tableClientSystem(InventoryBlockClientSystem):
         text = args["text"]
         if self.screen:
             self.screen.ShowItemText(text)
+
+    def openContainer(self, args):
+        compFactory.CreatePlayer(self.localPlayerId).Swing()
+        self.screen = clientApi.PushScreen(modConfig.modName, self.UI_KEY_NAME, {"playerId": self.localPlayerId, "clientSystem": self, "pos": args["pos"],"recipeItems":args['recipeItems']})
