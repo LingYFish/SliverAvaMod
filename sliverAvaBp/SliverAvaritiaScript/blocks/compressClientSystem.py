@@ -1,10 +1,14 @@
-import mod.client.extraClientApi as clientApi
-from SliverAvaritiaScript.container.InventoryClientSystem import InventoryBlockClientSystem
+from ..sliver_x_lib.ui.backpack.InventoryClientSystem import InventoryBlockClientSystem
+from ..sliver_x_lib.server.core import api as sApi
+from ..sliver_x_lib.client.core import api as cApi
+from ..sliver_x_lib.server.level import level
+from ..sliver_x_lib.util import minecraftEnum
 from SliverAvaritiaScript import modConfig
 
-compFactory = clientApi.GetEngineCompFactory()
-levelId = clientApi.GetLevelId()
-minecraftEnum = clientApi.GetMinecraftEnum()
+
+compFactory = cApi.clientApi.GetEngineCompFactory()
+levelId = cApi.clientApi.GetLevelId()
+minecraftEnum = cApi.clientApi.GetMinecraftEnum()
 
 class compressClientSystem(InventoryBlockClientSystem):
     SERVER_SYSTEM_NAME = "compressServerSystem"

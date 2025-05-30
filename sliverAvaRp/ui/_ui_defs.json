@@ -1,6 +1,7 @@
 {
     "ui_defs": [
         "ui/AvaritiaBaseUi.json",
-        "ui/AvaritiaUi.json"
+        "ui/AvaritiaUi.json",
+        "ui/inv_ui.json"
     ]
 }

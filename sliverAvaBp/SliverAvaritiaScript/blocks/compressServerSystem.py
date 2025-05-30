@@ -1,13 +1,15 @@
-import mod.server.extraServerApi as serverApi
-from SliverAvaritiaScript.container.InventoryServerSystem import InventoryBlockServerSystem
+from ..sliver_x_lib.server.core import api as sApi
+from ..sliver_x_lib.client.core import api as cApi
+from ..sliver_x_lib.server.level import level
+from ..sliver_x_lib.util import minecraftEnum
+from ..sliver_x_lib.util.itemStack import ItemStack
+from ..sliver_x_lib.ui.backpack.InventoryServerSystem import InventoryBlockServerSystem
 from SliverAvaritiaScript import modConfig
-from SliverAvaritiaScript.api.lib.itemStack import ItemStack
 import copy
 import json
 
-compFactory = serverApi.GetEngineCompFactory()
-levelId = serverApi.GetLevelId()
-minecraftEnum = serverApi.GetMinecraftEnum()
+compFactory = sApi.serverApi.GetEngineCompFactory()
+levelId = sApi.serverApi.GetLevelId()
 
 class compressServerSystem(InventoryBlockServerSystem):
     CLIENT_NAME = "compressClientSystem"
@@ -26,6 +28,16 @@ class compressServerSystem(InventoryBlockServerSystem):
     for key,vaule in compressRepic.items():
         for index in vaule['items']:
             ItemToCompressRepic[index] = key
+
+    def __init__(self, namespace, systemName):
+        InventoryBlockServerSystem.__init__(self,namespace, systemName)
+        self.FromHopperTick = 0
+        self.MaxFromHopperTick = 8
+        self.HopperInfo = {}
+        self.HopperInfo['ouptinSlot'] = []
+        self.HopperInfo['toinSlot'] = []
+        self.HopperInfo['ouptinSlot'].append("output")
+        self.HopperInfo['toinSlot'].append("input")
 
     def listenEvent(self):
         InventoryBlockServerSystem.listenEvent(self)
@@ -49,6 +61,11 @@ class compressServerSystem(InventoryBlockServerSystem):
         if (dimensionId, pos) not in self.BlockInfo:
             print ("初始化容器信息成功 - {}".format(blockData['_container_']))
             self.BlockInfo[(dimensionId, pos)] = blockData['_container_']
+        if self.HopperInfo:
+            self.FromHopperTick += 1
+            if self.FromHopperTick >= self.MaxFromHopperTick:
+                self.OnWithHopper(dimensionId,pos)
+                self.FromHopperTick = 0
         Progress = int(self.GetContainerItem(dimensionId,pos,'__Progress__','Progress'))
         MaxProgress = int(self.GetContainerItem(dimensionId,pos,'__Progress__','MaxProgress'))
         inputD = self.GetContainerItem(dimensionId,pos,'container_slot','input')

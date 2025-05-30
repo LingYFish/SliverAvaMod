@@ -27,7 +27,7 @@
                                 "texture": "textures/ui/dialog_background_opaque",
                                 "controls": [
                                     {
-                                        "close_button@AvaritiaBaseUi.close_button": {
+                                        "close_button@inv_ui.close_button": {
                                             "anchor_from": "top_right",
                                             "offset": [
                                                 -10,
@@ -50,7 +50,7 @@
                                         }
                                     },
                                     {
-                                        "inventory_panel@AvaritiaBaseUi.inventory_panel": {
+                                        "inventory_panel@inv_ui.inventory_panel": {
                                             "layer": 9,
                                             "offset": [
                                                 0,
@@ -59,7 +59,7 @@
                                         }
                                     },
                                     {
-                                        "item_cell@AvaritiaBaseUi.itemcell2": {
+                                        "item_cell@inv_ui.itemcell2": {
                                             "offset": [
                                                 0,
                                                 -40
@@ -97,13 +97,21 @@
                 }
             },
             {
-                "item_info@AvaritiaBaseUi.item_info": {
+                "item_info@inv_ui.item_info": {
                     "layer": 138
                 }
             },
             {
-                "fly_item_renderer@AvaritiaBaseUi.fly_item_renderer": {
+                "fly_item_renderer@inv_ui.fly_item_renderer": {
                     "layer": 140
+                }
+            },
+            {
+                "cursor_renderer@inv_ui.cursor_renderer": {
+                    "offset": [
+                        -122.8333,
+                        82.6667
+                    ]
                 }
             }
         ]
@@ -121,7 +129,7 @@
             "@common.screen_entrance_animation_push_fade",
             "@common.screen_entrance_animation_pop_fade"
         ],
-        "$screen_bg_content|default": "AvaritiaBaseUi.black_background",
+        "$screen_bg_content|default": "inv_ui.black_background",
         "$screen_content|default": "AvaritiaUi.collect",
         "cache_screen": false
     },
@@ -153,7 +161,7 @@
                                 "texture": "textures/ui/dialog_background_opaque",
                                 "controls": [
                                     {
-                                        "close_button@AvaritiaBaseUi.close_button": {
+                                        "close_button@inv_ui.close_button": {
                                             "anchor_from": "top_right",
                                             "offset": [
                                                 -10,
@@ -176,7 +184,7 @@
                                         }
                                     },
                                     {
-                                        "inventory_panel@AvaritiaBaseUi.inventory_panel": {
+                                        "inventory_panel@inv_ui.inventory_panel": {
                                             "layer": 9,
                                             "offset": [
                                                 0,
@@ -185,7 +193,7 @@
                                         }
                                     },
                                     {
-                                        "output@AvaritiaBaseUi.itemcell2": {
+                                        "output@inv_ui.itemcell2": {
                                             "offset": [
                                                 40,
                                                 -45
@@ -193,7 +201,7 @@
                                         }
                                     },
                                     {
-                                        "input@AvaritiaBaseUi.item_cell": {
+                                        "input@inv_ui.item_cell": {
                                             "layer": 9,
                                             "offset": [
                                                 -40,
@@ -252,7 +260,7 @@
                                                     }
                                                 },
                                                 {
-                                                    "image_button_hover@AvaritiaBaseUi.image_button_hover": {
+                                                    "image_button_hover@inv_ui.image_button_hover": {
                                                         "$default_texture": "",
                                                         "$hover_name": "#Output",
                                                         "$hover_texture": "",
@@ -289,7 +297,7 @@
                                                     }
                                                 },
                                                 {
-                                                    "image_button_hover@AvaritiaBaseUi.image_button_hover": {
+                                                    "image_button_hover@inv_ui.image_button_hover": {
                                                         "$default_texture": "",
                                                         "$hover_name": "#Input",
                                                         "$hover_texture": "",
@@ -381,13 +389,21 @@
                 }
             },
             {
-                "item_info@AvaritiaBaseUi.item_info": {
+                "item_info@inv_ui.item_info": {
                     "layer": 138
                 }
             },
             {
-                "fly_item_renderer@AvaritiaBaseUi.fly_item_renderer": {
+                "fly_item_renderer@inv_ui.fly_item_renderer": {
                     "layer": 140
+                }
+            },
+            {
+                "cursor_renderer@inv_ui.cursor_renderer": {
+                    "offset": [
+                        231.6667,
+                        191.3333
+                    ]
                 }
             }
         ]
@@ -405,7 +421,7 @@
             "@common.screen_entrance_animation_push_fade",
             "@common.screen_entrance_animation_pop_fade"
         ],
-        "$screen_bg_content|default": "AvaritiaBaseUi.black_background",
+        "$screen_bg_content|default": "inv_ui.black_background",
         "$screen_content|default": "AvaritiaUi.compress",
         "cache_screen": false
     },
@@ -437,7 +453,7 @@
                                 "texture": "textures/ui/dialog_background_opaque",
                                 "controls": [
                                     {
-                                        "close_button@AvaritiaBaseUi.close_button": {
+                                        "close_button@inv_ui.close_button": {
                                             "anchor_from": "top_right",
                                             "offset": [
                                                 -10,
@@ -460,7 +476,7 @@
                                         }
                                     },
                                     {
-                                        "inventory_panel@AvaritiaBaseUi.inventory_panel": {
+                                        "inventory_panel@inv_ui.inventory_panel": {
                                             "layer": 9,
                                             "offset": [
                                                 85,
@@ -494,7 +510,7 @@
                                                             9,
                                                             9
                                                         ],
-                                                        "grid_item_template": "AvaritiaBaseUi.item_cell"
+                                                        "grid_item_template": "inv_ui.item_cell"
                                                     }
                                                 },
                                                 {
@@ -542,7 +558,7 @@
                                                             5,
                                                             5
                                                         ],
-                                                        "grid_item_template": "AvaritiaBaseUi.item_cell"
+                                                        "grid_item_template": "inv_ui.item_cell"
                                                     }
                                                 },
                                                 {
@@ -560,7 +576,7 @@
                                                     }
                                                 },
                                                 {
-                                                    "previous@AvaritiaBaseUi.image_button_hover": {
+                                                    "previous@inv_ui.image_button_hover": {
                                                         "$default_texture": "textures/ui/chevron_grey_left",
                                                         "$hover_texture": "textures/ui/chevron_grey_left",
                                                         "$left_click_name": "#previousClick",
@@ -574,7 +590,7 @@
                                                     }
                                                 },
                                                 {
-                                                    "next@AvaritiaBaseUi.image_button_hover": {
+                                                    "next@inv_ui.image_button_hover": {
                                                         "$default_texture": "textures/ui/chevron_grey_right",
                                                         "$hover_texture": "textures/ui/chevron_grey_right",
                                                         "$left_click_name": "#nextClick",
@@ -591,7 +607,7 @@
                                         }
                                     },
                                     {
-                                        "output@AvaritiaBaseUi.itemcell2": {
+                                        "output@inv_ui.itemcell2": {
                                             "offset": [
                                                 15,
                                                 -25
@@ -605,13 +621,22 @@
                 }
             },
             {
-                "item_info@AvaritiaBaseUi.item_info": {
+                "item_info@inv_ui.item_info": {
                     "layer": 138
                 }
             },
             {
-                "fly_item_renderer@AvaritiaBaseUi.fly_item_renderer": {
+                "fly_item_renderer@inv_ui.fly_item_renderer": {
                     "layer": 140
+                }
+            },
+            {
+                "cursor_renderer@inv_ui.cursor_renderer": {
+                    "layer": -9999,
+                    "offset": [
+                        -29.8333,
+                        95.3333
+                    ]
                 }
             }
         ]
@@ -629,7 +654,7 @@
             "@common.screen_entrance_animation_push_fade",
             "@common.screen_entrance_animation_pop_fade"
         ],
-        "$screen_bg_content|default": "AvaritiaBaseUi.black_background",
+        "$screen_bg_content|default": "inv_ui.black_background",
         "$screen_content|default": "AvaritiaUi.extreme_crafting_table",
         "cache_screen": false
     },

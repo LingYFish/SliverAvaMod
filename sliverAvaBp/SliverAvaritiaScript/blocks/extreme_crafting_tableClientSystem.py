@@ -1,10 +1,14 @@
-import mod.client.extraClientApi as clientApi
-from SliverAvaritiaScript.container.InventoryClientSystem import InventoryBlockClientSystem
+from ..sliver_x_lib.ui.backpack.InventoryClientSystem import InventoryBlockClientSystem
+from ..sliver_x_lib.server.core import api as sApi
+from ..sliver_x_lib.client.core import api as cApi
+from ..sliver_x_lib.server.level import level
+from ..sliver_x_lib.util import minecraftEnum
 from SliverAvaritiaScript import modConfig
 
-compFactory = clientApi.GetEngineCompFactory()
-levelId = clientApi.GetLevelId()
-minecraftEnum = clientApi.GetMinecraftEnum()
+
+compFactory = cApi.clientApi.GetEngineCompFactory()
+levelId = cApi.clientApi.GetLevelId()
+minecraftEnum = cApi.clientApi.GetMinecraftEnum()
 
 class extreme_crafting_tableClientSystem(InventoryBlockClientSystem):
     SERVER_SYSTEM_NAME = "extreme_crafting_tableServerSystem"
@@ -21,5 +25,5 @@ class extreme_crafting_tableClientSystem(InventoryBlockClientSystem):
             self.screen.ShowItemText(text)
 
     def openContainer(self, args):
-        compFactory.CreatePlayer(self.localPlayerId).Swing()
-        self.screen = clientApi.PushScreen(modConfig.modName, self.UI_KEY_NAME, {"playerId": self.localPlayerId, "clientSystem": self, "pos": args["pos"],"recipeItems":args['recipeItems']})
+        compFactory.CreatePlayer(cApi.clientApi.GetLocalPlayerId()).Swing()
+        self.screen = cApi.clientApi.PushScreen(modConfig.modName, self.UI_KEY_NAME, {"playerId": cApi.clientApi.GetLocalPlayerId(), "clientSystem": self, "pos": args["pos"],"recipeItems":args['recipeItems']})

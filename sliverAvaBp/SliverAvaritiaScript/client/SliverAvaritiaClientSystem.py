@@ -2,7 +2,7 @@ from SliverAvaritiaScript.api.client.BaseClientSystem import BaseClientSystem
 from SliverAvaritiaScript.modConfig import *
 from SliverAvaritiaScript.api.lib.unicodeUtils import UnicodeConvert
 from random import uniform
-import mod.client.extraClientApi as clientApi
+from ..sliver_x_lib.client.core.api import extraClientApi as clientApi
 import json
 import uuid
 compFactory = clientApi.GetEngineCompFactory()
@@ -15,6 +15,7 @@ class SliverAvaritiaClientSystem(BaseClientSystem):
     def __init__(self, namespace, systemName):
         BaseClientSystem.__init__(self, namespace, systemName)
         self.default_option = None
+        self.NativeScreenManager = clientApi.GetNativeScreenManagerCls().instance()
         self.addListenEvent(self.UiInitFinished,eventName='UiInitFinished')
         self.addListenEvent(self.OnLocalPlayerStopLoading, eventName="OnLocalPlayerStopLoading")
         self.addListenEvent(self.syncFlyState, modName, "SliverAvaritiaServerSystem", "syncFlyState")
@@ -22,6 +23,7 @@ class SliverAvaritiaClientSystem(BaseClientSystem):
         self.addListenEvent(self.StopUsingItemClientEvent, eventName="StopUsingItemClientEvent")
         self.addListenEvent(self.OnCarriedNewItemChangedClient, eventName="OnCarriedNewItemChangedClientEvent")
         self.addListenEvent(self.shootSound, modName, "SliverAvaritiaServerSystem", "shootSound")
+        self.addListenEvent(self.pushScreen, eventName="PushScreenEvent")
 
     def StartUsingItemClient(self, args):
         playerId = args['playerId']
@@ -76,3 +78,15 @@ class SliverAvaritiaClientSystem(BaseClientSystem):
     def UiInitFinished(self,args):
         for uiKey, clsPath, uiScreenDef in SystemInit.UiScreenNode:
             clientApi.RegisterUI(modName, uiKey, clsPath, uiScreenDef)
+        self.NativeScreenManager.RegisterScreenProxy('crafting.inventory_screen','SliverAvaritiaScript.ui.color_ui.colorUiProxy')
+        self.NativeScreenManager.RegisterScreenProxy("crafting_pocket.inventory_screen_pocket", 'SliverAvaritiaScript.ui.color_ui.colorUiProxy')
+
+    def pushScreen(self, args):
+        screenName = args.get('screenName', '')
+        print (screenName)
+        if not screenName:
+            return
+        if screenName == 'inventory_screen':
+            self.NativeScreenManager.RegisterScreenProxy('crafting.inventory_screen','SliverAvaritiaScript.ui.color_ui.colorUiProxy')
+        elif screenName == 'inventory_screen_pocket':
+            self.NativeScreenManager.RegisterScreenProxy("crafting_pocket.inventory_screen_pocket", 'SliverAvaritiaScript.ui.color_ui.colorUiProxy')

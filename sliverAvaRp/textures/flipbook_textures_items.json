@@ -1,181 +1,181 @@
 [
     {
         "atlas_tile": "sliver_x:infinity_sword",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/tools/infinity_sword/1",
         "ticks_per_frame": 6
     },
     {
         "atlas_tile": "sliver_x:copper_singularity",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/singularity/copper_singularity",
         "ticks_per_frame": 4
     },
     {
         "atlas_tile": "sliver_x:diamond_singularity",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/singularity/diamond_singularity",
         "ticks_per_frame": 4
     },
     {
         "atlas_tile": "sliver_x:emerald_singularity",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/singularity/emerald_singularity",
         "ticks_per_frame": 4
     },
     {
         "atlas_tile": "sliver_x:fluxed_singularity",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/singularity/fluxed_singularity",
         "ticks_per_frame": 4
     },
     {
         "atlas_tile": "sliver_x:gold_singularity",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/singularity/gold_singularity",
         "ticks_per_frame": 4
     },
     {
         "atlas_tile": "sliver_x:redstone_singularity",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/singularity/redstone_singularity",
         "ticks_per_frame": 4
     },
     {
         "atlas_tile": "sliver_x:iridium_singularity",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/singularity/iridium_singularity",
         "ticks_per_frame": 4
     },
     {
         "atlas_tile": "sliver_x:quartz_singularity",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/singularity/quartz_singularity",
         "ticks_per_frame": 4
     },
     {
         "atlas_tile": "sliver_x:iron_singularity",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/singularity/iron_singularity",
         "ticks_per_frame": 4
     },
     {
         "atlas_tile": "sliver_x:lapis_singularity",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/singularity/lapis_singularity",
         "ticks_per_frame": 4
     },
     {
         "atlas_tile": "sliver_x:lead_singularity",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/singularity/lead_singularity",
         "ticks_per_frame": 4
     },
     {
         "atlas_tile": "sliver_x:nickel_singularity",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/singularity/nickel_singularity",
         "ticks_per_frame": 4
     },
     {
         "atlas_tile": "sliver_x:platinum_singularity",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/singularity/platinum_singularity",
         "ticks_per_frame": 4
     },
     {
         "atlas_tile": "sliver_x:silver_singularity",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/singularity/silver_singularity",
         "ticks_per_frame": 4
     },
     {
         "atlas_tile": "sliver_x:tin_singularity",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/singularity/tin_singularity",
         "ticks_per_frame": 4
     },
     {
         "atlas_tile": "sliver_x:infinity_bow",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/tools/infinity_bow/idle",
         "ticks_per_frame": 12
     },
     {
         "atlas_tile": "sliver_x:neutronium_ingot",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/neutronium_ingot",
         "ticks_per_frame": 2
     },
     {
         "atlas_tile": "sliver_x:endest_pearl",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/endest_pearl/layer_0",
         "ticks_per_frame": 2
     },
     {
         "atlas_tile": "sliver_x:infinity_catalyst",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/resource/infinity_catalyst",
         "ticks_per_frame": 2
     },
     {
         "atlas_tile": "sliver_x:skullfire_sword",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/tools/skullfire_sword/layer_0",
         "ticks_per_frame": 2
     },
     {
         "atlas_tile": "sliver_x:infinity_axe",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/tools/infinity_axe/infinity_axe",
         "ticks_per_frame": 2
     },
     {
         "atlas_tile": "sliver_x:infinity_ingot",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/resource/infinity_ingot",
         "ticks_per_frame": 5
     },
     {
         "atlas_tile": "sliver_x:cosmic_meatballs",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/cosmic_meatballs",
         "ticks_per_frame": 2
     },
     {
         "atlas_tile": "sliver_x:ultimate_stew",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/ultimate_stew/layer_0",
         "ticks_per_frame": 2
     },
     {
         "atlas_tile": "sliver_x:infinity_hoe",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/tools/infinity_hoe/layer_0",
         "ticks_per_frame": 4
     },
     {
         "atlas_tile": "sliver_x:infinity_pickaxe",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/tools/infinity_pickaxe/pickaxe",
         "ticks_per_frame": 2
     },
     {
         "atlas_tile": "sliver_x:infinity_pickaxe.hammer",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/tools/infinity_pickaxe/hammer",
         "ticks_per_frame": 2
     },
     {
         "atlas_tile": "sliver_x:infinity_shovel",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/tools/infinity_shovel/shovel",
         "ticks_per_frame": 2
     },
     {
         "atlas_tile": "sliver_x:infinity_shovel.destroyer",
-        "blend_frames": true,
+        "blend_frames": false,
         "flipbook_texture": "textures/sliver_ava/tools/infinity_shovel/destroyer",
         "ticks_per_frame": 2
     }

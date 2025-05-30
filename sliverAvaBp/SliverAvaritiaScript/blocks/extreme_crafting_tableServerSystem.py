@@ -1,7 +1,10 @@
-import mod.server.extraServerApi as serverApi
-from SliverAvaritiaScript.container.InventoryServerSystem import InventoryBlockServerSystem
+from ..sliver_x_lib.server.core import api as sApi
+from ..sliver_x_lib.client.core import api as cApi
+from ..sliver_x_lib.server.level import level
+from ..sliver_x_lib.util import minecraftEnum
+from ..sliver_x_lib.util.itemStack import ItemStack
+from ..sliver_x_lib.ui.backpack.InventoryServerSystem import InventoryBlockServerSystem
 from SliverAvaritiaScript import modConfig
-from SliverAvaritiaScript.api.lib.itemStack import ItemStack
 import copy
 import json
 
@@ -132,9 +135,8 @@ class extremeCraftingTable(object):
         return ingredients_count == 0 and len([i for i in all_items if not i.isEmpty()]) == len(recipe["ingredients"])
     
 """工作台所有逻辑来自AlwnRrr苏奶白 特别鸣谢"""
-compFactory = serverApi.GetEngineCompFactory()
-levelId = serverApi.GetLevelId()
-minecraftEnum = serverApi.GetMinecraftEnum()
+compFactory = sApi.serverApi.GetEngineCompFactory()
+levelId = sApi.serverApi.GetLevelId()
 
 class extreme_crafting_tableServerSystem(InventoryBlockServerSystem):
     CLIENT_NAME = "extreme_crafting_tableClientSystem"
@@ -236,7 +238,7 @@ class extreme_crafting_tableServerSystem(InventoryBlockServerSystem):
         dimensionComp, posComp, rotComp = compFactory.CreateDimension(playerId),compFactory.CreatePos(playerId),compFactory.CreateRot(playerId)
         dimensionId = dimensionComp.GetEntityDimensionId()
         pos = posComp.GetPos()
-        dir = serverApi.GetDirFromRot(rotComp.GetRot())
+        dir = sApi.serverApi.GetDirFromRot(rotComp.GetRot())
         itemEntityId = self.CreateEngineItemEntity(itemDict, dimensionId, pos)
         if itemEntityId:
             actorMotionComp = compFactory.CreateActorMotion(itemEntityId)

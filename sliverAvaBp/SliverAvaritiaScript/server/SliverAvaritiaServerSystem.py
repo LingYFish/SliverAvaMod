@@ -4,14 +4,17 @@ from SliverAvaritiaScript.api.lib.unicodeUtils import UnicodeConvert
 from SliverAvaritiaScript.api.lib.itemStack import ItemStack
 from SliverAvaritiaScript.modConfig import ItemType
 from SliverAvaritiaScript.api.lib import nbt
+from ..sliver_x_lib.util.toolHelper import toolHelper
+from ..sliver_x_lib.server.entity import entity
+from ..sliver_x_lib.server.core.api import extraServerApi as serverApi
+from ..sliver_x_lib.util import minecraftEnum
 import random
-import mod.server.extraServerApi as serverApi
 import json
 import math
 import uuid
 compFactory = serverApi.GetEngineCompFactory()
 levelId = serverApi.GetLevelId()
-minecraftEnum = serverApi.GetMinecraftEnum()
+
 class Armor:
 
     def __init__(self,System):
@@ -67,22 +70,68 @@ class Armor:
         if entityId not in self.equipedArmors:self.equipedArmors[entityId] = set()
         self.equipedArmors[entityId].discard(armorName)
 
+class asyncTask(object):
+    POS_OFFSET = (
+        (1, 0, 0),
+        (0, 1, 0),
+        (0, 0, 1),
+        (-1, 0, 0),
+        (0, -1, 0),
+        (0, 0, -1),
+    )
+    def __init__(self, playerId, pos, step, leaves, forceDestroy, posChecked, serverSystem):
+        self.playerId = playerId
+        self.pos = pos
+        self.step = step
+        self.leaves = leaves
+        self.forceDestroy = forceDestroy
+        self.posChecked = posChecked
+        self.serverSystem = serverSystem
+
+    def update(self):
+        blockInfoComp = compFactory.CreateBlockInfo(self.playerId)
+        block = blockInfoComp.GetBlockNew(self.pos)
+        if not self.forceDestroy and (not block or block['name'] == 'minecraft:air'):
+            return
+        blockInfoComp.PlayerDestoryBlock(self.pos, 1, True)
+        if self.step == 0:
+            return
+        for offset in self.POS_OFFSET:
+            stepPos = (self.pos[0] + offset[0], self.pos[1] + offset[1], self.pos[2] + offset[2])
+            if stepPos in self.posChecked:
+                continue
+            stepBlock = blockInfoComp.GetBlockNew(stepPos)
+            diggerInfo = toolHelper.getBlockDiggerInfo(stepBlock['name'], stepBlock['aux'])
+            isLog = diggerInfo["digger"] == 'axe'
+            isLeaf = diggerInfo["digger"] == 'hoe'
+            if isLog or isLeaf:
+                steps = self.step - 1
+                steps = (steps if self.leaves else 3) if isLeaf else steps
+                self.posChecked.append(stepPos)
+                self.serverSystem.startBreakTask(self.playerId, stepPos, steps, isLeaf, False, self.posChecked)
+
 class SliverAvaritiaServerSystem(BaseServerSystem):
     gameComp = compFactory.CreateGame(levelId)
     remove_effect = ("wither","bad_omen","nausea","slowness","hunger","levitation","blindness","instant_damage","mining_fatigue","poison","weakness","fatal_poison","empty")
+    hoe_blocks = ('minecraft:dirt','minecraft:grass','minecraft:grass_path','minecraft:dirt_with_roots','minecraft:farmland')
 
     def __init__(self, namespace, systemName):
         BaseServerSystem.__init__(self, namespace, systemName)
         self.armor = Armor(self)
         self.cooldown = {}
+        self.chainBlocks = False
+        self.onBreakTask = False
+        self.breakTasks = []
         self.search = []
         self.destroyBlockQueue = [] # LIFO
         self.replaceBlockQueue = {}
         itemComp = compFactory.CreateItem(levelId)
         itemComp.GetUserDataInEvent("InventoryItemChangedServerEvent")
+        itemComp.GetUserDataInEvent('ItemUseAfterServerEvent')
         compFactory.CreateGame(levelId).AddRepeatedTimer(0.05, self.coolDownUpdate)
+        compFactory.CreateGame(levelId).AddRepeatedTimer(0.05, self.on_tick_update)
+        self.addListenEvent(self.ItemUseAfterServerEvent, eventName='ItemUseAfterServerEvent')
         serverApi.AddEntityTickEventWhiteList(EntityType.GAPING_VOID)
-        self.search = []
         self.addListenEvent(self.OnScriptTickServer, eventName="OnScriptTickServer")
         self.addListenEvent(self.LIFO, eventName="OnScriptTickServer")
         self.addListenEvent(self.LIFO2, eventName="OnScriptTickServer")
@@ -101,24 +150,75 @@ class SliverAvaritiaServerSystem(BaseServerSystem):
         self.addListenEvent(self.DestroyBlockEventPickaxe,eventName='DestroyBlockEvent')
         self.addListenEvent(self.DestroyBlockEventShovel,eventName='DestroyBlockEvent')
         self.addListenEvent(self.DestroyBlockEventAxe,eventName='DestroyBlockEvent')
-    
-    def DestroyBlockEventAxe(self,args):
+        self.addListenEvent(self.ServerItemUseOnEvent, eventName="ServerItemUseOnEvent")
+
+    def ServerItemUseOnEvent(self,args):
         pos = (args['x'],args['y'],args['z'])
         dimension_id = args['dimensionId']
-        player_id = args['playerId']
-        pos = (args['x'], args['y'], args['z'], dimension_id)
-        ItemCreate = compFactory.CreateItem(player_id).GetPlayerItem(minecraftEnum.ItemPosType.CARRIED, 0)
-        if ItemCreate and ItemCreate['newItemName'] == ItemType.INFINITY_AXE and compFactory.CreatePlayer(player_id).isSneaking():
-            if any([s in args['fullName'] for s in ['log']]):
-                self.destroyBlockQueue.insert(0, pos)
-            print (compFactory.CreateBlockInfo(levelId).GetBlockNew((pos[0],pos[1]-1,pos[2]), pos[3])['name'])
-            if compFactory.CreateBlockInfo(levelId).GetBlockNew((pos[0],pos[1]-1,pos[2]), pos[3])['name'] in ["minecraft:grass","minecraft:dirt"]:
-                self.replaceBlockQueue[player_id] = {
-                    "replace" : ["minecraft:grass","minecraft:dirt"],
-                    "count" : 0,
-                    "pos" : [pos],
-                    "y" : pos[1]
-                }
+        player_id = args['entityId']
+        itemDict = args['itemDict']
+        if itemDict:
+            extraId = itemDict.get('extraId',None)
+            newItemName = itemDict['newItemName']
+            userData = itemDict.get('userData',None)
+            enchantData = itemDict['enchantData']
+            modEnchantData = itemDict['modEnchantData']
+            if newItemName == ItemType.INFINITY_HOE:
+                start_x = pos[0] - 4
+                end_x = pos[0] + 4
+                start_z = pos[2] - 4
+                end_z = pos[2] + 4
+                for block_pos in [(x, pos[1], z) for x in range(start_x, end_x + 1)for z in range(start_z, end_z + 1)]:
+                    block_id = compFactory.CreateBlockInfo(levelId).GetBlockNew(block_pos, dimension_id)['name']
+                    if block_id in self.hoe_blocks:
+                        compFactory.CreateBlockInfo(levelId).SetBlockNew(block_pos, {'name': 'minecraft:farmland','aux': 0}, 0, dimension_id, True)
+    
+    def ItemUseAfterServerEvent(self, args):
+        playerId = args['entityId']
+        itemDict = args['itemDict']
+        if itemDict['newItemName'] == ItemType.INFINITY_AXE:
+            dimensionComp = compFactory.CreateDimension(playerId)
+            playerComp = compFactory.CreatePlayer(playerId)
+            if playerComp.isSneaking() and (not self.chainBlocks):
+                dimensionId = dimensionComp.GetEntityDimensionId()
+                pos = compFactory.CreatePos(playerId).GetFootPos()
+                pos = map(int, map(math.floor, pos))
+                minPos = (-13, -3, -13)
+                maxPos = (13, 23, 13)
+                toolHelper.removeBlocksInIteration(playerId, dimensionId, pos, minPos, maxPos, "axe")
+                self.chainBlocks = False
+
+    def applyVelocity(self,entityId, pos_delta):
+        actorMotionComp = compFactory.CreateActorMotion(entityId)
+        if entityId in serverApi.GetPlayerList():
+            actorMotionComp.SetPlayerMotion(pos_delta)
+        else:
+            actorMotionComp.SetMotion(pos_delta)
+    
+    def DestroyBlockEventAxe(self,args):
+        playerId = args['playerId']
+        itemComp = compFactory.CreateItem(playerId)
+        itemDict = itemComp.GetEntityItem(minecraftEnum.ItemPosType.CARRIED)
+        if itemDict and itemDict["newItemName"] == ItemType.INFINITY_AXE:
+            playerComp = compFactory.CreatePlayer(playerId)
+            if not playerComp.isSneaking() and not self.onBreakTask:
+                self.startBreakTask(playerId, (args['x'], args['y'], args['z']), 32, False, True, [])
+                self.onBreakTask = True
+
+    def startBreakTask(self, playerId, pos, steps, leaves, force, posChecked):
+        self.breakTasks.append(asyncTask(playerId, pos, steps, leaves, force, posChecked, self))
+
+    def on_tick_update(self):
+        if self.breakTasks:
+            newBreakTasks = list(self.breakTasks)
+            self.breakTasks = []
+            while len(newBreakTasks) > 0:
+                breakTask = newBreakTasks.pop()
+                breakTask.update()
+
+        else:
+            if self.onBreakTask:
+                self.onBreakTask = False
 
     def LIFO(self):
         if not self.destroyBlockQueue: return
@@ -429,16 +529,22 @@ class SliverAvaritiaServerSystem(BaseServerSystem):
         victimId = args["victimId"]
         itemCarried = compFactory.CreateItem(playerId).GetEntityItem(minecraftEnum.ItemPosType.CARRIED, 0)
         if itemCarried and itemCarried["newItemName"] == ItemType.INFINITY_SWORD:
-            compFactory.CreateAttr(victimId).SetAttrValue(minecraftEnum.AttrType.HEALTH, 0)
+            entityCls = entity(victimId)
+            if entityCls.is_player():
+                if self.isAlArmor(victimId):
+                    entityCls.set_health(entityCls.health-3)
+                    return
+                entityCls.set_health(0)
+            else:
+                if self.isAlArmor(victimId):
+                    entityCls.set_health(entityCls.health-3)
+                    return
+                entityCls.entity_die
     
     def inventoryItemChangedServer(self, args):
         playerId = args['playerId']
         slotId = args['slot']
         newItemDict = args['newItemDict']
-        if newItemDict and newItemDict["newItemName"] == ItemType.INFINITY_SWORD:
-            itemStack = ItemStack(**newItemDict)
-            itemStack.setItemCustomTips("%name%%category%%enchanting%\n\n§r§9+§cI§6n§ef§ai§bn§9i§dt§cy §r§9攻击伤害§r")
-            self.gameComp.AddTimer(0.05, compFactory.CreateItem(playerId).SetPlayerAllItems, {(minecraftEnum.ItemPosType.INVENTORY, slotId): itemStack.toItemDict()})
         if newItemDict and newItemDict["newItemName"] in [ItemType.INFINITY_PICKAXE,ItemType.INFINITY_PICKAXE_HAMMER]:
             itemStack = ItemStack(**newItemDict)
             if not itemStack.hasEnchant(18):
@@ -450,11 +556,21 @@ class SliverAvaritiaServerSystem(BaseServerSystem):
     def DamageEvent(self, args):
         entityId = args['entityId']
         cause = args['cause']
+        srcId = args["srcId"]
         if self.isAlArmor(entityId):
             args['knock'] = False
             args['ignite'] = False
             args['damage'] = 0
             args['damage_f'] = 0.0
+        itemComp = compFactory.CreateItem(srcId)
+        itemCarried = itemComp.GetEntityItem(minecraftEnum.ItemPosType.CARRIED, 0, False)
+        if itemCarried and itemCarried["newItemName"] == ItemType.INFINITY_PICKAXE_HAMMER:
+            attrComp = compFactory.CreateRot(srcId)
+            gameComp = compFactory.CreateGame(levelId)
+            args["knock"] = False
+            i = 8
+            rotation = attrComp.GetRot()
+            gameComp.AddTimer(0.05, self.applyVelocity, entityId, ((-math.sin(rotation[1] * math.pi / 180.0) * i * 0.5), 2.0, (math.cos(rotation[1] * math.pi / 180.0) * i * 0.5)))
     
     def HealthChangeBeforeServerEvent(self, args):
         entityId = args['entityId']
@@ -505,8 +621,11 @@ class SliverAvaritiaServerSystem(BaseServerSystem):
         for playerId in serverApi.GetPlayerList():
             flyComp = compFactory.CreateFly(playerId)
             isFlying = flyComp.IsPlayerFlying()
-            self.armor.PlayerflyState[playerId] = isFlying
-        self.CallAllclient("syncFlyState", {"state": self.armor.PlayerflyState})
+            if playerId not in self.armor.PlayerflyState:
+                self.armor.PlayerflyState[playerId] = None
+            if self.armor.PlayerflyState[playerId] != isFlying:
+                self.armor.PlayerflyState[playerId] = isFlying
+                self.CallAllclient("syncFlyState", {"state": self.armor.PlayerflyState})
         for entityId in self.armor.equipedArmors:
             armors = self.armor.equipedArmors[entityId]
             if ItemType.INFINITY_HELMET in armors:

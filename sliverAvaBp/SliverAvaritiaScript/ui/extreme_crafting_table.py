@@ -1,8 +1,8 @@
-import mod.client.extraClientApi as clientApi
-from SliverAvaritiaScript.container.Inventory import Inventory
-from SliverAvaritiaScript.container.itemSlot import ItemSlot
-from SliverAvaritiaScript.api.lib.itemStack import ItemStack
-from SliverAvaritiaScript import modConfig
+from ..sliver_x_lib.client.core.api import  clientApi
+from ..sliver_x_lib.ui.backpack.Inventory import Inventory
+from ..sliver_x_lib.ui.backpack.itemSlot import ItemSlot
+from ..sliver_x_lib.ui.backpack.hoverButton import hoverButton
+from ..sliver_x_lib.util.itemStack import ItemStack
 import json
 import math
 ViewBinder = clientApi.GetViewBinderCls()
@@ -51,25 +51,25 @@ class extreme_crafting_table(Inventory):
     def LoadContainer(self):
         path = self.bg + '/output'
         self.PATH_TO_CONTAINER[path] = "output"
-        self.containerSlots[path] = ItemSlot(self, path, path)
+        self.containerSlots[path] = ItemSlot(self, path, path,True,False)
 
         for i in range(25*self.index):
             slot = i + 1
             if i*self.index > len(self.recipeItems) - 1:
                 path = self.bg + '/recipe/grid/item_cell{}'.format(slot)
                 self.PATH_TO_CONTAINER[path] = 'recipe_slot{}'.format(slot)
-                self.containerSlots[path] = ItemSlot(self, path, path)
+                self.containerSlots[path] = ItemSlot(self, path, path,False,False)
                 continue
             path = self.bg + '/recipe/grid/item_cell{}'.format(slot)
             self.PATH_TO_CONTAINER[path] = 'recipe_slot{}'.format(slot)
-            self.containerSlots[path] = ItemSlot(self, path, path)
+            self.containerSlots[path] = ItemSlot(self, path, path,False,False)
             self.containerSlots[path].setSlotItem(self.recipeItems[i*self.index])
 
         for i in range(81):
             slot = i + 1
             path = self.bg + '/crafting/grid/item_cell{}'.format(slot)
             self.PATH_TO_CONTAINER[path] = 'crafting_slot{}'.format(slot)
-            self.containerSlots[path] = ItemSlot(self, path, path)
+            self.containerSlots[path] = ItemSlot(self, path, path,True,True)
 
     def Update(self):
         Inventory.Update(self)
@@ -90,7 +90,7 @@ class extreme_crafting_table(Inventory):
                 break
             path = self.bg + '/recipe/grid/item_cell{}'.format(slot)
             self.PATH_TO_CONTAINER[path] = 'recipe_slot{}'.format(slot)
-            self.containerSlots[path] = ItemSlot(self, path, path)
+            self.containerSlots[path] = ItemSlot(self, path, path,False,False)
             self.containerSlots[path].setSlotItem(self.recipeItems[i*self.index])
 
     @ViewBinder.binding(ViewBinder.BF_ButtonClick, "#previousClick")
@@ -121,30 +121,45 @@ class extreme_crafting_table(Inventory):
             if path:
                 itemDict = json.loads(self.data['_container_']['container_slot'][i].get("__value__"))
                 self.containerSlots[path].setSlotItem(itemDict)
-        self.clientSystem.serverCaller("requestRecipe", {})
 
     def setSelectSlot(self, itemSlot):
         if self.isRecipeSlot(itemSlot):
             self.clientSystem.serverCaller("requestRecipeId", {"itemName": itemSlot.itemStack.identifier})
         else:
-            Inventory.setSelectSlot(self, itemSlot)
-
-    def isOutputSlot(self,fromSlot):
-        #type: (ItemSlot) -> bool
-        return fromSlot.path == self.bg+"/output"
+            if itemSlot.itemStack.isEmpty():
+                return
+            self.selectedSlot = itemSlot
+            self.selectedSlot.setSelected(True)
+            self.clickInterval = 10
+        compFactory.CreateGame(levelId).AddTimer(0.2, self.clientSystem.serverCaller,"requestRecipe", {})
     
     def isRecipeSlot(self,fromSlot):
         #type: (ItemSlot) -> bool
         return "recipe_slot" in self.PATH_TO_CONTAINER.get(fromSlot.path,"")
+    
+    def isOutputSlot(self,fromSlot):
+        #type: (ItemSlot) -> bool
+        return fromSlot.path == self.bg+"/output"
+    
+    def clearTable(self,eventName,Data):
+        self.clientSystem.serverCaller(eventName,Data)
+        compFactory.CreateGame(levelId).AddTimer(0.01, lambda:self.clientSystem.serverCaller('clearTable',{}))
 
     def exchangeContainerSlot(self, fromSlot, toSlot):
-        fromItemStack = fromSlot.itemStack
-        toItemStack = toSlot.itemStack
-        if not (self.CanDrop(fromItemStack) and self.CanDrop(toItemStack)):
+        #type: (ItemSlot,ItemSlot) -> None
+        """
+        交换容器槽。
+        :param fromSlot: 来源物品槽
+        :param toSlot: 目标物品槽
+        """
+        if not (self.CanDrop(fromSlot) and self.CanDrop(toSlot)):
             return
-        if self.isRecipeSlot(fromSlot) or self.isRecipeSlot(toSlot):
+        if not fromSlot.CanOutput():
             return
-        if self.isOutputSlot(toSlot):
+        if not toSlot.CanInput(fromSlot):
+            return
+        if self.isHoveredSlotValid():
+            self.handleHoveredSlotExchange()
             return
         if self.IsContainerSlot(fromSlot) and not self.IsContainerSlot(toSlot):#从容器内拿取物品
             self.pickItemFromContainer(fromSlot, toSlot)
@@ -152,10 +167,6 @@ class extreme_crafting_table(Inventory):
             self.inputItemToContainer(fromSlot, toSlot)
         elif self.IsContainerSlot(fromSlot) and self.IsContainerSlot(toSlot):#移动容器中物品
             self.moveItemInContainer(fromSlot, toSlot)
-
-    def clearTable(self,eventName,Data):
-        self.clientSystem.serverCaller(eventName,Data)
-        compFactory.CreateGame(levelId).AddTimer(0.01, lambda:self.clientSystem.serverCaller('clearTable',{}))
     
     def pickItemFromContainer(self, fromSlot, toSlot):
         fromItemStack = fromSlot.itemStack
@@ -284,3 +295,58 @@ class extreme_crafting_table(Inventory):
                     self.createFlyingItem(toSlot, fromSlot)
                     fromSlot.setHide(True)
                     toSlot.setHide(True)
+
+    def OnCursorItemCellUp(self, buttonPath):
+        """
+        鼠标抬起事件（左键）
+        """
+        itemComp = compFactory.CreateItem(levelId)  # 创建物品组件
+        itemSlot = self.getSlotByPath(buttonPath)  # 获取目标物品槽
+        if len(self.stockpilesData) > 1:
+            self.handleStockpiles()
+            return
+        self.stockpilesData = {}
+        self.stockpilesSlot = []
+        if self.clickInterval >= -10 and self.upCell == itemSlot and not self.cursorSlot.itemStack.isEmpty() and self.cursorSlot.itemStack.count < self.cursorSlot.itemStack.getMaxStackSize(itemComp):
+            self.reloadInventory()
+            compFactory.CreateGame(levelId).AddTimer(0.2,self.CursorMergeItems,itemSlot)
+            return
+        if self.holdItemCount > 0 and self.holdSlot.index == itemSlot.index and self.CanMove(itemSlot):
+            self.handleHoldItem(itemSlot)
+            return
+        else:
+            self.holdSlot = None
+            self.holdTime = None
+            self.holdItemCount = 0
+        if self.cursorSlot.itemStack.isEmpty(): #拿取
+            if itemSlot.itemStack.isEmpty():
+                return
+            else:
+                self.handleTakeItemFromSlot(itemSlot)
+            if self.isOutputSlot(itemSlot):
+                compFactory.CreateGame(levelId).AddTimer(0.01, lambda:self.clientSystem.serverCaller('clearTable',{}))
+        elif itemSlot.itemStack.isEmpty(): #放入
+            self.handlePutItemIntoSlot(itemSlot)
+        elif itemSlot.itemStack == self.cursorSlot.itemStack and self.CanMove(itemSlot): #合并
+            self.handleMergeItemsWithCursor(itemSlot)
+    
+    def OnCursorItemCellRightUp(self, buttonPath):
+        """
+        鼠标右键抬起事件
+        """
+        itemComp = compFactory.CreateItem(levelId)
+        itemSlot = self.getSlotByPath(buttonPath)
+
+        if (itemSlot.itemStack.getMaxStackSize(itemComp) > 1 and  #拿取
+            not itemSlot.itemStack.isEmpty() and 
+            self.CanMove(itemSlot) and 
+            self.cursorSlot.itemStack.isEmpty()):
+            self.handleTakeItemFromSlotRight(itemSlot)
+            if self.isOutputSlot(itemSlot):
+                compFactory.CreateGame(levelId).AddTimer(0.01, lambda:self.clientSystem.serverCaller('clearTable',{}))
+        elif (itemSlot.itemStack.getMaxStackSize(itemComp) > 1 and  #合并
+            not itemSlot.itemStack.isEmpty() and 
+            not self.cursorSlot.itemStack.isEmpty()):
+            self.handleMergeItemsWithCursorRight(itemSlot)
+        elif itemSlot.itemStack.isEmpty() and not self.cursorSlot.itemStack.isEmpty(): #放入
+            self.handlePutItemIntoSlotRight(itemSlot)

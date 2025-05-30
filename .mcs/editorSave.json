@@ -76,6 +76,10 @@
                 "createTime": 1747619864.9854007,
                 "modifyTime": 1747671310.2795606
             },
+            "2_sliver_x:item": {
+                "createTime": 1748565589.6004555,
+                "modifyTime": 1748565656.1005526
+            },
             "2_sliver_x:matter_cluster": {
                 "createTime": 1747631319.1271284,
                 "modifyTime": 1747631319.1271284
@@ -280,22 +284,26 @@
     "UI": {
         "customPrefabGroupExpand": [
             "AvaritiaBaseUi",
-            "AvaritiaUi"
+            "AvaritiaUi",
+            "inv_ui"
         ],
         "expandData": {
             "prefab": {
                 "AvaritiaUi.collect": [
-                    "/netease_prefab_screen"
+                    "/netease_prefab_screen",
+                    "/netease_prefab_screen/collect"
                 ],
                 "AvaritiaUi.compress": [
-                    "/netease_prefab_screen"
+                    "/netease_prefab_screen",
+                    "/netease_prefab_screen/compress"
                 ],
                 "AvaritiaUi.extreme_crafting_table": [
                     "/netease_prefab_screen",
-                    "/netease_prefab_screen/extreme_crafting_table",
-                    "/netease_prefab_screen/extreme_crafting_table/screen_background",
-                    "/netease_prefab_screen/extreme_crafting_table/screen_background/bg",
-                    "/netease_prefab_screen/extreme_crafting_table/screen_background/bg/recipe"
+                    "/netease_prefab_screen/extreme_crafting_table"
+                ],
+                "inv_ui.item_info": [
+                    "/netease_prefab_screen",
+                    "/netease_prefab_screen/item_info"
                 ]
             },
             "screen": {
@@ -312,6 +320,9 @@
                     "/extreme_crafting_tableUi/variables_button_mappings_and_controls/safezone_screen_matrix/inner_matrix/safezone_screen_panel/root_screen_panel/screen_background",
                     "/extreme_crafting_tableUi/variables_button_mappings_and_controls/safezone_screen_matrix/inner_matrix/safezone_screen_panel/root_screen_panel/screen_background/bg",
                     "/extreme_crafting_tableUi/variables_button_mappings_and_controls/safezone_screen_matrix/inner_matrix/safezone_screen_panel/root_screen_panel/screen_background/bg/crafting"
+                ],
+                "D:\\MCStudioDownload\\work\\lingyfish@163.com\\Cpp\\AddOn\\SliverAvaMod\\sliverAvaRp\\ui\\inv_ui.json": [
+
                 ]
             }
         }
